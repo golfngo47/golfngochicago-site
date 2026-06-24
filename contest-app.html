@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golf 'n Go Chicago | Closest to the Pin Contest</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --bg:         #0a0a0a;
+      --bg2:        #111111;
+      --bg3:        #161616;
+      --green:      #39FF14;
+      --green-dim:  rgba(57,255,20,0.12);
+      --green-glow: rgba(57,255,20,0.35);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.5);
+      --border:     rgba(255,255,255,0.08);
+      --gold:       #FFD700;
+      --silver:     #C0C0C0;
+      --bronze:     #CD7F32;
+      --font:       'Barlow Condensed', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+    /* ── LOCK SCREEN ────────────────────────────────────── */
+    .lock-screen {
+      min-height: 100vh; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .lock-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(57,255,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,255,20,0.025) 1px, transparent 1px);
+      background-size: 80px 80px; pointer-events: none;
+    }
+    .lock-box {
+      position: relative; z-index: 2;
+      background: var(--bg2); border: 1px solid rgba(57,255,20,0.2);
+      border-radius: 8px; padding: 40px 36px; width: 100%; max-width: 380px;
+      text-align: center;
+    }
+    .lock-logo { height: 58px; object-fit: contain; margin: 0 auto 24px; display: block; }
+    .lock-title {
+      font-size: 1.5rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; color: var(--white); margin-bottom: 4px;
+    }
+    .lock-title span { color: var(--green); }
+    .lock-sub {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 28px;
+    }
+    .lock-error {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #f87171; margin-top: 10px; min-height: 20px;
+    }
+
+    /* ── TV LEADERBOARD ─────────────────────────────────── */
+    .tv-view {
+      min-height: 100vh; background: var(--bg);
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .tv-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(57,255,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,255,20,0.025) 1px, transparent 1px);
+      background-size: 80px 80px; pointer-events: none; z-index: 0;
+    }
+    .tv-glow {
+      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 1400px; height: 500px;
+      background: radial-gradient(ellipse at center, rgba(57,255,20,0.07) 0%, transparent 68%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .tv-header {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 56px 24px;
+      border-bottom: 1px solid rgba(57,255,20,0.18);
+    }
+    .tv-logo { height: 80px; width: auto; object-fit: contain; }
+
+    .tv-title-block { text-align: center; flex: 1; padding: 0 32px; }
+    .tv-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 8px;
+    }
+    .tv-main-title {
+      font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      line-height: 0.88; letter-spacing: -0.01em; color: var(--white);
+    }
+    .tv-main-title .accent {
+      color: var(--green);
+      text-shadow: 0 0 40px rgba(57,255,20,0.5), 0 0 80px rgba(57,255,20,0.2);
+    }
+
+    .tv-prize-badge {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--green); color: #0a0a0a;
+      padding: 16px 28px; border-radius: 4px; min-width: 148px;
+    }
+    .tv-prize-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; }
+    .tv-prize-amount { font-size: 3rem; font-weight: 900; font-style: italic; line-height: 1; }
+
+    .tv-info-bar {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      padding: 13px 56px;
+      background: rgba(57,255,20,0.05);
+      border-bottom: 1px solid rgba(57,255,20,0.1);
+    }
+    .tv-info-item {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .tv-info-item strong { color: var(--green); font-weight: 800; }
+    .tv-info-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(57,255,20,0.3); }
+
+    .tv-board {
+      position: relative; z-index: 2;
+      flex: 1; padding: 28px 56px 36px;
+      display: flex; flex-direction: column;
+    }
+    .tv-board-head {
+      display: grid; grid-template-columns: 88px 1fr 200px 200px;
+      gap: 16px; padding: 0 20px 12px;
+      border-bottom: 1px solid var(--border); margin-bottom: 6px;
+    }
+    .tv-col-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+    }
+    .tv-col-label.r { text-align: right; }
+
+    .tv-row {
+      display: grid; grid-template-columns: 88px 1fr 200px 200px;
+      gap: 16px; align-items: center;
+      padding: 16px 20px; border-radius: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative; overflow: hidden; transition: background 0.3s;
+    }
+    .tv-row::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: transparent; transition: background 0.3s;
+    }
+    .tv-row.r1 { background: rgba(255,215,0,0.055); }
+    .tv-row.r1::before { background: var(--gold); }
+    .tv-row.r2 { background: rgba(192,192,192,0.035); }
+    .tv-row.r2::before { background: var(--silver); }
+    .tv-row.r3 { background: rgba(205,127,50,0.035); }
+    .tv-row.r3::before { background: var(--bronze); }
+
+    .tv-medal { display: flex; align-items: center; justify-content: center; }
+    .tv-medal-badge {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 900; font-style: italic;
+    }
+    .tv-medal-badge.gold   { background: rgba(255,215,0,0.14); border: 2px solid var(--gold);   color: var(--gold);   box-shadow: 0 0 16px rgba(255,215,0,0.3); }
+    .tv-medal-badge.silver { background: rgba(192,192,192,0.1); border: 2px solid var(--silver); color: var(--silver); }
+    .tv-medal-badge.bronze { background: rgba(205,127,50,0.1); border: 2px solid var(--bronze); color: var(--bronze); }
+    .tv-medal-badge.plain  { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.12); color: var(--muted); }
+
+    .tv-player-name {
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      font-weight: 800; font-style: italic;
+      text-transform: uppercase; color: var(--white); letter-spacing: 0.02em;
+    }
+    .tv-player-sub {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-top: 3px;
+    }
+
+    .tv-shots-col { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+    .tv-shot-pills { display: flex; gap: 5px; }
+    .tv-shot-pill {
+      font-size: 0.76rem; font-weight: 700; padding: 3px 9px;
+      border-radius: 2px; background: rgba(255,255,255,0.06);
+      color: var(--muted); letter-spacing: 0.05em;
+    }
+    .tv-shot-pill.hi { background: var(--green-dim); color: var(--green); }
+    .tv-shots-sub {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.18);
+    }
+
+    .tv-best-col { text-align: right; }
+    .tv-best-num {
+      font-size: clamp(2rem, 3.2vw, 2.9rem); font-weight: 900; font-style: italic;
+      color: var(--green); line-height: 1; text-shadow: 0 0 28px rgba(57,255,20,0.4);
+    }
+    .tv-best-num.r1 {
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      text-shadow: 0 0 40px rgba(57,255,20,0.7), 0 0 80px rgba(57,255,20,0.3);
+    }
+    .tv-best-unit {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .tv-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px; padding: 80px;
+    }
+    .tv-empty-icon { font-size: 4.5rem; opacity: 0.18; }
+    .tv-empty-title {
+      font-size: 2rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2); text-align: center;
+    }
+    .tv-empty-sub {
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.12); text-align: center;
+    }
+
+    .tv-footer {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 56px;
+      border-top: 1px solid rgba(57,255,20,0.08);
+      background: rgba(57,255,20,0.025);
+    }
+    .tv-footer-left {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.18);
+    }
+    .tv-footer-right {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(57,255,20,0.45);
+    }
+
+    /* ── WINNER SCREEN ──────────────────────────────────── */
+    .winner-screen {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px; text-align: center;
+    }
+    .winner-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,215,0,0.1) 0%, rgba(57,255,20,0.04) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .winner-trophy {
+      font-size: clamp(5rem, 12vw, 9rem); line-height: 1; margin-bottom: 12px;
+      position: relative; z-index: 1;
+      animation: trophyPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes trophyPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+    .winner-label {
+      font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 900; letter-spacing: 0.45em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(255,215,0,0.7);
+      position: relative; z-index: 1;
+    }
+    .winner-name {
+      font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 900; font-style: italic;
+      text-transform: uppercase; color: var(--white); line-height: 0.88;
+      margin-bottom: 24px; position: relative; z-index: 1;
+    }
+    .winner-dist {
+      font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; font-style: italic;
+      color: var(--green); line-height: 1;
+      text-shadow: 0 0 40px rgba(57,255,20,0.7);
+      position: relative; z-index: 1;
+    }
+    .winner-dist-lbl {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 24px;
+      position: relative; z-index: 1;
+    }
+    .winner-prize-badge {
+      display: inline-block; background: var(--gold); color: #0a0a0a;
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; font-style: italic;
+      letter-spacing: 0.06em; padding: 14px 48px; border-radius: 4px;
+      box-shadow: 0 0 50px rgba(255,215,0,0.5);
+      position: relative; z-index: 1;
+    }
+    .winner-rounds-lbl {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      margin-top: 20px; position: relative; z-index: 1;
+    }
+
+    /* ── ADMIN PANEL ────────────────────────────────────── */
+    .admin-view {
+      min-height: 100vh; background: var(--bg);
+      display: flex; flex-direction: column;
+    }
+
+    .admin-topbar {
+      background: var(--bg2);
+      border-bottom: 2px solid rgba(57,255,20,0.2);
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .admin-brand { display: flex; align-items: center; gap: 14px; }
+    .admin-logo { height: 46px; object-fit: contain; }
+    .admin-brand-title {
+      font-size: 1.2rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
+    }
+    .admin-brand-title .g { color: var(--green); }
+    .admin-brand-sub {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); margin-top: 1px;
+    }
+
+    .admin-stats { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .stat-chip {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 4px; padding: 7px 14px; min-width: 72px;
+    }
+    .stat-chip-num {
+      font-size: 1.5rem; font-weight: 900; font-style: italic;
+      color: var(--green); line-height: 1;
+    }
+    .stat-chip-label {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); margin-top: 1px;
+    }
+    .tv-btn {
+      font-family: var(--font); font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(57,255,20,0.1); color: var(--green);
+      border: 1px solid rgba(57,255,20,0.25); border-radius: 4px;
+      padding: 10px 18px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .tv-btn:hover { background: var(--green); color: #0a0a0a; }
+    .end-btn {
+      font-family: var(--font); font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(220,38,38,0.12); color: #f87171;
+      border: 1px solid rgba(220,38,38,0.25); border-radius: 4px;
+      padding: 10px 18px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .end-btn:hover { background: rgba(220,38,38,0.25); }
+    .export-btn {
+      font-family: var(--font); font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(255,255,255,0.06); color: var(--white);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 10px 18px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .export-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+
+    .admin-tabs {
+      display: flex; background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px; gap: 2px; overflow-x: auto;
+    }
+    .a-tab {
+      font-family: var(--font); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); background: none; border: none;
+      padding: 13px 18px; cursor: pointer;
+      border-bottom: 3px solid transparent; transition: all 0.2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .a-tab:hover { color: var(--white); }
+    .a-tab.on { color: var(--green); border-bottom-color: var(--green); }
+
+    .admin-body { flex: 1; padding: 20px; overflow-y: auto; }
+
+    /* Cards */
+    .card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 18px; margin-bottom: 14px;
+    }
+    .card-heading {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 14px;
+    }
+    .card-heading::before {
+      content: ''; display: block; width: 14px; height: 2px; background: var(--green); flex-shrink: 0;
+    }
+
+    /* Forms */
+    .fg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg.full { grid-column: 1 / -1; }
+    label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    input, select, textarea {
+      font-family: var(--font); font-size: 1.05rem; font-weight: 600;
+      background: var(--bg3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; color: var(--white); padding: 13px 14px;
+      width: 100%; outline: none; -webkit-appearance: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(57,255,20,0.45);
+      box-shadow: 0 0 0 3px rgba(57,255,20,0.07);
+    }
+    select option { background: #111; color: #fff; }
+    textarea { resize: vertical; min-height: 72px; }
+    input[type=number] { -moz-appearance: textfield; }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    /* Buttons */
+    .btn {
+      font-family: var(--font); font-size: 0.9rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 13px 20px; border-radius: 4px; border: none;
+      cursor: pointer; transition: all 0.2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn:disabled { opacity: 0.38; cursor: not-allowed; }
+    .btn-primary { background: var(--green); color: #0a0a0a; }
+    .btn-primary:not(:disabled):hover { background: #fff; box-shadow: 0 0 24px var(--green-glow); }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: var(--white); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+    .btn-danger { background: rgba(220,38,38,0.12); color: #f87171; border: 1px solid rgba(220,38,38,0.18); }
+    .btn-danger:hover { background: rgba(220,38,38,0.22); }
+    .btn-reentry {
+      background: rgba(255,215,0,0.1); color: var(--gold);
+      border: 1px solid rgba(255,215,0,0.28);
+    }
+    .btn-reentry:hover { background: rgba(255,215,0,0.2); }
+    .btn-sm { font-size: 0.72rem; padding: 8px 12px; }
+    .btn-full { width: 100%; }
+    .btn-lg { font-size: 1rem; padding: 16px 28px; }
+
+    /* Player list card */
+    .pcard {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden; margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .pcard:hover { border-color: rgba(57,255,20,0.18); }
+    .pcard-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; cursor: pointer; gap: 10px;
+    }
+    .pcard-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+    .rank-num {
+      font-size: 1rem; font-weight: 900; font-style: italic;
+      color: var(--muted); min-width: 26px; text-align: center; flex-shrink: 0;
+    }
+    .rank-num.g { color: var(--gold); }
+    .rank-num.s { color: var(--silver); }
+    .rank-num.b { color: var(--bronze); }
+    .pinfo { flex: 1; min-width: 0; }
+    .pname {
+      font-size: 1.15rem; font-weight: 800; font-style: italic;
+      text-transform: uppercase; color: var(--white);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .pmeta {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-top: 2px;
+    }
+    .pcard-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .badge {
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 3px 7px; border-radius: 2px;
+    }
+    .badge-paid   { background: rgba(57,255,20,0.14); color: var(--green); border: 1px solid rgba(57,255,20,0.28); }
+    .badge-unpaid { background: rgba(239,68,68,0.1);  color: #f87171;      border: 1px solid rgba(239,68,68,0.2); }
+    .badge-method { background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+    .pbest { text-align: right; }
+    .pbest-num { font-size: 1.5rem; font-weight: 900; font-style: italic; color: var(--green); line-height: 1; }
+    .pbest-lbl { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .chevron { font-size: 0.7rem; color: var(--muted); margin-left: 4px; }
+
+    .pcard-body {
+      border-top: 1px solid var(--border);
+      padding: 16px 18px; background: var(--bg3);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .section-lbl {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+
+    /* Toggle */
+    .tog-wrap { display: flex; align-items: center; gap: 12px; }
+    .tog-track {
+      width: 50px; height: 27px; border-radius: 14px;
+      background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+      position: relative; cursor: pointer; transition: all 0.25s; flex-shrink: 0;
+    }
+    .tog-track.on { background: rgba(57,255,20,0.18); border-color: rgba(57,255,20,0.35); }
+    .tog-thumb {
+      position: absolute; top: 3px; left: 3px;
+      width: 19px; height: 19px; border-radius: 50%;
+      background: var(--muted); transition: all 0.25s;
+    }
+    .tog-track.on .tog-thumb { transform: translateX(23px); background: var(--green); box-shadow: 0 0 8px rgba(57,255,20,0.5); }
+    .tog-lbl { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .tog-lbl.on { color: var(--green); }
+
+    /* Round items */
+    .round-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 12px 14px; margin-bottom: 8px;
+    }
+    .round-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .round-lbl { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); }
+    .round-best { font-size: 0.78rem; font-weight: 700; color: var(--white); }
+    .shot-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .shot-box { display: flex; flex-direction: column; gap: 4px; }
+    .shot-box-lbl { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .shot-display {
+      font-family: var(--font); font-size: 1.15rem; font-weight: 700;
+      text-align: center; background: var(--bg); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px; color: var(--muted); padding: 9px;
+    }
+    .shot-display.has { border-color: rgba(57,255,20,0.25); color: var(--green); }
+
+    .shot-input-el {
+      font-family: var(--font); font-size: 1.15rem; font-weight: 700;
+      text-align: center; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; color: var(--white); padding: 9px;
+      outline: none; width: 100%; -webkit-appearance: none; -moz-appearance: textfield;
+      transition: border-color 0.2s;
+    }
+    .shot-input-el::-webkit-inner-spin-button,
+    .shot-input-el::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .shot-input-el:focus { border-color: rgba(57,255,20,0.45); box-shadow: 0 0 0 3px rgba(57,255,20,0.07); }
+    .shot-input-el.has { border-color: rgba(57,255,20,0.3); color: var(--green); }
+
+    .divider { height: 1px; background: var(--border); }
+    .notes-txt { font-size: 0.88rem; font-style: italic; color: var(--muted); flex: 1; }
+
+    /* Modal */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(5px); z-index: 1000;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal {
+      background: var(--bg2); border: 1px solid rgba(57,255,20,0.2);
+      border-radius: 8px; padding: 24px; width: 100%; max-width: 480px;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-title {
+      font-size: 1.35rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 18px; letter-spacing: 0.03em;
+    }
+    .modal-title .g { color: var(--green); }
+    .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+
+    /* Confirm dialog */
+    .confirm-modal {
+      background: var(--bg2); border: 1px solid rgba(220,38,38,0.3);
+      border-radius: 8px; padding: 28px; width: 100%; max-width: 420px;
+      text-align: center;
+    }
+    .confirm-title { font-size: 1.4rem; font-weight: 900; font-style: italic; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+    .confirm-body { font-size: 0.9rem; font-weight: 600; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+    /* Empty */
+    .empty { text-align: center; padding: 60px 20px; }
+    .empty-title {
+      font-size: 1.4rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; color: rgba(255,255,255,0.18); margin-bottom: 6px;
+    }
+    .empty-sub {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.12);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #0a0a0a;
+      font-family: var(--font); font-size: 0.82rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 11px 22px; border-radius: 4px; z-index: 9999;
+      box-shadow: 0 0 32px rgba(57,255,20,0.5);
+      animation: toastUp 0.25s ease;
+    }
+    @keyframes toastUp {
+      from { transform: translateX(-50%) translateY(16px); opacity: 0; }
+      to   { transform: translateX(-50%) translateY(0);   opacity: 1; }
+    }
+
+    /* Live dot */
+    .live-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 8px rgba(57,255,20,0.7);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .tv-header { padding: 18px 24px; }
+      .tv-board { padding: 20px 24px; }
+      .tv-board-head { display: none; }
+      .tv-row { grid-template-columns: 64px 1fr auto; }
+      .tv-shots-col { display: none; }
+      .tv-info-bar { flex-wrap: wrap; gap: 14px; padding: 12px 24px; }
+      .tv-footer { padding: 12px 24px; }
+    }
+    @media (max-width: 600px) {
+      .admin-topbar { gap: 10px; }
+      .admin-body { padding: 14px; }
+      .fg-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const STORAGE_KEY  = 'gng_contest_v2';
+const CONTEST_KEY  = 'gng_contest_ended';
+const ADMIN_PASS   = '0430';
+
+function genId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+function calcBest(rounds) {
+  const vals = rounds.flatMap(r =>
+    r.shots.filter(s => s !== null && s !== '' && !isNaN(Number(s))).map(Number)
+  );
+  return vals.length ? Math.min(...vals) : null;
+}
+
+function useStorage(key, init) {
+  const [val, setVal] = useState(() => {
+    try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : init; }
+    catch { return init; }
+  });
+  useEffect(() => {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+  }, [key, val]);
+  return [val, setVal];
+}
+
+function readStorage(key, fallback) {
+  try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : fallback; }
+  catch { return fallback; }
+}
+
+// ── Toggle ─────────────────────────────────────────────────
+function Toggle({ on, onChange }) {
+  return (
+    <div className={`tog-track${on ? ' on' : ''}`} onClick={() => onChange(!on)}>
+      <div className="tog-thumb" />
+    </div>
+  );
+}
+
+// ── Toast ──────────────────────────────────────────────────
+function Toast({ msg, onDone }) {
+  useEffect(() => { const t = setTimeout(onDone, 2400); return () => clearTimeout(t); }, []);
+  return <div className="toast">{msg}</div>;
+}
+
+// ── Lock Screen ────────────────────────────────────────────
+function LockScreen({ onUnlock }) {
+  const [pw, setPw]       = useState('');
+  const [err, setErr]     = useState('');
+  const inputRef          = useRef();
+  useEffect(() => { inputRef.current?.focus(); }, []);
+
+  const attempt = () => {
+    if (pw === ADMIN_PASS) { onUnlock(); }
+    else { setErr('Incorrect password. Try again.'); setPw(''); inputRef.current?.focus(); }
+  };
+
+  return (
+    <div className="lock-screen">
+      <div className="lock-grid" />
+      <div className="lock-box">
+        <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="lock-logo" />
+        <div className="lock-title">Admin <span>Panel</span></div>
+        <div className="lock-sub">Enter password to continue</div>
+        <input
+          ref={inputRef}
+          type="password"
+          placeholder="Password"
+          value={pw}
+          onChange={e => { setPw(e.target.value); setErr(''); }}
+          onKeyDown={e => e.key === 'Enter' && attempt()}
+          style={{textAlign:'center', letterSpacing:'0.2em', marginBottom:12}}
+        />
+        <button className="btn btn-primary btn-full btn-lg" onClick={attempt}>
+          Unlock Admin
+        </button>
+        <div className="lock-error">{err}</div>
+      </div>
+    </div>
+  );
+}
+
+// ── Register Modal ─────────────────────────────────────────
+function RegisterModal({ onSave, onClose }) {
+  const [f, setF] = useState({ name:'', phone:'', email:'', method:'cash', notes:'' });
+  const nameRef = useRef();
+  useEffect(() => { nameRef.current?.focus(); }, []);
+  const set = k => e => setF(p => ({ ...p, [k]: e.target.value }));
+
+  const submit = () => {
+    if (!f.name.trim()) return;
+    onSave({
+      id: genId(), createdAt: Date.now(),
+      name: f.name.trim(), phone: f.phone.trim(), email: f.email.trim(),
+      method: f.method, paid: false, reentries: 0, notes: f.notes.trim(), rounds: [],
+    });
+    onClose();
+  };
+
+  return (
+    <div className="overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal">
+        <div className="modal-title">New <span className="g">Player</span></div>
+        <div className="fg-grid">
+          <div className="fg full">
+            <label>Player Name *</label>
+            <input ref={nameRef} type="text" placeholder="Full name"
+              value={f.name} onChange={set('name')}
+              onKeyDown={e => e.key === 'Enter' && submit()} />
+          </div>
+          <div className="fg">
+            <label>Phone</label>
+            <input type="tel" placeholder="(555) 555-5555" value={f.phone} onChange={set('phone')} />
+          </div>
+          <div className="fg">
+            <label>Email</label>
+            <input type="email" placeholder="email@example.com" value={f.email} onChange={set('email')} />
+          </div>
+          <div className="fg full">
+            <label>Payment Method</label>
+            <select value={f.method} onChange={set('method')}>
+              <option value="cash">Cash</option>
+              <option value="venmo">Venmo</option>
+              <option value="zelle">Zelle</option>
+              <option value="card">Card</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div className="fg full">
+            <label>Notes</label>
+            <textarea placeholder="Optional notes…" value={f.notes} onChange={set('notes')} />
+          </div>
+        </div>
+        <div className="modal-actions">
+          <button className="btn btn-primary btn-lg" style={{flex:1}}
+            onClick={submit} disabled={!f.name.trim()}>
+            Register Player
+          </button>
+          <button className="btn btn-ghost" onClick={onClose}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Add Round Modal ────────────────────────────────────────
+function AddRoundModal({ player, onSave, onClose }) {
+  const [shots, setShots] = useState(['','','']);
+  const ref0 = useRef();
+  useEffect(() => { ref0.current?.focus(); }, []);
+
+  const setShot = i => e => {
+    const v = e.target.value;
+    if (v === '' || (/^\d*\.?\d*$/.test(v) && Number(v) >= 0))
+      setShots(s => { const n=[...s]; n[i]=v; return n; });
+  };
+
+  const valid = shots.filter(s => s !== '' && !isNaN(Number(s)));
+  const best  = valid.length ? Math.min(...valid.map(Number)) : null;
+
+  const submit = () => {
+    if (!valid.length) return;
+    onSave({ id: genId(), createdAt: Date.now(), shots: shots.map(s => s === '' ? null : Number(s)) });
+    onClose();
+  };
+
+  return (
+    <div className="overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal">
+        <div className="modal-title">Add Round — <span className="g">{player.name}</span></div>
+        <div className="section-lbl" style={{marginBottom:10}}>Shot Distances (feet)</div>
+        <div className="shot-grid">
+          {[0,1,2].map(i => (
+            <div className="shot-box" key={i}>
+              <div className="shot-box-lbl">Shot {i+1}</div>
+              <input
+                ref={i===0 ? ref0 : undefined}
+                type="number" min="0" step="0.1"
+                className={`shot-input-el${shots[i]!=='' ? ' has' : ''}`}
+                placeholder="—"
+                value={shots[i]}
+                onChange={setShot(i)}
+                onKeyDown={e => e.key==='Enter' && submit()}
+              />
+            </div>
+          ))}
+        </div>
+        {best !== null && (
+          <div style={{marginTop:12, padding:'9px 14px',
+            background:'var(--green-dim)', borderRadius:4, border:'1px solid rgba(57,255,20,0.2)'}}>
+            <span style={{fontSize:'0.68rem',fontWeight:700,letterSpacing:'0.15em',
+              textTransform:'uppercase',color:'var(--muted)'}}>Best Shot: </span>
+            <span style={{fontSize:'1.2rem',fontWeight:900,color:'var(--green)'}}>{best} ft</span>
+          </div>
+        )}
+        <div className="modal-actions">
+          <button className="btn btn-primary btn-lg" style={{flex:1}}
+            onClick={submit} disabled={!valid.length}>
+            Save Round
+          </button>
+          <button className="btn btn-ghost" onClick={onClose}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Player Card ────────────────────────────────────────────
+function PlayerCard({ player, rank, onUpdate, onDelete }) {
+  const [open, setOpen]           = useState(false);
+  const [showRound, setShowRound] = useState(false);
+  const [editNotes, setEditNotes] = useState(false);
+  const [notesDraft, setNotesDraft] = useState(player.notes || '');
+
+  const best     = calcBest(player.rounds);
+  const rnk      = rank === 1 ? 'g' : rank === 2 ? 's' : rank === 3 ? 'b' : '';
+  const reentries = player.reentries || 0;
+  // can add a new round when: first round slot (rounds=0) or a paid re-entry slot exists
+  const canAddRound = player.paid && player.rounds.length <= reentries;
+  const METHODS  = { cash:'Cash', venmo:'Venmo', zelle:'Zelle', card:'Card', other:'Other' };
+
+  const update = patch => onUpdate({ ...player, ...patch });
+
+  const addRound = round => onUpdate({ ...player, rounds: [...player.rounds, round] });
+
+  const deleteRound = id => onUpdate({ ...player, rounds: player.rounds.filter(r => r.id !== id) });
+
+  const confirmReentry = () => {
+    onUpdate({ ...player, reentries: reentries + 1 });
+  };
+
+  const saveNotes = () => { update({ notes: notesDraft }); setEditNotes(false); };
+
+  return (
+    <>
+      <div className="pcard">
+        <div className="pcard-head" onClick={() => setOpen(o => !o)}>
+          <div className="pcard-left">
+            <div className={`rank-num${rnk ? ' '+rnk : ''}`}>#{rank}</div>
+            <div className="pinfo">
+              <div className="pname">{player.name}</div>
+              <div className="pmeta">
+                {player.rounds.length} round{player.rounds.length !== 1 ? 's' : ''} ·{' '}
+                {METHODS[player.method] || player.method}
+                {player.phone ? ` · ${player.phone}` : ''}
+              </div>
+            </div>
+          </div>
+          <div className="pcard-right">
+            <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+              <span className={`badge ${player.paid ? 'badge-paid' : 'badge-unpaid'}`}>
+                {player.paid ? 'Paid' : 'Unpaid'}
+              </span>
+              <span className="badge badge-method">{METHODS[player.method] || player.method}</span>
+            </div>
+            <div className="pbest">
+              {best !== null
+                ? <><div className="pbest-num">{best} ft</div><div className="pbest-lbl">Best</div></>
+                : <div className="pbest-lbl">No shots</div>
+              }
+            </div>
+            <div className="chevron">{open ? '▲' : '▼'}</div>
+          </div>
+        </div>
+
+        {open && (
+          <div className="pcard-body">
+
+            {/* Payment */}
+            <div>
+              <div className="section-lbl">Initial Payment — $20 / 3 Shots</div>
+              <div className="tog-wrap">
+                <Toggle on={player.paid} onChange={v => update({ paid: v })} />
+                <span className={`tog-lbl${player.paid ? ' on' : ''}`}>
+                  {player.paid ? 'Payment Confirmed' : 'Awaiting Payment'}
+                </span>
+              </div>
+            </div>
+
+            <div className="divider" />
+
+            {/* Re-entry payments */}
+            {player.paid && (
+              <>
+                <div>
+                  <div className="section-lbl">
+                    Re-Entry Payments — {reentries} confirmed · ${reentries * 20} collected
+                  </div>
+                  <button className="btn btn-reentry btn-full" onClick={confirmReentry}>
+                    + Confirm Re-Entry Payment ($20)
+                  </button>
+                </div>
+                <div className="divider" />
+              </>
+            )}
+
+            {/* Rounds */}
+            <div>
+              <div className="section-lbl">Rounds ({player.rounds.length})</div>
+              {player.rounds.length === 0 && (
+                <div style={{fontSize:'0.82rem',color:'var(--muted)',fontStyle:'italic',marginBottom:8}}>
+                  No rounds yet.
+                </div>
+              )}
+              {player.rounds.map((round, idx) => {
+                const rv = round.shots.filter(s => s !== null && !isNaN(Number(s)));
+                const rb = rv.length ? Math.min(...rv.map(Number)) : null;
+                return (
+                  <div className="round-item" key={round.id}>
+                    <div className="round-head">
+                      <span className="round-lbl">Round {idx + 1}</span>
+                      <div style={{display:'flex',alignItems:'center',gap:8}}>
+                        {rb !== null &&
+                          <span className="round-best">Best: <strong style={{color:'var(--green)'}}>{rb} ft</strong></span>
+                        }
+                        <button className="btn btn-danger btn-sm" onClick={() => deleteRound(round.id)}>
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                    <div className="shot-grid">
+                      {round.shots.map((s, si) => (
+                        <div className="shot-box" key={si}>
+                          <div className="shot-box-lbl">Shot {si+1}</div>
+                          <div className={`shot-display${s !== null ? ' has' : ''}`}>
+                            {s !== null ? `${s} ft` : '—'}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+
+              <button
+                className="btn btn-primary btn-full"
+                style={{marginTop:4}}
+                disabled={!canAddRound}
+                title={
+                  !player.paid ? 'Confirm initial payment first' :
+                  !canAddRound ? 'Confirm re-entry payment to add another round' : ''
+                }
+                onClick={() => setShowRound(true)}
+              >
+                {!player.paid
+                  ? 'Confirm Payment to Add Round'
+                  : !canAddRound
+                    ? 'Confirm Re-Entry Payment to Add Round'
+                    : '+ Add Round'
+                }
+              </button>
+            </div>
+
+            <div className="divider" />
+
+            {/* Notes */}
+            <div>
+              <div className="section-lbl">Notes</div>
+              {editNotes ? (
+                <>
+                  <textarea value={notesDraft} onChange={e => setNotesDraft(e.target.value)}
+                    style={{marginBottom:8}} />
+                  <div style={{display:'flex',gap:8}}>
+                    <button className="btn btn-primary btn-sm" onClick={saveNotes}>Save</button>
+                    <button className="btn btn-ghost btn-sm" onClick={() => {
+                      setNotesDraft(player.notes||''); setEditNotes(false);
+                    }}>Cancel</button>
+                  </div>
+                </>
+              ) : (
+                <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
+                  <div className="notes-txt">{player.notes || 'No notes.'}</div>
+                  <button className="btn btn-ghost btn-sm" onClick={() => setEditNotes(true)}>Edit</button>
+                </div>
+              )}
+            </div>
+
+            {(player.phone || player.email) && (
+              <>
+                <div className="divider" />
+                <div>
+                  <div className="section-lbl">Contact</div>
+                  {player.phone && <div style={{fontSize:'0.88rem',color:'var(--muted)',marginBottom:3}}>📞 {player.phone}</div>}
+                  {player.email && <div style={{fontSize:'0.88rem',color:'var(--muted)'}}>{player.email}</div>}
+                </div>
+              </>
+            )}
+
+            <div className="divider" />
+            <div style={{display:'flex',justifyContent:'flex-end'}}>
+              <button className="btn btn-danger btn-sm" onClick={() => onDelete(player.id)}>
+                Delete Player
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {showRound && (
+        <AddRoundModal player={player} onSave={addRound} onClose={() => setShowRound(false)} />
+      )}
+    </>
+  );
+}
+
+// ── Admin View ─────────────────────────────────────────────
+function AdminView({ players, setPlayers, onTV, contestEnded, setContestEnded }) {
+  const [tab, setTab]           = useState('players');
+  const [showReg, setShowReg]   = useState(false);
+  const [toast, setToast]       = useState(null);
+  const [search, setSearch]     = useState('');
+  const [showEndConfirm, setShowEndConfirm] = useState(false);
+
+  const sorted = [...players].sort((a, b) => {
+    const ba = calcBest(a.rounds), bb = calcBest(b.rounds);
+    if (ba === null && bb === null) return a.createdAt - b.createdAt;
+    if (ba === null) return 1;
+    if (bb === null) return -1;
+    return ba - bb;
+  });
+
+  const filtered = search.trim()
+    ? sorted.filter(p =>
+        p.name.toLowerCase().includes(search.toLowerCase()) ||
+        (p.phone||'').includes(search)
+      )
+    : sorted;
+
+  const addPlayer = p => { setPlayers(ps => [...ps, p]); notify(`${p.name} registered!`); };
+  const updatePlayer = u => setPlayers(ps => ps.map(p => p.id===u.id ? u : p));
+  const deletePlayer = id => { setPlayers(ps => ps.filter(p => p.id!==id)); notify('Player removed.'); };
+  const notify = msg => setToast(msg);
+
+  // Revenue: total rounds submitted by confirmed players × $20
+  const totalRevenue = players
+    .filter(p => p.paid)
+    .reduce((s, p) => s + p.rounds.length, 0) * 20;
+  const totalRounds = players.reduce((s, p) => s + p.rounds.length, 0);
+
+  // Export CSV
+  const exportCSV = () => {
+    const rows = [
+      ['Name','Phone','Email','Payment Method','Rounds','Best Shot (ft)'],
+      ...players.map(p => [
+        p.name,
+        p.phone || '',
+        p.email || '',
+        p.method,
+        p.rounds.length,
+        calcBest(p.rounds) !== null ? calcBest(p.rounds) : '',
+      ])
+    ];
+    const csv = rows.map(r =>
+      r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+    ).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `gng-contest-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    notify('CSV exported!');
+  };
+
+  const endContest = () => {
+    setContestEnded(true);
+    setShowEndConfirm(false);
+    onTV();
+    notify('Contest ended — switching to winner screen.');
+  };
+
+  // Inline register form
+  function RegForm() {
+    const [f, setF] = useState({ name:'', phone:'', email:'', method:'cash', notes:'' });
+    const set = k => e => setF(p => ({ ...p, [k]: e.target.value }));
+    const submit = () => {
+      if (!f.name.trim()) return;
+      addPlayer({
+        id: genId(), createdAt: Date.now(),
+        name: f.name.trim(), phone: f.phone.trim(), email: f.email.trim(),
+        method: f.method, paid: false, reentries: 0, notes: f.notes.trim(), rounds: [],
+      });
+      setTab('players');
+    };
+    return (
+      <div className="card">
+        <div className="card-heading">Register New Player</div>
+        <div className="fg-grid">
+          <div className="fg full">
+            <label>Player Name *</label>
+            <input type="text" placeholder="Full name" value={f.name} onChange={set('name')} />
+          </div>
+          <div className="fg">
+            <label>Phone</label>
+            <input type="tel" placeholder="(555) 555-5555" value={f.phone} onChange={set('phone')} />
+          </div>
+          <div className="fg">
+            <label>Email</label>
+            <input type="email" placeholder="email@example.com" value={f.email} onChange={set('email')} />
+          </div>
+          <div className="fg full">
+            <label>Payment Method</label>
+            <select value={f.method} onChange={set('method')}>
+              <option value="cash">Cash</option>
+              <option value="venmo">Venmo</option>
+              <option value="zelle">Zelle</option>
+              <option value="card">Card</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div className="fg full">
+            <label>Notes</label>
+            <textarea placeholder="Optional notes…" value={f.notes} onChange={set('notes')} />
+          </div>
+        </div>
+        <button className="btn btn-primary btn-lg btn-full" style={{marginTop:14}}
+          onClick={submit} disabled={!f.name.trim()}>
+          Register Player
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="admin-view">
+      {/* Top bar */}
+      <div className="admin-topbar">
+        <div className="admin-brand">
+          <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="admin-logo" />
+          <div>
+            <div className="admin-brand-title">Closest to the <span className="g">Pin</span></div>
+            <div className="admin-brand-sub">Contest Manager</div>
+          </div>
+        </div>
+        <div className="admin-stats">
+          <div className="stat-chip">
+            <div className="stat-chip-num">{players.length}</div>
+            <div className="stat-chip-label">Players</div>
+          </div>
+          <div className="stat-chip">
+            <div className="stat-chip-num">{totalRounds}</div>
+            <div className="stat-chip-label">Rounds</div>
+          </div>
+          <div className="stat-chip">
+            <div className="stat-chip-num">${totalRevenue}</div>
+            <div className="stat-chip-label">Revenue</div>
+          </div>
+          <button className="export-btn" onClick={exportCSV}>⬇ Export CSV</button>
+          <button className="tv-btn" onClick={onTV}>📺 TV View</button>
+          <button className="end-btn" onClick={() => setShowEndConfirm(true)}>🏁 End Contest</button>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="admin-tabs">
+        <button className={`a-tab${tab==='players' ? ' on' : ''}`} onClick={() => setTab('players')}>
+          Players ({players.length})
+        </button>
+        <button className={`a-tab${tab==='register' ? ' on' : ''}`} onClick={() => setTab('register')}>
+          + New Player
+        </button>
+      </div>
+
+      {/* Body */}
+      <div className="admin-body">
+        {tab === 'register' && <RegForm />}
+
+        {tab === 'players' && (
+          <>
+            <div style={{display:'flex', gap:10, marginBottom:14, alignItems:'center', flexWrap:'wrap'}}>
+              <input type="text" placeholder="Search by name or phone…"
+                value={search} onChange={e => setSearch(e.target.value)}
+                style={{flex:1, minWidth:180, maxWidth:340}} />
+              <button className="btn btn-primary" onClick={() => setShowReg(true)}>
+                + Register Player
+              </button>
+            </div>
+
+            {filtered.length === 0 ? (
+              <div className="empty">
+                <div className="empty-title">{search ? 'No Matches Found' : 'No Players Yet'}</div>
+                <div className="empty-sub">{search ? 'Try a different search' : 'Register the first player to get started'}</div>
+              </div>
+            ) : (
+              filtered.map(p => {
+                const rank = sorted.findIndex(s => s.id === p.id) + 1;
+                return (
+                  <PlayerCard key={p.id} player={p} rank={rank}
+                    onUpdate={updatePlayer} onDelete={deletePlayer} />
+                );
+              })
+            )}
+          </>
+        )}
+      </div>
+
+      {showReg && <RegisterModal onSave={addPlayer} onClose={() => setShowReg(false)} />}
+      {toast && <Toast msg={toast} onDone={() => setToast(null)} />}
+
+      {/* End Contest confirm */}
+      {showEndConfirm && (
+        <div className="overlay" onClick={e => e.target===e.currentTarget && setShowEndConfirm(false)}>
+          <div className="confirm-modal">
+            <div className="confirm-title">End Contest?</div>
+            <div className="confirm-body">
+              This will switch the TV leaderboard to winner announcement mode.<br />
+              The contest data will not be deleted.
+            </div>
+            <div style={{display:'flex', gap:10, justifyContent:'center'}}>
+              <button className="btn btn-danger btn-lg" onClick={endContest}>
+                Yes, End Contest
+              </button>
+              <button className="btn btn-ghost btn-lg" onClick={() => setShowEndConfirm(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── TV Leaderboard ─────────────────────────────────────────
+function TVView({ propPlayers, contestEnded }) {
+  // Local state that auto-refreshes from localStorage every 10 seconds
+  const [players, setPlayers] = useState(propPlayers);
+
+  useEffect(() => {
+    const refresh = () => {
+      const latest = readStorage(STORAGE_KEY, []);
+      setPlayers(latest);
+    };
+    const id = setInterval(refresh, 10000);
+    // Also catch same-tab updates via storage event
+    window.addEventListener('storage', refresh);
+    return () => { clearInterval(id); window.removeEventListener('storage', refresh); };
+  }, []);
+
+  // Keep in sync when propPlayers change (same-tab admin edits)
+  useEffect(() => { setPlayers(propPlayers); }, [propPlayers]);
+
+  const ranked = [...players]
+    .filter(p => calcBest(p.rounds) !== null)
+    .sort((a, b) => calcBest(a.rounds) - calcBest(b.rounds));
+
+  const medalClass = i => i===0?'gold':i===1?'silver':i===2?'bronze':'plain';
+  const rowClass   = i => i===0?'r1':i===1?'r2':i===2?'r3':'';
+  const medals     = ['🥇','🥈','🥉'];
+  const latestShots = p => p.rounds.length ? p.rounds[p.rounds.length-1].shots : [];
+  const overallBest = ranked.length ? calcBest(ranked[0].rounds) : null;
+  const winner      = ranked[0] || null;
+
+  return (
+    <div className="tv-view">
+      <div className="tv-grid-bg" />
+      <div className="tv-glow" />
+
+      {/* Header */}
+      <div className="tv-header">
+        <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="tv-logo" />
+        <div className="tv-title-block">
+          <div className="tv-eyebrow">
+            <span className="live-dot" />
+            {contestEnded ? 'Contest Complete' : 'Live Leaderboard'}
+          </div>
+          <div className="tv-main-title">
+            {contestEnded
+              ? <><span className="accent">Winner</span> Announcement</>
+              : <>Closest to <span className="accent">the Pin</span></>
+            }
+          </div>
+        </div>
+        <div className="tv-prize-badge">
+          <div className="tv-prize-label">Prize</div>
+          <div className="tv-prize-amount">$500</div>
+          <div className="tv-prize-label">Cash</div>
+        </div>
+      </div>
+
+      {/* Info bar */}
+      <div className="tv-info-bar">
+        <div className="tv-info-item">Entry Fee: <strong>$20 / 3 Shots</strong></div>
+        <div className="tv-info-sep" />
+        <div className="tv-info-item">Format: <strong>Lowest Distance Wins</strong></div>
+        <div className="tv-info-sep" />
+        <div className="tv-info-item">Players: <strong>{players.length}</strong></div>
+        {overallBest !== null && (
+          <>
+            <div className="tv-info-sep" />
+            <div className="tv-info-item">
+              {contestEnded ? 'Winning Shot' : 'Current Best'}: <strong>{overallBest} ft</strong>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Winner screen */}
+      {contestEnded && winner ? (
+        <div className="winner-screen">
+          <div className="winner-glow" />
+          <div className="winner-trophy">🏆</div>
+          <div className="winner-label">⭐ Contest Winner ⭐</div>
+          <div className="winner-name">{winner.name}</div>
+          <div className="winner-dist">{calcBest(winner.rounds)} ft</div>
+          <div className="winner-dist-lbl">Closest to the Pin</div>
+          <div className="winner-prize-badge">$500 Cash Prize</div>
+          <div className="winner-rounds-lbl">
+            {winner.rounds.length} Round{winner.rounds.length !== 1 ? 's' : ''} played · Golf 'n Go Chicago
+          </div>
+        </div>
+      ) : contestEnded && !winner ? (
+        <div className="tv-empty">
+          <div className="tv-empty-icon">🏁</div>
+          <div className="tv-empty-title">Contest Complete</div>
+          <div className="tv-empty-sub">No shots were recorded</div>
+        </div>
+      ) : (
+        /* Normal leaderboard */
+        <div className="tv-board">
+          {ranked.length === 0 ? (
+            <div className="tv-empty">
+              <div className="tv-empty-icon">⛳</div>
+              <div className="tv-empty-title">
+                {players.length === 0
+                  ? <>Leaderboard<br />Coming Soon</>
+                  : <>Shots<br />Incoming</>
+                }
+              </div>
+              <div className="tv-empty-sub">
+                {players.length === 0
+                  ? 'Step up and take your shot at $500!'
+                  : `${players.length} player${players.length!==1?'s':''} registered — first shots being taken now`
+                }
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="tv-board-head">
+                <div className="tv-col-label" style={{textAlign:'center'}}>Rank</div>
+                <div className="tv-col-label">Player</div>
+                <div className="tv-col-label r">Last Round</div>
+                <div className="tv-col-label r">Best Distance</div>
+              </div>
+              {ranked.map((player, i) => {
+                const best  = calcBest(player.rounds);
+                const shots = latestShots(player);
+                return (
+                  <div key={player.id} className={`tv-row ${rowClass(i)}`}>
+                    <div className="tv-medal">
+                      <div className={`tv-medal-badge ${medalClass(i)}`}>
+                        {i < 3 ? medals[i] : i + 1}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="tv-player-name">{player.name}</div>
+                      <div className="tv-player-sub">
+                        {player.rounds.length} Round{player.rounds.length!==1?'s':''}
+                      </div>
+                    </div>
+                    <div className="tv-shots-col">
+                      <div className="tv-shot-pills">
+                        {shots.map((s, si) => (
+                          <div key={si} className={`tv-shot-pill${s!==null && s===best?' hi':''}`}>
+                            {s !== null ? `${s} ft` : '—'}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="tv-shots-sub">Latest Round</div>
+                    </div>
+                    <div className="tv-best-col">
+                      <div className={`tv-best-num ${rowClass(i)}`}>{best}</div>
+                      <div className="tv-best-unit">Feet</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="tv-footer">
+        <div className="tv-footer-left">Golf 'n Go Chicago · Mobile Golf Simulator Rental</div>
+        <div className="tv-footer-right">golfngochicago.com</div>
+      </div>
+      {/* No admin button on TV — intentionally removed */}
+    </div>
+  );
+}
+
+// ── App Root ───────────────────────────────────────────────
+function App() {
+  const [players, setPlayers]           = useStorage(STORAGE_KEY, []);
+  const [contestEnded, setContestEnded] = useStorage(CONTEST_KEY, false);
+  const [view, setView]                 = useState('admin');
+  const [authed, setAuthed]             = useState(false);
+
+  if (view === 'tv') {
+    return (
+      <TVView
+        propPlayers={players}
+        contestEnded={contestEnded}
+        onAdmin={() => setView('admin')}
+      />
+    );
+  }
+
+  if (!authed) {
+    return <LockScreen onUnlock={() => setAuthed(true)} />;
+  }
+
+  return (
+    <AdminView
+      players={players}
+      setPlayers={setPlayers}
+      onTV={() => setView('tv')}
+      contestEnded={contestEnded}
+      setContestEnded={setContestEnded}
+    />
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

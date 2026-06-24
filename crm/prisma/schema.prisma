@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                  String    @id @default(cuid())
+  clientEmail         String    @unique
+  clientName          String
+  clientPhone         String    @default("")
+  eventDate           String    @default("")
+  eventDateRaw        String    @default("")
+  startTime           String    @default("")
+  eventCity           String    @default("")
+  packageName         String    @default("")
+  packagePrice        Float     @default(0)
+  source              String    @default("")
+  status              String    @default("active")
+  urgency             String    @default("WARM")
+  daysUntil           Int?
+  quoteSent           Boolean   @default(false)
+  quoteAmount         Float?
+  quoteNumber         Int?
+  depositPaid         Boolean   @default(false)
+  depositAmount       Float?
+  invoicePaid         Boolean   @default(false)
+  outreachCount       Int       @default(0)
+  clientReplied       Boolean   @default(false)
+  lastOutreachDate    DateTime?
+  lastClientReplyDate DateTime?
+  jotformReceivedAt   DateTime  @default(now())
+  summary             String    @default("")
+  // New fields
+  activityStatus      String    @default("New Lead")
+  followUpDate        DateTime?
+  eventType           String    @default("")
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @default(now()) @updatedAt
+  // Relations
+  calls               CallLog[]
+  notes               Note[]
+  smsLogs             SmsLog[]
+}
+
+model CallLog {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  date      DateTime @default(now())
+  outcome   String   @default("No Answer")
+  notes     String   @default("")
+  createdAt DateTime @default(now())
+
+  @@index([leadId])
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([leadId])
+}
+
+model SmsLog {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  date      DateTime @default(now())
+  direction String   @default("Sent")
+  notes     String   @default("")
+  createdAt DateTime @default(now())
+
+  @@index([leadId])
+}
+
+model SyncState {
+  id          String    @id @default("singleton")
+  lastSyncAt  DateTime?
+}

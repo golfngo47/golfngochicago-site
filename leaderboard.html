@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golf 'n Go Chicago | Leaderboard</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --bg:         #0a0a0a;
+      --bg2:        #111111;
+      --bg3:        #161616;
+      --green:      #39FF14;
+      --green-dim:  rgba(57,255,20,0.12);
+      --green-glow: rgba(57,255,20,0.35);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.5);
+      --border:     rgba(255,255,255,0.08);
+      --gold:       #FFD700;
+      --font:       'Barlow Condensed', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(57,255,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,255,20,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* ── Leaderboard ── */
+    .lb-wrap {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      padding: 28px 24px 40px;
+    }
+
+    .lb-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+    }
+    .lb-logo { height: 54px; width: auto; object-fit: contain; }
+    .lb-header-center { flex: 1; text-align: center; }
+    .lb-contest-title {
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      line-height: 0.9; color: var(--white);
+    }
+    .lb-contest-title .acc {
+      color: var(--green);
+      text-shadow: 0 0 40px rgba(57,255,20,0.5), 0 0 80px rgba(57,255,20,0.2);
+    }
+
+    .prize-badge {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--green); color: #0a0a0a;
+      border-radius: 6px; padding: 10px 24px; text-align: center;
+    }
+    .prize-amount {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 900; font-style: italic; letter-spacing: 0.02em; line-height: 1;
+    }
+    .prize-label {
+      font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+      font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase;
+    }
+
+    .stats-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+    .stat-chip {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 8px 20px;
+      display: flex; align-items: baseline; gap: 8px;
+    }
+    .stat-val { font-size: 1.6rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .stat-lbl {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .info-bar {
+      display: flex; gap: 16px; margin-bottom: 20px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); flex-wrap: wrap;
+    }
+    .info-bar span { display: flex; align-items: center; gap: 6px; }
+
+    .lb-table { width: 100%; border-collapse: collapse; }
+    .lb-table thead tr { border-bottom: 1px solid rgba(57,255,20,0.2); }
+    .lb-table th {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 10px 14px; text-align: left;
+    }
+    .lb-table th.right { text-align: right; }
+    .lb-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .lb-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+    .lb-table tbody tr.first-place { background: rgba(57,255,20,0.06); }
+    .lb-table td { padding: 14px 14px; vertical-align: middle; }
+
+    .rank-cell { width: 52px; }
+    .rank-num { font-size: 1.1rem; font-weight: 900; font-style: italic; color: var(--muted); }
+    .rank-1 { color: var(--gold); font-size: 1.4rem; }
+    .rank-2 { color: #c0c0c0; }
+    .rank-3 { color: #cd7f32; }
+
+    .player-name {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+    }
+    .first-place .player-name { color: var(--green); }
+    .rounds-badge {
+      display: inline-block; margin-left: 8px;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .best-shot {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 900; font-style: italic; text-align: right;
+    }
+    .first-place .best-shot {
+      color: var(--green);
+      text-shadow: 0 0 24px rgba(57,255,20,0.5);
+    }
+
+    .no-players {
+      text-align: center; padding: 80px 20px;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .live-dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── Winner Screen ── */
+    .winner-wrap {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 24px; text-align: center;
+    }
+    .winner-glow {
+      position: fixed; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(255,215,0,0.14) 0%, transparent 65%);
+    }
+    .winner-logo { height: 60px; width: auto; display: block; margin: 0 auto 32px; object-fit: contain; }
+    .winner-label {
+      font-size: clamp(1rem, 3vw, 1.8rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      letter-spacing: 0.3em; color: var(--gold);
+      text-shadow: 0 0 40px rgba(255,215,0,0.5); margin-bottom: 12px;
+    }
+    .winner-trophy {
+      font-size: clamp(5rem, 14vw, 10rem);
+      line-height: 1; margin-bottom: 16px;
+      filter: drop-shadow(0 0 40px rgba(255,215,0,0.5));
+    }
+    .winner-name {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      line-height: 0.88; color: var(--white); margin-bottom: 16px;
+    }
+    .winner-shot {
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      color: var(--green);
+      text-shadow: 0 0 40px rgba(57,255,20,0.6), 0 0 80px rgba(57,255,20,0.3);
+      margin-bottom: 12px;
+    }
+    .winner-prize {
+      font-size: clamp(2rem, 6vw, 5rem);
+      font-weight: 900; font-style: italic;
+      color: var(--gold);
+      text-shadow: 0 0 60px rgba(255,215,0,0.7), 0 0 120px rgba(255,215,0,0.3);
+    }
+
+    @media (max-width: 600px) {
+      .lb-header { flex-direction: column; align-items: flex-start; }
+      .lb-header-center { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjWw6jYAIuKnJ-q5jNfjqD3AfnEdNQQkM",
+    authDomain: "golfngo-contest.firebaseapp.com",
+    projectId: "golfngo-contest",
+    storageBucket: "golfngo-contest.firebasestorage.app",
+    messagingSenderId: "339117171060",
+    appId: "1:339117171060:web:183e8132312163a9474c21"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+function toFeet(shot) {
+  if (shot === null || shot === undefined) return null;
+  if (typeof shot === 'number') return shot;
+  if (shot.value !== null && shot.value !== undefined)
+    return shot.unit === 'yards' ? shot.value * 3 : shot.value;
+  return null;
+}
+function calcBest(rounds) {
+  if (!rounds || !rounds.length) return null;
+  const vals = rounds.flatMap(r => r.shots.map(toFeet).filter(v => v !== null && !isNaN(v)));
+  return vals.length ? Math.min(...vals) : null;
+}
+function fmtFeet(ft) {
+  if (ft === null) return '—';
+  const yd = ft / 3;
+  if (yd >= 1) return `${yd.toFixed(1)} yd`;
+  return `${ft} ft`;
+}
+
+// ── Leaderboard ──────────────────────────────────────────
+function Leaderboard({ players }) {
+  const ranked = players
+    .map(p => ({ ...p, best: calcBest(p.rounds || []) }))
+    .filter(p => p.best !== null)
+    .sort((a, b) => a.best - b.best);
+
+  const unranked    = players.filter(p => calcBest(p.rounds || []) === null);
+  const totalRounds = players.reduce((s, p) => s + (p.rounds || []).length, 0);
+
+  return (
+    <div className="lb-wrap">
+      <div className="lb-header">
+        <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="lb-logo" />
+        <div className="lb-header-center">
+          <div className="lb-contest-title">
+            Closest to <span className="acc">the Pin</span>
+          </div>
+        </div>
+        <div className="prize-badge">
+          <div className="prize-amount">$500</div>
+          <div className="prize-label">Cash Prize</div>
+        </div>
+      </div>
+
+      <div className="stats-bar">
+        <div className="stat-chip">
+          <div className="stat-val">{players.length}</div>
+          <div className="stat-lbl">Players</div>
+        </div>
+        <div className="stat-chip">
+          <div className="stat-val">{totalRounds}</div>
+          <div className="stat-lbl">Rounds</div>
+        </div>
+      </div>
+
+      <div className="info-bar">
+        <span><span className="live-dot"></span> Live</span>
+        <span>· $20 Entry · 3 Shots · Lowest Distance Wins</span>
+      </div>
+
+      {ranked.length === 0 && unranked.length === 0 ? (
+        <div className="no-players">No players registered yet</div>
+      ) : (
+        <table className="lb-table">
+          <thead>
+            <tr>
+              <th className="rank-cell">#</th>
+              <th>Player</th>
+              <th className="right">Best Distance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ranked.map((p, i) => (
+              <tr key={p.id} className={i === 0 ? 'first-place' : ''}>
+                <td className="rank-cell">
+                  <span className={`rank-num rank-${i + 1}`}>
+                    {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}`}
+                  </span>
+                </td>
+                <td>
+                  <span className="player-name">{p.name}</span>
+                  <span className="rounds-badge">{(p.rounds || []).length}R</span>
+                </td>
+                <td>
+                  <div className="best-shot">{fmtFeet(p.best)}</div>
+                </td>
+              </tr>
+            ))}
+            {unranked.map(p => (
+              <tr key={p.id}>
+                <td className="rank-cell"><span className="rank-num">—</span></td>
+                <td>
+                  <span className="player-name" style={{ color: 'var(--muted)' }}>{p.name}</span>
+                  <span className="rounds-badge">No shots</span>
+                </td>
+                <td>
+                  <div className="best-shot" style={{ color: 'var(--muted)', fontSize: '1rem' }}>—</div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+// ── Winner Screen ───────────────────────────────────────
+function WinnerScreen({ players }) {
+  const ranked = players
+    .map(p => ({ ...p, best: calcBest(p.rounds || []) }))
+    .filter(p => p.best !== null)
+    .sort((a, b) => a.best - b.best);
+
+  const winner = ranked[0] || null;
+
+  return (
+    <div className="winner-wrap">
+      <div className="winner-glow" />
+      <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="winner-logo" />
+      <div className="winner-label">🏆 Contest Winner 🏆</div>
+      <div className="winner-trophy">🏆</div>
+      {winner ? (
+        <>
+          <div className="winner-name">{winner.name}</div>
+          <div className="winner-shot">{fmtFeet(winner.best)} from the pin</div>
+          <div className="winner-prize">$500</div>
+        </>
+      ) : (
+        <div className="winner-name" style={{ color: 'var(--muted)' }}>No scores recorded</div>
+      )}
+    </div>
+  );
+}
+
+// ── App ─────────────────────────────────────────────────
+function App() {
+  const [players, setPlayers] = useState([]);
+  const [ended, setEnded]     = useState(false);
+
+  useEffect(() => {
+    // Real-time listener for players
+    const unsubPlayers = db.collection('players').onSnapshot(snap => {
+      setPlayers(snap.docs.map(d => d.data()));
+    }, err => console.error('Players listener error:', err));
+
+    // Real-time listener for contest status
+    const unsubStatus = db.collection('contest').doc('status').onSnapshot(snap => {
+      setEnded(!!(snap.exists && snap.data()?.ended));
+    }, err => console.error('Status listener error:', err));
+
+    // 10-second fallback refresh via manual get()
+    const interval = setInterval(() => {
+      db.collection('players').get().then(snap => {
+        setPlayers(snap.docs.map(d => d.data()));
+      }).catch(() => {});
+      db.collection('contest').doc('status').get().then(snap => {
+        setEnded(!!(snap.exists && snap.data()?.ended));
+      }).catch(() => {});
+    }, 10000);
+
+    return () => { unsubPlayers(); unsubStatus(); clearInterval(interval); };
+  }, []);
+
+  return (
+    <>
+      <div className="grid-bg" />
+      {ended
+        ? <WinnerScreen players={players} />
+        : <Leaderboard players={players} />
+      }
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+
+# Netlify
+.netlify/
+
+# Claude Code local config
+.claude/

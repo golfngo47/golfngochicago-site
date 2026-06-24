@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Golf 'n Go Chicago | Contest Registration</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --bg:         #0a0a0a;
+      --bg2:        #111111;
+      --bg3:        #161616;
+      --green:      #39FF14;
+      --green-dim:  rgba(57,255,20,0.12);
+      --green-glow: rgba(57,255,20,0.35);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.5);
+      --border:     rgba(255,255,255,0.08);
+      --gold:       #FFD700;
+      --font:       'Barlow Condensed', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(57,255,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,255,20,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .reg-wrap {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .reg-header { text-align: center; margin-bottom: 28px; }
+    .reg-logo { height: 68px; width: auto; object-fit: contain; display: block; margin: 0 auto 22px; }
+
+    .reg-title {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      line-height: 0.88; color: var(--white); margin-bottom: 16px;
+    }
+    .reg-title .acc {
+      color: var(--green);
+      text-shadow: 0 0 40px rgba(57,255,20,0.5), 0 0 80px rgba(57,255,20,0.2);
+    }
+
+    .prize-pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green); color: #0a0a0a;
+      font-size: 1.5rem; font-weight: 900; font-style: italic; letter-spacing: 0.05em;
+      padding: 12px 32px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .entry-note {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .reg-card {
+      background: var(--bg2);
+      border: 1px solid rgba(57,255,20,0.16);
+      border-radius: 8px; padding: 28px 24px;
+      width: 100%; max-width: 500px;
+    }
+
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    input {
+      font-family: var(--font); font-size: 1.15rem; font-weight: 600;
+      background: var(--bg3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; color: var(--white); padding: 15px 14px;
+      width: 100%; outline: none; -webkit-appearance: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input::placeholder { color: rgba(255,255,255,0.2); }
+    input:focus {
+      border-color: rgba(57,255,20,0.5);
+      box-shadow: 0 0 0 3px rgba(57,255,20,0.08);
+    }
+
+    .btn-submit {
+      font-family: var(--font); font-size: 1.25rem; font-weight: 900;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: var(--green); color: #0a0a0a;
+      border: none; border-radius: 4px; padding: 20px;
+      width: 100%; cursor: pointer; margin-top: 16px;
+      transition: all 0.2s;
+    }
+    .btn-submit:not(:disabled):hover { background: #fff; box-shadow: 0 0 36px var(--green-glow); }
+    .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .confirm-wrap {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 20px; text-align: center;
+    }
+    .confirm-glow {
+      position: fixed; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(57,255,20,0.12) 0%, transparent 65%);
+    }
+    .confirm-logo { height: 64px; width: auto; display: block; margin: 0 auto 28px; object-fit: contain; }
+    .confirm-youre-in {
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      line-height: 0.85; color: var(--green);
+      text-shadow: 0 0 60px rgba(57,255,20,0.7), 0 0 120px rgba(57,255,20,0.3);
+      margin-bottom: 20px;
+    }
+    .confirm-name {
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      color: var(--white); line-height: 0.9; margin-bottom: 16px;
+    }
+    .confirm-luck {
+      font-size: 1.3rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 48px;
+    }
+    .btn-new-player {
+      font-family: var(--font); font-size: 1rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: rgba(255,255,255,0.07); color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+      padding: 18px 48px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-new-player:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 480px) {
+      .field-grid { grid-template-columns: 1fr; }
+      .reg-card { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjWw6jYAIuKnJ-q5jNfjqD3AfnEdNQQkM",
+    authDomain: "golfngo-contest.firebaseapp.com",
+    projectId: "golfngo-contest",
+    storageBucket: "golfngo-contest.firebasestorage.app",
+    messagingSenderId: "339117171060",
+    appId: "1:339117171060:web:183e8132312163a9474c21"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script type="text/babel">
+const { useState, useRef, useEffect } = React;
+
+const ADMIN_PASS = '0430';
+
+function genId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+// ── Registration Form ──────────────────────────────────────
+function RegForm({ onSuccess }) {
+  const [f, setF]       = useState({ firstName: '', lastName: '', phone: '', email: '' });
+  const [busy, setBusy] = useState(false);
+  const firstRef        = useRef();
+  useEffect(() => { firstRef.current?.focus(); }, []);
+
+  const set = k => e => setF(p => ({ ...p, [k]: e.target.value }));
+  const ok  = f.firstName.trim() && f.lastName.trim() && !busy;
+
+  const submit = async () => {
+    if (!ok) return;
+    setBusy(true);
+    const firstName = f.firstName.trim();
+    const lastName  = f.lastName.trim();
+    const player = {
+      id: genId(), createdAt: Date.now(),
+      firstName, lastName, name: `${firstName} ${lastName}`,
+      phone: f.phone.trim(), email: f.email.trim(),
+      paid: true, method: 'registration', reentries: 0, notes: '', rounds: [],
+    };
+    try {
+      await db.collection('players').doc(player.id).set(player);
+    } catch (e) {
+      console.error('Firestore write failed:', e);
+    }
+    onSuccess(`${firstName} ${lastName}`);
+  };
+
+  return (
+    <div className="reg-wrap">
+      <div className="reg-header">
+        <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="reg-logo" />
+        <div className="reg-title">Closest to <span className="acc">the Pin</span></div>
+        <div className="prize-pill">🏆 $500 Cash Prize</div>
+        <div className="entry-note">$20 Entry · 3 Shots · Lowest Distance Wins</div>
+      </div>
+
+      <div className="reg-card">
+        <div className="field-grid">
+          <div className="field">
+            <label>First Name *</label>
+            <input ref={firstRef} type="text" placeholder="John"
+              value={f.firstName} onChange={set('firstName')}
+              onKeyDown={e => e.key === 'Enter' && submit()} />
+          </div>
+          <div className="field">
+            <label>Last Name *</label>
+            <input type="text" placeholder="Smith"
+              value={f.lastName} onChange={set('lastName')}
+              onKeyDown={e => e.key === 'Enter' && submit()} />
+          </div>
+          <div className="field">
+            <label>Phone</label>
+            <input type="tel" placeholder="(555) 555-5555"
+              value={f.phone} onChange={set('phone')} />
+          </div>
+          <div className="field">
+            <label>Email</label>
+            <input type="email" placeholder="john@email.com"
+              value={f.email} onChange={set('email')} />
+          </div>
+        </div>
+        <button className="btn-submit" onClick={submit} disabled={!ok}>
+          {busy ? 'Registering…' : 'Register & Pay — $20'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Confirmation Screen ────────────────────────────────────
+function ConfirmScreen({ name, onReset }) {
+  return (
+    <div className="confirm-wrap">
+      <div className="confirm-glow" />
+      <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="confirm-logo" />
+      <div className="confirm-youre-in">You're In!</div>
+      <div className="confirm-name">{name}</div>
+      <div className="confirm-luck">Good Luck 🏌️</div>
+      <button className="btn-new-player" onClick={onReset}>Add New Player</button>
+    </div>
+  );
+}
+
+// ── App ────────────────────────────────────────────────────
+function App() {
+  const [screen, setScreen]   = useState('form');
+  const [lastName, setLastName] = useState('');
+
+  return (
+    <>
+      <div className="grid-bg" />
+      {screen === 'form'
+        ? <RegForm onSuccess={n => { setLastName(n); setScreen('confirm'); }} />
+        : <ConfirmScreen name={lastName} onReset={() => setScreen('form')} />
+      }
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

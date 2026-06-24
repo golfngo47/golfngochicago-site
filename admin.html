@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golf 'n Go Chicago | Admin</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --bg:         #0a0a0a;
+      --bg2:        #111111;
+      --bg3:        #161616;
+      --green:      #39FF14;
+      --green-dim:  rgba(57,255,20,0.12);
+      --green-glow: rgba(57,255,20,0.35);
+      --white:      #ffffff;
+      --muted:      rgba(255,255,255,0.5);
+      --border:     rgba(255,255,255,0.08);
+      --red:        #ff4444;
+      --font:       'Barlow Condensed', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(57,255,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,255,20,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* ── Password Gate ── */
+    .gate-wrap {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 20px;
+    }
+    .gate-logo { height: 64px; width: auto; display: block; margin: 0 auto 32px; }
+    .gate-title {
+      font-size: 2rem; font-weight: 900; font-style: italic; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 24px; text-align: center;
+    }
+    .gate-card {
+      background: var(--bg2); border: 1px solid rgba(57,255,20,0.16);
+      border-radius: 8px; padding: 32px 28px; width: 100%; max-width: 360px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .gate-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .gate-input {
+      font-family: var(--font); font-size: 1.6rem; font-weight: 800;
+      letter-spacing: 0.3em; text-align: center;
+      background: var(--bg3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; color: var(--white); padding: 18px 14px;
+      width: 100%; outline: none; -webkit-appearance: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gate-input:focus {
+      border-color: rgba(57,255,20,0.5);
+      box-shadow: 0 0 0 3px rgba(57,255,20,0.08);
+    }
+    .gate-error {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); text-align: center;
+      min-height: 18px;
+    }
+    .gate-btn {
+      font-family: var(--font); font-size: 1.1rem; font-weight: 900;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: var(--green); color: #0a0a0a;
+      border: none; border-radius: 4px; padding: 18px;
+      width: 100%; cursor: pointer; transition: all 0.2s;
+    }
+    .gate-btn:hover { background: #fff; box-shadow: 0 0 36px var(--green-glow); }
+
+    /* ── Admin Layout ── */
+    .admin-shell {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      display: flex; align-items: center; gap: 16px;
+      padding: 12px 20px; border-bottom: 1px solid var(--border);
+      background: var(--bg2); flex-shrink: 0;
+    }
+    .topbar-logo { height: 38px; width: auto; }
+    .topbar-title {
+      font-size: 1.1rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; color: var(--muted); flex: 1;
+    }
+    .topbar-actions { display: flex; gap: 8px; }
+
+    .stat-chips { display: flex; gap: 8px; padding: 12px 20px; flex-shrink: 0; flex-wrap: wrap; }
+    .stat-chip {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 8px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .stat-val { font-size: 1.5rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .stat-lbl {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .admin-body { display: flex; flex: 1; overflow: hidden; }
+
+    .sidebar {
+      width: 300px; flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-search {
+      padding: 12px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .sidebar-search input {
+      font-family: var(--font); font-size: 1rem; font-weight: 600;
+      background: var(--bg3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; color: var(--white); padding: 10px 12px;
+      width: 100%; outline: none; transition: border-color 0.2s;
+    }
+    .sidebar-search input::placeholder { color: rgba(255,255,255,0.2); }
+    .sidebar-search input:focus { border-color: rgba(57,255,20,0.4); }
+    .player-list { flex: 1; overflow-y: auto; }
+    .player-row {
+      padding: 12px 14px; border-bottom: 1px solid var(--border);
+      cursor: pointer; transition: background 0.15s;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .player-row:hover { background: rgba(255,255,255,0.04); }
+    .player-row.active { background: var(--green-dim); border-left: 3px solid var(--green); }
+    .player-row-name { font-size: 1rem; font-weight: 800; text-transform: uppercase; }
+    .player-row-meta { font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; }
+    .player-row-best { font-size: 0.78rem; font-weight: 700; color: var(--green); }
+    .no-players {
+      padding: 32px; text-align: center;
+      font-size: 0.9rem; font-weight: 600; color: var(--muted);
+    }
+
+    .main-panel { flex: 1; overflow-y: auto; padding: 24px; }
+    .no-selection {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; color: var(--muted);
+      font-size: 1.1rem; font-weight: 700; font-style: italic; text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .profile-header { margin-bottom: 20px; }
+    .profile-name {
+      font-size: 2.2rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; line-height: 1; margin-bottom: 6px;
+    }
+    .profile-meta { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+
+    .rounds-section { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .round-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 16px;
+    }
+    .round-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .round-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .round-best { font-size: 0.85rem; font-weight: 800; color: var(--green); }
+
+    .shots-grid { display: flex; flex-direction: column; gap: 10px; }
+    .shot-row { display: flex; align-items: center; gap: 10px; }
+    .shot-num {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted); width: 42px; flex-shrink: 0;
+    }
+    .shot-input-wrap { flex: 1; position: relative; }
+    .shot-input {
+      font-family: var(--font); font-size: 1.1rem; font-weight: 700;
+      background: var(--bg3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; color: var(--white); padding: 10px 12px;
+      width: 100%; outline: none; -webkit-appearance: none;
+      transition: border-color 0.2s;
+    }
+    .shot-input::placeholder { color: rgba(255,255,255,0.2); }
+    .shot-input:focus { border-color: rgba(57,255,20,0.4); }
+    .shot-input-label {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted); margin-top: 3px;
+    }
+
+    .unit-toggle {
+      display: flex; border-radius: 4px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12); flex-shrink: 0;
+    }
+    .unit-btn {
+      font-family: var(--font); font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: transparent; color: var(--muted);
+      border: none; padding: 8px 12px; cursor: pointer; transition: all 0.15s;
+    }
+    .unit-btn.active { background: var(--green); color: #0a0a0a; }
+
+    .add-round-btn {
+      font-family: var(--font); font-size: 0.9rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: transparent; color: var(--green);
+      border: 1px solid rgba(57,255,20,0.3); border-radius: 4px;
+      padding: 12px; width: 100%; cursor: pointer;
+      transition: all 0.2s; margin-top: 4px;
+    }
+    .add-round-btn:hover { background: var(--green-dim); border-color: var(--green); }
+
+    .save-btn {
+      font-family: var(--font); font-size: 1rem; font-weight: 900;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: var(--green); color: #0a0a0a;
+      border: none; border-radius: 4px; padding: 14px;
+      width: 100%; cursor: pointer; transition: all 0.2s; margin-top: 8px;
+    }
+    .save-btn:hover { background: #fff; box-shadow: 0 0 36px var(--green-glow); }
+    .save-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .save-confirm {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--green); text-align: center;
+      margin-top: 6px; min-height: 18px;
+    }
+
+    .delete-player-btn {
+      font-family: var(--font); font-size: 0.8rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: transparent; color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+      padding: 10px; width: 100%; cursor: pointer;
+      transition: all 0.2s; margin-top: 8px;
+    }
+    .delete-player-btn:hover { color: var(--red); border-color: var(--red); }
+
+    .action-btn {
+      font-family: var(--font); font-size: 0.8rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid; border-radius: 4px;
+      padding: 10px 18px; cursor: pointer; transition: all 0.2s;
+    }
+    .action-btn.export { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.2); }
+    .action-btn.export:hover { background: rgba(255,255,255,0.08); }
+    .action-btn.end-contest { background: transparent; color: #FFD700; border-color: rgba(255,215,0,0.35); }
+    .action-btn.end-contest:hover { background: rgba(255,215,0,0.1); }
+    .action-btn.reset { background: transparent; color: var(--red); border-color: rgba(255,68,68,0.3); }
+    .action-btn.reset:hover { background: rgba(255,68,68,0.08); }
+
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.8);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-box {
+      background: var(--bg2); border: 1px solid rgba(57,255,20,0.2);
+      border-radius: 8px; padding: 32px 28px; max-width: 400px; width: 100%; text-align: center;
+    }
+    .modal-title {
+      font-size: 1.6rem; font-weight: 900; font-style: italic;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .modal-body { font-size: 1rem; font-weight: 600; color: var(--muted); margin-bottom: 24px; }
+    .modal-actions { display: flex; gap: 10px; }
+    .modal-cancel {
+      font-family: var(--font); font-size: 0.9rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: transparent; color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+      padding: 14px; flex: 1; cursor: pointer; transition: all 0.2s;
+    }
+    .modal-cancel:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+    .modal-confirm {
+      font-family: var(--font); font-size: 0.9rem; font-weight: 900;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: none; border-radius: 4px; padding: 14px; flex: 1; cursor: pointer; transition: all 0.2s;
+    }
+    .modal-confirm.danger { background: var(--red); color: #fff; }
+    .modal-confirm.danger:hover { background: #ff6666; }
+    .modal-confirm.gold { background: #FFD700; color: #0a0a0a; }
+    .modal-confirm.gold:hover { background: #ffe84d; }
+
+    @media (max-width: 640px) {
+      .admin-body { flex-direction: column; }
+      .sidebar { width: 100%; height: 220px; border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjWw6jYAIuKnJ-q5jNfjqD3AfnEdNQQkM",
+    authDomain: "golfngo-contest.firebaseapp.com",
+    projectId: "golfngo-contest",
+    storageBucket: "golfngo-contest.firebasestorage.app",
+    messagingSenderId: "339117171060",
+    appId: "1:339117171060:web:183e8132312163a9474c21"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script type="text/babel">
+const { useState, useRef, useEffect, useCallback } = React;
+
+const ADMIN_PASS = '0430';
+
+function genId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+function toFeet(shot) {
+  if (shot === null || shot === undefined) return null;
+  if (typeof shot === 'number') return shot;
+  if (shot.value !== null && shot.value !== undefined)
+    return shot.unit === 'yards' ? shot.value * 3 : shot.value;
+  return null;
+}
+function calcBest(rounds) {
+  if (!rounds || !rounds.length) return null;
+  const vals = rounds.flatMap(r => r.shots.map(toFeet).filter(v => v !== null && !isNaN(v)));
+  return vals.length ? Math.min(...vals) : null;
+}
+function fmtFeet(ft) {
+  if (ft === null) return '—';
+  if (ft >= 3) return `${(ft / 3).toFixed(1)} yd`;
+  return `${ft} ft`;
+}
+
+// ── Password Gate ──────────────────────────────────────────
+function Gate({ onAuth }) {
+  const [pass, setPass] = useState('');
+  const [err, setErr]   = useState('');
+  const inputRef        = useRef();
+  useEffect(() => { inputRef.current?.focus(); }, []);
+
+  const attempt = () => {
+    if (pass === ADMIN_PASS) { onAuth(); }
+    else { setErr('Incorrect password'); setPass(''); setTimeout(() => setErr(''), 2000); }
+  };
+
+  return (
+    <div className="gate-wrap">
+      <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="gate-logo" />
+      <div className="gate-title">Admin Access</div>
+      <div className="gate-card">
+        <label className="gate-label">Password</label>
+        <input
+          ref={inputRef}
+          className="gate-input"
+          type="password"
+          placeholder="••••"
+          value={pass}
+          onChange={e => setPass(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && attempt()}
+        />
+        <div className="gate-error">{err}</div>
+        <button className="gate-btn" onClick={attempt}>Unlock Admin</button>
+      </div>
+    </div>
+  );
+}
+
+function blankShots() {
+  return [
+    { value: '', unit: 'yards' },
+    { value: '', unit: 'yards' },
+    { value: '', unit: 'yards' },
+  ];
+}
+
+// ── Round Editor ───────────────────────────────────────────
+function RoundEditor({ round, roundIndex, onChange, onRemove }) {
+  const updateShot = (i, field, val) => {
+    const shots = round.shots.map((s, idx) => idx === i ? { ...s, [field]: val } : s);
+    onChange({ ...round, shots });
+  };
+  const bestFt = round.shots.some(s => s.value !== '')
+    ? Math.min(...round.shots.map(s => {
+        const v = parseFloat(s.value);
+        if (isNaN(v)) return Infinity;
+        return s.unit === 'yards' ? v * 3 : v;
+      }).filter(v => v !== Infinity))
+    : null;
+
+  return (
+    <div className="round-card">
+      <div className="round-card-header">
+        <div className="round-label">Round {roundIndex + 1}</div>
+        {bestFt !== null && <div className="round-best">Best: {fmtFeet(bestFt)}</div>}
+      </div>
+      <div className="shots-grid">
+        {round.shots.map((shot, i) => (
+          <div className="shot-row" key={i}>
+            <div className="shot-num">Shot {i + 1}</div>
+            <div className="shot-input-wrap">
+              <input
+                className="shot-input"
+                type="number"
+                min="0"
+                step="0.1"
+                placeholder="0.0"
+                value={shot.value}
+                onChange={e => updateShot(i, 'value', e.target.value)}
+              />
+              <div className="shot-input-label">
+                Distance from Pin ({shot.unit === 'yards' ? 'Yards' : 'Feet'})
+              </div>
+            </div>
+            <div className="unit-toggle">
+              <button
+                className={`unit-btn${shot.unit === 'yards' ? ' active' : ''}`}
+                onClick={() => updateShot(i, 'unit', 'yards')}
+              >yd</button>
+              <button
+                className={`unit-btn${shot.unit === 'feet' ? ' active' : ''}`}
+                onClick={() => updateShot(i, 'unit', 'feet')}
+              >ft</button>
+            </div>
+          </div>
+        ))}
+      </div>
+      {onRemove && (
+        <button
+          style={{ marginTop: 10, fontFamily: 'var(--font)', fontSize: '0.75rem', fontWeight: 700,
+            letterSpacing: '0.1em', textTransform: 'uppercase', background: 'transparent',
+            color: 'rgba(255,68,68,0.6)', border: '1px solid rgba(255,68,68,0.2)',
+            borderRadius: 4, padding: '7px 12px', cursor: 'pointer' }}
+          onClick={onRemove}
+        >Remove Round</button>
+      )}
+    </div>
+  );
+}
+
+// ── Player Profile ─────────────────────────────────────────
+function PlayerProfile({ player, onUpdate, onDelete }) {
+  const [rounds, setRounds]         = useState(() => {
+    if (!player.rounds || !player.rounds.length)
+      return [{ id: genId(), shots: blankShots(), createdAt: Date.now() }];
+    return player.rounds.map(r => ({
+      ...r,
+      shots: r.shots.map(s => typeof s === 'number'
+        ? { value: String(s), unit: 'feet' }
+        : { ...s, value: s.value !== null && s.value !== undefined ? String(s.value) : '' })
+    }));
+  });
+  const [saved, setSaved]           = useState(false);
+  const [delConfirm, setDelConfirm] = useState(false);
+
+  useEffect(() => {
+    if (!player.rounds || !player.rounds.length) {
+      setRounds([{ id: genId(), shots: blankShots(), createdAt: Date.now() }]);
+    } else {
+      setRounds(player.rounds.map(r => ({
+        ...r,
+        shots: r.shots.map(s => typeof s === 'number'
+          ? { value: String(s), unit: 'feet' }
+          : { ...s, value: s.value !== null && s.value !== undefined ? String(s.value) : '' })
+      })));
+    }
+    setSaved(false);
+  }, [player.id]);
+
+  const updateRound = (i, updated) => setRounds(r => r.map((x, idx) => idx === i ? updated : x));
+  const removeRound = i => setRounds(r => r.filter((_, idx) => idx !== i));
+  const addRound    = () => setRounds(r => [...r, { id: genId(), shots: blankShots(), createdAt: Date.now() }]);
+
+  const save = async () => {
+    const saved_rounds = rounds.map(r => ({
+      ...r,
+      shots: r.shots.map(s => ({
+        value: s.value === '' ? null : parseFloat(s.value),
+        unit: s.unit,
+      }))
+    }));
+    const updated = { ...player, rounds: saved_rounds };
+    await onUpdate(updated);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  const best = calcBest(player.rounds || []);
+
+  return (
+    <div style={{ maxWidth: 600 }}>
+      {delConfirm && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <div className="modal-title">Remove Player?</div>
+            <div className="modal-body">
+              This will permanently delete {player.name} and all their round data.
+            </div>
+            <div className="modal-actions">
+              <button className="modal-cancel" onClick={() => setDelConfirm(false)}>Cancel</button>
+              <button className="modal-confirm danger" onClick={() => { setDelConfirm(false); onDelete(player.id); }}>Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="profile-header">
+        <div className="profile-name">{player.name}</div>
+        <div className="profile-meta">
+          {player.phone && `📞 ${player.phone}  `}
+          {player.email && `✉️ ${player.email}  `}
+          {best !== null && `Best: ${fmtFeet(best)}`}
+        </div>
+      </div>
+      <div className="rounds-section">
+        {rounds.map((r, i) => (
+          <RoundEditor
+            key={r.id}
+            round={r}
+            roundIndex={i}
+            onChange={updated => updateRound(i, updated)}
+            onRemove={rounds.length > 1 ? () => removeRound(i) : null}
+          />
+        ))}
+      </div>
+      <button className="add-round-btn" onClick={addRound}>+ Add Round</button>
+      <button className="save-btn" onClick={save}>Save Shots</button>
+      {saved && <div className="save-confirm">✓ Saved</div>}
+      <button className="delete-player-btn" onClick={() => setDelConfirm(true)}>Remove Player</button>
+    </div>
+  );
+}
+
+// ── CSV Export ─────────────────────────────────────────────
+function exportCSV(players) {
+  const header = ['Name','First','Last','Phone','Email','Rounds','Best Shot (ft)','Best Shot (yd)','Registered'];
+  const rows = players.map(p => {
+    const best = calcBest(p.rounds || []);
+    return [
+      p.name, p.firstName, p.lastName, p.phone || '', p.email || '',
+      (p.rounds || []).length,
+      best !== null ? best : '',
+      best !== null ? (best / 3).toFixed(2) : '',
+      new Date(p.createdAt).toLocaleString()
+    ];
+  });
+  const csv = [header, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = `gng-contest-${Date.now()}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Main Admin App ─────────────────────────────────────────
+function AdminApp() {
+  const [players, setPlayers]   = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [search, setSearch]     = useState('');
+  const [modal, setModal]       = useState(null);
+  const [ended, setEnded]       = useState(false);
+
+  useEffect(() => {
+    // Real-time listener for players collection
+    const unsubPlayers = db.collection('players').onSnapshot(snap => {
+      setPlayers(snap.docs.map(d => d.data()));
+    }, err => console.error('Players listener error:', err));
+
+    // Real-time listener for contest status
+    const unsubStatus = db.collection('contest').doc('status').onSnapshot(snap => {
+      setEnded(!!(snap.exists && snap.data()?.ended));
+    }, err => console.error('Status listener error:', err));
+
+    return () => { unsubPlayers(); unsubStatus(); };
+  }, []);
+
+  const updatePlayer = useCallback(async updated => {
+    try {
+      await db.collection('players').doc(updated.id).set(updated);
+    } catch (e) { console.error('Update player error:', e); }
+    setSelected(updated);
+  }, []);
+
+  const deletePlayer = useCallback(async id => {
+    try {
+      await db.collection('players').doc(id).delete();
+    } catch (e) { console.error('Delete player error:', e); }
+    setSelected(null);
+  }, []);
+
+  const endContest = async () => {
+    try {
+      await db.collection('contest').doc('status').set({ ended: true });
+    } catch (e) { console.error('End contest error:', e); }
+    setModal(null);
+  };
+
+  const resetAll = async () => {
+    try {
+      const snap = await db.collection('players').get();
+      const batch = db.batch();
+      snap.docs.forEach(d => batch.delete(d.ref));
+      await batch.commit();
+      await db.collection('contest').doc('status').set({ ended: false });
+    } catch (e) { console.error('Reset error:', e); }
+    setSelected(null);
+    setModal(null);
+  };
+
+  const filtered = players
+    .filter(p =>
+      p.name.toLowerCase().includes(search.toLowerCase()) ||
+      (p.phone || '').includes(search) ||
+      (p.email || '').toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => b.createdAt - a.createdAt);
+
+  const totalRounds = players.reduce((s, p) => s + (p.rounds || []).length, 0);
+  const revenue     = players.length * 20;
+
+  return (
+    <div className="admin-shell">
+      {modal === 'end' && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <div className="modal-title">End Contest?</div>
+            <div className="modal-body">
+              The leaderboard will switch to winner announcement mode. This cannot be undone without resetting all data.
+            </div>
+            <div className="modal-actions">
+              <button className="modal-cancel" onClick={() => setModal(null)}>Cancel</button>
+              <button className="modal-confirm gold" onClick={endContest}>End Contest</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {modal === 'reset' && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <div className="modal-title">Reset All Data?</div>
+            <div className="modal-body">
+              This will permanently delete all players, rounds, and scores. This cannot be undone.
+            </div>
+            <div className="modal-actions">
+              <button className="modal-cancel" onClick={() => setModal(null)}>Cancel</button>
+              <button className="modal-confirm danger" onClick={resetAll}>Reset Everything</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="topbar">
+        <img src="gng-main-logo.svg" alt="Golf 'n Go Chicago" className="topbar-logo" />
+        <div className="topbar-title">Contest Admin</div>
+        <div className="topbar-actions">
+          <button className="action-btn export" onClick={() => exportCSV(players)}>Export CSV</button>
+          {!ended
+            ? <button className="action-btn end-contest" onClick={() => setModal('end')}>End Contest</button>
+            : <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#FFD700', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Contest Ended</span>
+          }
+          <button className="action-btn reset" onClick={() => setModal('reset')}>Reset</button>
+        </div>
+      </div>
+
+      <div className="stat-chips">
+        <div className="stat-chip">
+          <div className="stat-val">{players.length}</div>
+          <div className="stat-lbl">Players</div>
+        </div>
+        <div className="stat-chip">
+          <div className="stat-val">{totalRounds}</div>
+          <div className="stat-lbl">Rounds</div>
+        </div>
+        <div className="stat-chip">
+          <div className="stat-val">${revenue}</div>
+          <div className="stat-lbl">Revenue</div>
+        </div>
+      </div>
+
+      <div className="admin-body">
+        <div className="sidebar">
+          <div className="sidebar-search">
+            <input
+              type="text"
+              placeholder="Search players…"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
+          <div className="player-list">
+            {filtered.length === 0
+              ? <div className="no-players">No players yet</div>
+              : filtered.map(p => {
+                  const best = calcBest(p.rounds || []);
+                  return (
+                    <div
+                      key={p.id}
+                      className={`player-row${selected?.id === p.id ? ' active' : ''}`}
+                      onClick={() => setSelected(p)}
+                    >
+                      <div className="player-row-name">{p.name}</div>
+                      <div className="player-row-meta">
+                        {(p.rounds || []).length} round{(p.rounds || []).length !== 1 ? 's' : ''}
+                        {p.phone ? `  ·  ${p.phone}` : ''}
+                      </div>
+                      {best !== null && <div className="player-row-best">{fmtFeet(best)}</div>}
+                    </div>
+                  );
+                })
+            }
+          </div>
+        </div>
+
+        <div className="main-panel">
+          {selected
+            ? <PlayerProfile
+                key={selected.id}
+                player={players.find(p => p.id === selected.id) || selected}
+                onUpdate={updatePlayer}
+                onDelete={deletePlayer}
+              />
+            : <div className="no-selection">← Select a player to enter shots</div>
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Root ───────────────────────────────────────────────────
+function App() {
+  const [authed, setAuthed] = useState(false);
+  return (
+    <>
+      <div className="grid-bg" />
+      {authed ? <AdminApp /> : <Gate onAuth={() => setAuthed(true)} />}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
