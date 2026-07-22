@@ -4,7 +4,9 @@
 
 # Event pages
 /golf-simulator-corporate-events-chicago    /golf-simulator-corporate-events-chicago.html    301
-/golf-simulator-wedding-chicago             /golf-simulator-wedding-chicago.html             301
+/golf-simulator-wedding-chicago             /404.html                                        404
+/golf-simulator-wedding-chicago.html        /404.html                                        404
+/golf-simulator-graduation-chicago          /golf-simulator-graduation-chicago.html          301
 /golf-simulator-birthday-party-chicago      /golf-simulator-birthday-party-chicago.html      301
 /golf-simulator-charity-fundraiser-chicago  /golf-simulator-charity-fundraiser-chicago.html  301
 /golf-simulator-private-party-chicago       /golf-simulator-private-party-chicago.html       301
