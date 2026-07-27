@@ -441,7 +441,8 @@
       align-items: center;
       justify-content: center;
     }
-    #video-hero video {
+    #video-hero video,
+    #video-hero .hero-banner-image {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -975,11 +976,25 @@
     #video-hero {
       position: relative;
       width: 100vw; height: 100vh; min-height: 600px;
-      overflow: hidden;
+      /* overflow: hidden; */
     }
-    #video-hero video {
+    #video-hero video,
+    #video-hero .hero-banner-image {
       position: absolute; inset: 0;
       width: 100%; height: 100%; object-fit: cover; z-index: 0;
+    }
+    #video-hero::before {
+      content: '';
+      position: absolute;
+      inset: -24px;
+      z-index: 0;
+      background: url('/images/banner-homepage.png') center bottom / cover no-repeat;
+      filter: blur(18px) brightness(0.72);
+      transform: scale(1.04);
+    }
+    #video-hero .hero-banner-image {
+      object-fit: cover;
+      object-position: center bottom;
     }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
@@ -1038,6 +1053,10 @@
       .hero-wrap-inner { padding: 0 24px; }
       .hero-btn-group { flex-direction: column; align-items: stretch; }
       .hero-btn-group .btn-pill { justify-content: center; }
+      #video-hero .hero-banner-image {
+        object-fit: cover;
+        object-position: center bottom;
+      }
     }
 
     /* ══════════════════════════════════════
@@ -1463,7 +1482,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#events">Events</a>
       <ul class="nav-dropdown">
         <li><a href="golf-simulator-corporate-events-chicago.html">Corporate Events</a></li>
-        <li><a href="golf-simulator-wedding-chicago.html">Weddings</a></li>
+        <li><a href="golf-simulator-graduation-chicago.html">Graduation</a></li>
         <li><a href="golf-simulator-birthday-party-chicago.html">Birthdays</a></li>
         <li><a href="golf-simulator-charity-fundraiser-chicago.html">Charities</a></li>
         <li><a href="golf-simulator-private-party-chicago.html">Private Parties</a></li>
@@ -1507,7 +1526,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="mobile-accordion-toggle" id="eventsToggle">Events &#9662;</button>
       <ul class="mobile-sub-list" id="eventsSubList">
         <li><a href="golf-simulator-corporate-events-chicago.html" class="mobile-nav-close-link">Corporate Events</a></li>
-        <li><a href="golf-simulator-wedding-chicago.html" class="mobile-nav-close-link">Weddings</a></li>
+        <li><a href="golf-simulator-graduation-chicago.html" class="mobile-nav-close-link">Graduation</a></li>
         <li><a href="golf-simulator-birthday-party-chicago.html" class="mobile-nav-close-link">Birthdays</a></li>
         <li><a href="golf-simulator-charity-fundraiser-chicago.html" class="mobile-nav-close-link">Charities</a></li>
         <li><a href="golf-simulator-private-party-chicago.html" class="mobile-nav-close-link">Private Parties</a></li>
@@ -1541,10 +1560,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════════════════════════════════
      VIDEO HERO
 ══════════════════════════════════════ -->
-<section id="video-hero" aria-label="Hero video">
+<section id="video-hero" aria-label="Golf n Go event hero">
+  <!-- Video retained for possible future use.
   <video autoplay loop muted playsinline poster="/images/hero-bg.jpg" id="heroVideo">
     <source src="hero.mp4" type="video/mp4">
   </video>
+  -->
+  <img class="hero-banner-image" src="/images/banner-homepage.png" alt="Golf n Go mobile golf simulator entertaining guests at an outdoor Chicagoland event" fetchpriority="high">
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-wrap">
     <div class="hero-wrap-inner">
@@ -1581,7 +1603,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="intro-tagline-new">Premium equipment. Full setup. Unforgettable experience.</p>
         <div class="stats-badges-row">
           <div class="stat-badge-new reveal reveal-delay-1">
-            <span class="stat-num-new" data-count-target="25" data-count-suffix="+">0</span>
+            <span class="stat-num-new" data-count-target="50" data-count-suffix="+">0</span>
             <span class="stat-label-new">Events Hosted</span>
           </div>
           <div class="stat-badge-new reveal reveal-delay-2">
@@ -1598,7 +1620,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="intro-new-right reveal reveal-delay-1">
         <div class="img-slot-wrap">
           <span class="img-slot-label">about-main.jpg</span>
-          <img src="/images/about-main.jpg" alt="Golf n Go portable golf simulator setup at a Chicagoland event" loading="lazy" onerror="this.src='images/Galaxy%20motion.PNG';this.onerror=null;">
+          <img src="/images/about-event.jpg" alt="Golf n Go portable golf simulator setup at a Chicagoland event" loading="lazy" onerror="this.src='images/Galaxy%20motion.PNG';this.onerror=null;">
         </div>
         <div class="hud-frame" aria-hidden="true">
           <span class="hud-c tl"></span>
@@ -1679,7 +1701,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="golf-simulator-birthday-party-chicago.html" class="event-photo-card reveal reveal-delay-1">
         <div class="event-photo-bg">
           <span class="event-slot-label">event-birthday.jpg</span>
-          <img src="/images/event-birthday.jpeg" alt="Birthday party golf simulator rental Chicago" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/birthday-event-image.jpg" alt="Birthday party golf simulator rental Chicago" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="event-photo-gradient"></div>
         <div class="event-photo-content">
@@ -1689,15 +1711,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </a>
 
-      <a href="golf-simulator-wedding-chicago.html" class="event-photo-card reveal">
+      <a href="golf-simulator-graduation-chicago.html" class="event-photo-card reveal">
         <div class="event-photo-bg">
-          <span class="event-slot-label">event-wedding.jpg</span>
-          <img src="/images/event-wedding.png" alt="Wedding golf simulator entertainment Chicago" loading="lazy" onerror="this.style.display='none'">
+          <span class="event-slot-label">graduation-chicago.jpg</span>
+          <img src="/images/graduation-section.jpg" alt="Graduation golf simulator entertainment Chicago" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="event-photo-gradient"></div>
         <div class="event-photo-content">
-          <div class="event-photo-title">Weddings</div>
-          <p class="event-photo-desc">Add an unforgettable entertainment moment to your reception or rehearsal dinner that guests will talk about long after the night ends.</p>
+          <div class="event-photo-title">Graduation Parties</div>
+          <p class="event-photo-desc">Celebrate the graduate with an interactive golf simulator experience for every age and skill level — delivered to your backyard, open house, or venue.</p>
           <span class="event-photo-cta">Learn More →</span>
         </div>
       </a>
@@ -1731,7 +1753,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="golf-simulator-bachelor-party-chicago.html" class="event-photo-card reveal reveal-delay-1">
         <div class="event-photo-bg">
           <span class="event-slot-label">event-bachelor.jpg</span>
-          <img src="/images/event-bachelor.jpeg" alt="Bachelor party golf simulator Chicago" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/bachelor-party-image.jpg" alt="Bachelor party golf simulator Chicago" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="event-photo-gradient"></div>
         <div class="event-photo-content">
@@ -1907,9 +1929,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Full-width carousel (intentionally outside section-wrap) -->
   <div class="carousel-wrap" id="galleryCarousel" role="region" aria-label="Photo gallery">
 
-    <div class="carousel-slide active">
+    <!-- <div class="carousel-slide active">
       <img src="/images/gallery-1.jpeg" alt="Golf n Go simulator in action at a live event" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
+    </div> -->
     <div class="carousel-slide">
       <img src="/images/gallery-2.jpeg" alt="Golf n Go mobile simulator at an outdoor backyard event" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
     </div>
@@ -1919,18 +1941,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="carousel-slide">
       <img src="/images/gallery-4.jpeg" alt="Golfer taking a swing at a Golf n Go indoor simulator event" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
     </div>
-    <div class="carousel-slide">
+    <!-- <div class="carousel-slide">
       <img src="/images/gallery-5.jpeg" alt="Golf n Go simulator event photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
+    </div> -->
     <div class="carousel-slide">
       <img src="/images/gallery-6.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
     </div>
     <div class="carousel-slide">
       <img src="/images/gallery-7.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
     </div>
-    <div class="carousel-slide">
+    <!-- <div class="carousel-slide">
       <img src="/images/gallery-8.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
+    </div> -->
     <div class="carousel-slide">
       <img src="/images/gallery-9.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
     </div>
@@ -1968,18 +1990,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="ig-photos-row reveal">
 
         <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-1.jpg</span>
-          <img src="/images/instagram-1.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <span class="ig-slot-label">instagram-a.jpg</span>
+          <img src="/images/instagram-a.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-2.jpg</span>
-          <img src="/images/instagram-2.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <span class="ig-slot-label">instagram-b.jpg</span>
+          <img src="/images/instagram-b.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-3.jpg</span>
-          <img src="/images/instagram-3.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <span class="ig-slot-label">instagram-c.jpg</span>
+          <img src="/images/instagram-c.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+        </div>
+
+        <div class="ig-photo-item">
+          <span class="ig-slot-label">instagram-d.jpg</span>
+          <img src="/images/instagram-d.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+        </div>
+
+        <div class="ig-photo-item">
+          <span class="ig-slot-label">instagram-e.jpg</span>
+          <img src="/images/instagram-e.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+        </div>
+
+        <div class="ig-photo-item">
+          <span class="ig-slot-label">instagram-f.jpg</span>
+          <img src="/images/instagram-f.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
       </div>
@@ -2285,7 +2322,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="footer-col-heading">Event Types</p>
       <ul class="footer-links">
         <li><a href="golf-simulator-corporate-events-chicago.html">Corporate Events</a></li>
-        <li><a href="golf-simulator-wedding-chicago.html">Weddings</a></li>
+        <li><a href="golf-simulator-graduation-chicago.html">Graduation</a></li>
         <li><a href="golf-simulator-birthday-party-chicago.html">Birthday Parties</a></li>
         <li><a href="golf-simulator-charity-fundraiser-chicago.html">Charity &amp; Fundraisers</a></li>
         <li><a href="golf-simulator-private-party-chicago.html">Private Parties</a></li>
