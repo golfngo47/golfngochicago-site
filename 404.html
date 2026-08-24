@@ -20,6 +20,11 @@
     .nav-links a{color:rgba(240,234,216,0.7);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
     .nav-links a:hover{color:var(--gold)}
     .nav-book{background:var(--gold)!important;color:var(--black)!important;padding:9px 22px!important;border-radius:5px;font-weight:700!important}
+    .has-dropdown{position:relative}
+    .nav-dropdown{position:absolute;top:100%;left:-16px;min-width:190px;background:rgba(8,8,8,0.98);border:1px solid rgba(240,192,64,0.18);border-radius:6px;padding:8px 0;list-style:none;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity 0.22s,transform 0.22s,visibility 0.22s}
+    .has-dropdown:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+    .nav-dropdown li a{display:block;padding:9px 20px;font-size:0.78rem;white-space:nowrap}
+    .nav-dropdown li a:hover{color:var(--gold);background:rgba(240,192,64,0.06)}
 
     /* 404 CONTENT */
     .not-found{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 80px;background:linear-gradient(135deg,rgba(8,8,8,0.97) 0%,rgba(14,46,23,0.6) 100%)}
@@ -52,7 +57,11 @@
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
     <li><a href="/#perfect">Events</a></li>
-    <li><a href="/#service-areas">Service Areas</a></li>
+    <li class="has-dropdown"><a href="/#service-areas">Service Areas</a>
+        <ul class="nav-dropdown">
+          <li><a href="/golf-simulator-rental-naperville">Naperville</a></li>
+        </ul>
+      </li>
     <li><a href="/#faq">FAQ</a></li>
     <li><a href="/#contact">Contact</a></li>
     <li><a href="https://form.jotform.com/253077673115054" target="_blank" rel="noopener noreferrer" class="nav-book">Book Now</a></li>

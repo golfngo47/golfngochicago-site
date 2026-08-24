@@ -335,7 +335,11 @@ footer{background:#0d0d0d;border-top:1px solid rgba(57,255,20,.14)}
     <li><a href="/how-it-works">How It Works</a></li>
     <li><a href="/what-we-offer.html">What We Offer</a></li>
     <li><a href="/#gallery">Gallery</a></li>
-    <li><a href="/#service-areas">Service Areas</a></li>
+    <li class="has-dropdown"><a href="/#service-areas">Service Areas</a>
+        <ul class="nav-dropdown">
+          <li><a href="/golf-simulator-rental-naperville" aria-current="page">Naperville</a></li>
+        </ul>
+      </li>
     <li><a href="/#faq">FAQ</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
@@ -366,7 +370,11 @@ footer{background:#0d0d0d;border-top:1px solid rgba(57,255,20,.14)}
     <li><a href="/how-it-works" class="mobile-nav-close-link">How It Works</a></li>
     <li><a href="/what-we-offer.html" class="mobile-nav-close-link">What We Offer</a></li>
     <li><a href="/#gallery" class="mobile-nav-close-link">Gallery</a></li>
-    <li><a href="/#service-areas" class="mobile-nav-close-link">Service Areas</a></li>
+    <li><button class="mobile-accordion-toggle" id="areasToggle" type="button" aria-expanded="false" aria-controls="areasSubList">Service Areas &#9662;</button>
+        <ul class="mobile-sub-list" id="areasSubList">
+          <li><a href="/golf-simulator-rental-naperville" class="mobile-nav-close-link" aria-current="page">Naperville</a></li>
+        </ul>
+      </li>
     <li><a href="/#faq" class="mobile-nav-close-link">FAQ</a></li>
     <li><a href="/#contact" class="mobile-nav-close-link">Contact</a></li>
   </ul>
@@ -791,6 +799,18 @@ courseModal.addEventListener('click',e=>{if(e.target===courseModal){closeCourseM
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&courseModal.classList.contains('open')){closeCourseModal();}});
 
 if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){const ro=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{threshold:0.1});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));}
+
+  // NAV: mobile service areas accordion
+  var areasToggle  = document.getElementById('areasToggle');
+  var areasSubList = document.getElementById('areasSubList');
+  var areasArrow   = document.getElementById('areasArrow');
+  if (areasToggle && areasSubList) {
+    areasToggle.addEventListener('click', function () {
+      var isOpen = areasSubList.classList.toggle('open');
+      if (areasArrow) areasArrow.classList.toggle('open', isOpen);
+      areasToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
 </script>
 </body>
 </html>
