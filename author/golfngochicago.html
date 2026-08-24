@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -541,7 +541,7 @@
     }
     .hero-line-left  { left: 60px; }
     .hero-line-right { right: 60px; }
-    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 1000px; padding: 0 32px; }
+    .hero-content { position: relative; z-index: 2; text-align: left; max-width: 1000px; padding: 0 32px; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 14px;
       font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em;
@@ -1439,7 +1439,882 @@
     .sa-view-all-btn:hover { background: rgba(57,255,20,0.06); border-color: rgba(57,255,20,0.6); }
     .sa-full-content { display: none; padding-top: 40px; }
     .sa-full-content.open { display: block; }
-  </style>
+
+
+
+    /* =========================================================
+   BLOG PAGE ONLY
+   ========================================================= */
+
+.blog-hero {
+  position: relative;
+  padding: 110px 0 70px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(23, 37, 29, 0.82) 0%,
+      rgba(23, 37, 29, 0.55) 50%,
+      rgba(23, 37, 29, 0.25) 100%
+    ),
+    url("images/blog-hero.jpg") center center / cover no-repeat;
+  overflow: hidden;
+}
+
+
+.hero-inner,
+.section-wrap,
+.category-inner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.hero-content {
+  max-width: 760px;
+}
+
+.section-label {
+  margin-bottom: 14px;
+  color: #39ff14;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(48px, 7vw, 86px);
+  line-height: .95;
+  font-weight: 800;
+  letter-spacing: -3px;
+}
+
+.hero-title span,
+.section-heading span,
+.newsletter-title span,
+.cta-title span {
+  color: #39ff14;
+}
+
+.hero-description {
+  max-width: 680px;
+  margin: 28px 0 0;
+  color: #667068;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.hero-line {
+  width: min(1180px, calc(100% - 40px));
+  height: 1px;
+  margin: 60px auto 0;
+  background: #d8d8cf;
+}
+
+
+/* =========================================================
+   FEATURED BLOG
+   ========================================================= */
+
+.featured-section {
+  padding: 90px 0 60px;
+}
+
+.featured-header {
+  margin-bottom: 35px;
+}
+
+.section-heading {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+
+.featured-card {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #17251d;
+}
+
+.featured-image {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, .35)
+  );
+}
+
+.featured-image-tag {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  padding: 8px 14px;
+  border-radius: 50px;
+  background: #39ff14;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.featured-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 55px;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: #a9b38c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.article-meta-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #39ff14;
+}
+
+.featured-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.featured-excerpt {
+  margin: 22px 0 30px;
+  color: #c7cec8;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap .25s ease;
+}
+
+.read-more:hover {
+  gap: 16px;
+}
+
+.read-more-arrow {
+  color: #9caf61;
+  font-size: 20px;
+}
+
+
+
+/* =========================================================
+   BLOG POSTS
+   3 BLOGS PER ROW
+   ========================================================= */
+
+.posts-section {
+  padding: 80px 0 100px;
+}
+
+.posts-heading {
+  max-width: 700px;
+  margin-bottom: 45px;
+}
+
+.posts-heading > p {
+  max-width: 650px;
+  margin: 20px 0 0;
+  color: #69736d;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.post-card {
+  overflow: hidden;
+  border: 1px solid #e2e3dc;
+  border-radius: 14px;
+  background: #fff;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(23, 37, 29, .10);
+}
+
+.post-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  background: #e8e9e2;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+
+.post-card:hover .post-image img {
+  transform: scale(1.05);
+}
+
+.post-category {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 7px 12px;
+  border-radius: 50px;
+  background: #39ff14;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.post-body {
+  padding: 25px;
+}
+
+.post-date {
+  margin-bottom: 10px;
+  color: #39ff14;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.post-title {
+  margin: 0;
+  color: #17251d;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -.5px;
+}
+
+.post-excerpt {
+  margin: 15px 0 20px;
+  color: #69736d;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.post-read {
+  color: #17251d;
+  font-size: 13px;
+  font-weight: 700;
+  transition: color .2s ease;
+}
+
+.post-card:hover .post-read {
+  color: #39ff14;
+}
+
+.no-results {
+  display: none;
+  grid-column: 1 / -1;
+  padding: 50px 20px;
+  color: #69736d;
+  text-align: center;
+}
+
+
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: #39ff14;
+  color: #fff;
+}
+
+.cta {
+  padding: 100px 0;
+  background: #17251d;
+}
+
+.cta-inner {
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.cta-label {
+  margin-bottom: 15px;
+  color: #a9b38c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.cta-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.cta-copy {
+  max-width: 650px;
+  margin: 25px auto 32px;
+  color: #c7cec8;
+  line-height: 1.7;
+}
+
+.cta .btn-primary {
+  display: inline-flex;
+}
+
+
+/* =========================================================
+   REVEAL
+   ========================================================= */
+
+.reveal {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .featured-card {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-image {
+    min-height: 380px;
+  }
+
+  .featured-content {
+    padding: 40px;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .blog-hero {
+    padding: 80px 0 50px;
+  }
+
+  .hero-title {
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .featured-section,
+  .posts-section {
+    padding: 60px 0;
+  }
+
+  .featured-image {
+    min-height: 280px;
+  }
+
+  .featured-content {
+    padding: 30px 24px;
+  }
+
+  .featured-title {
+    font-size: 30px;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .post-image {
+    height: 230px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form input,
+  .newsletter-form .btn {
+    width: 100%;
+  }
+
+  .cta {
+    padding: 75px 0;
+  }
+
+}
+
+
+  
+/* =========================================================
+   AUTHOR ARCHIVE PAGE
+   Golf 'n Go Chicago design system
+   ========================================================= */
+
+.author-hero {
+  position: relative;
+  padding: 112px 0 70px;
+  background:
+    radial-gradient(circle at 82% 35%, rgba(57,255,20,.08), transparent 34%),
+    linear-gradient(180deg, #101611 0%, #0b0d0b 100%);
+  overflow: hidden;
+}
+
+.author-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(57,255,20,.28);
+}
+
+.author-hero-inner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.author-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 24px;
+  color: #39ff14;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.author-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.author-breadcrumb span {
+  color: rgba(255,255,255,.35);
+}
+
+.author-profile {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 30px;
+  align-items: center;
+  max-width: 920px;
+}
+
+.author-logo {
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  border: 1px solid rgba(57,255,20,.28);
+  border-radius: 50%;
+  background: #111;
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+
+.author-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.author-kicker {
+  margin-bottom: 10px;
+  color: #39ff14;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.author-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(42px, 6vw, 70px);
+  line-height: .98;
+  letter-spacing: -2px;
+}
+
+.author-title span {
+  color: #39ff14;
+}
+
+.author-description {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: #b7c0b9;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.author-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  color: #8f9a92;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.author-meta .dot {
+  width: 4px;
+  height: 4px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #39ff14;
+}
+
+.author-content {
+  padding: 78px 0 100px;
+}
+
+.author-content-inner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.author-about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
+  gap: 70px;
+  align-items: start;
+  margin-bottom: 80px;
+  padding-bottom: 55px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.author-about h2 {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.05;
+}
+
+.author-about h2 span {
+  color: #39ff14;
+}
+
+.author-about p {
+  max-width: 760px;
+  margin: 0 0 18px;
+  color: #bfc7c1;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.author-focus-card {
+  padding: 25px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-left: 3px solid #39ff14;
+  border-radius: 10px;
+  background: #121512;
+}
+
+.author-focus-label {
+  margin-bottom: 14px;
+  color: #39ff14;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.author-focus-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.author-focus-list li {
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  color: #c4ccc6;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.author-focus-list li:last-child {
+  border-bottom: 0;
+}
+
+.author-focus-list li::before {
+  content: "→";
+  margin-right: 9px;
+  color: #39ff14;
+  font-weight: 700;
+}
+
+.author-posts-header {
+  margin-bottom: 30px;
+}
+
+.author-posts-header .section-label {
+  margin-bottom: 10px;
+}
+
+.author-posts-heading {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+}
+
+.author-posts-heading span {
+  color: #39ff14;
+}
+
+.author-posts-intro {
+  max-width: 680px;
+  margin: 14px 0 0;
+  color: #89938d;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.author-post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.author-post-card {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  background: #121412;
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.author-post-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(57,255,20,.30);
+}
+
+.author-post-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.author-post-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.author-post-card:hover .author-post-image img {
+  transform: scale(1.035);
+}
+
+.author-post-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.38));
+  pointer-events: none;
+}
+
+.author-post-body {
+  padding: 21px 21px 23px;
+}
+
+.author-post-date {
+  margin-bottom: 9px;
+  color: #39ff14;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.author-post-title {
+  margin: 0 0 11px;
+  color: #fff;
+  font-size: 21px;
+  line-height: 1.12;
+}
+
+.author-post-excerpt {
+  margin: 0 0 17px;
+  color: #929c95;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.author-post-read {
+  color: #fff;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.author-post-read:hover {
+  color: #39ff14;
+}
+
+.author-post-read span {
+  color: #39ff14;
+  margin-left: 4px;
+}
+
+.author-bottom-cta {
+  padding: 88px 0;
+  background: #17251d;
+  border-top: 1px solid rgba(57,255,20,.10);
+}
+
+.author-bottom-cta .cta-inner {
+  max-width: 820px;
+}
+
+@media (max-width: 900px) {
+  .author-about {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .author-post-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .author-hero {
+    padding: 88px 0 55px;
+  }
+
+  .author-profile {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .author-logo {
+    width: 98px;
+    height: 98px;
+    padding: 14px;
+  }
+
+  .author-title {
+    font-size: 42px;
+    letter-spacing: -1.5px;
+  }
+
+  .author-description {
+    font-size: 15px;
+  }
+
+  .author-content {
+    padding: 58px 0 72px;
+  }
+
+  .author-content-inner {
+    width: min(100% - 32px, 1180px);
+  }
+
+  .author-about {
+    margin-bottom: 58px;
+    padding-bottom: 42px;
+  }
+
+  .author-post-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .author-post-title {
+    font-size: 23px;
+  }
+
+  .author-bottom-cta {
+    padding: 70px 0;
+  }
+}
+
+</style>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP23CNV0VG"></script>
@@ -1460,7 +2335,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5WR96DTK');</script>
 <!-- End Google Tag Manager -->
   
-</head>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Golf 'n Go Chicago",
+    "url": "https://www.golfngochicago.com/",
+    "logo": "https://golfngochicago.com/images/main_logo_trans.svg",
+    "description": "Golf 'n Go Chicago shares golf simulator tips, event inspiration, Chicago golf guides, party ideas, and practical advice for mobile golf simulator events."
+  }
+}
+</script>
+
+
+
+<body>
+
 <body>
 
   <!-- Google Tag Manager (noscript) -->
@@ -1473,7 +2365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 ══════════════════════════════════════ -->
 <nav id="navbar" aria-label="Main navigation">
   <div class="nav-logo">
-    <a href="/"><img src="/images/main_logo_trans.svg" alt="Golf n Go Chicago" fetchpriority="high" /></a>
+    <a href="/"><img src="https://golfngochicago.com/images/main_logo_trans.svg" alt="Golf n Go Chicago" fetchpriority="high" /></a>
   </div>
 
   <ul class="nav-links">
@@ -1491,13 +2383,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="/how-it-works">How It Works</a></li>
     <li><a href="what-we-offer.html">What We Offer</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li class="has-dropdown"><a href="#service-areas">Service Areas</a>
-        <ul class="nav-dropdown">
-          <li><a href="/golf-simulator-rental-naperville">Naperville</a></li>
-        </ul>
-      </li>
+    <li><a href="#service-areas">Service Areas</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="/blog">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 
@@ -1540,13 +2427,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="/how-it-works" class="mobile-nav-close-link">How It Works</a></li>
     <li><a href="what-we-offer.html" class="mobile-nav-close-link">What We Offer</a></li>
     <li><a href="#gallery" class="mobile-nav-close-link">Gallery</a></li>
-    <li><button class="mobile-accordion-toggle" id="areasToggle" type="button" aria-expanded="false" aria-controls="areasSubList">Service Areas &#9662;</button>
-        <ul class="mobile-sub-list" id="areasSubList">
-          <li><a href="/golf-simulator-rental-naperville" class="mobile-nav-close-link">Naperville</a></li>
-        </ul>
-      </li>
+    <li><a href="#service-areas" class="mobile-nav-close-link">Service Areas</a></li>
     <li><a href="#faq" class="mobile-nav-close-link">FAQ</a></li>
-    <li><a href="/blog" class="mobile-nav-close-link">Blog</a></li>
     <li><a href="#contact" class="mobile-nav-close-link">Contact</a></li>
   </ul>
   <div class="mobile-nav-bottom">
@@ -1567,739 +2449,425 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     VIDEO HERO
-══════════════════════════════════════ -->
-<section id="video-hero" aria-label="Golf n Go event hero">
-  <!-- Video retained for possible future use.
-  <video autoplay loop muted playsinline poster="/images/hero-bg.jpg" id="heroVideo">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
-  -->
-  <img class="hero-banner-image" src="/images/banner-homepage.png" alt="Golf n Go mobile golf simulator entertaining guests at an outdoor Chicagoland event" fetchpriority="high">
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-wrap">
-    <div class="hero-wrap-inner">
-      <div class="hero-text-box">
-        <p class="hero-eyebrow-label">Serving all of Chicagoland</p>
-        <h1 class="hero-h1">
-          <span class="hero-h1-white">Chicago’s #1 Mobile</span>
-          <span class="hero-h1-green">Golf Simulator.</span>
-        </h1>
-        <p class="hero-subline">Bring the course to you.</p>
-        <div class="hero-btn-group">
-          <a href="https://form.jotform.com/253077673115054" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">BOOK YOUR EVENT →</a>
-          <a href="#how-it-works" class="btn-pill btn-pill-secondary">SEE HOW IT WORKS</a>
+  <!-- =======================================================
+       BLOG HERO
+  ======================================================== -->
+
+  
+<!-- =======================================================
+     AUTHOR HERO
+======================================================== -->
+
+<!-- =======================================================
+     AUTHOR INFO
+======================================================== -->
+<section class="author-reference-section">
+  <div class="author-reference-inner">
+
+    <div class="author-reference-card">
+
+      <div>
+        <div class="author-reference-avatar">
+          <img
+            src="https://golfngochicago.com/images/main_logo_trans.svg"
+            alt="Golf 'n Go Chicago"
+          >
         </div>
       </div>
+
+      <div class="author-reference-copy">
+
+        <h1>GOLF 'N GO CHICAGO</h1>
+
+        <p>
+          Golf 'n Go Chicago is a mobile golf simulator rental company
+          bringing a premium golf experience directly to events throughout
+          Chicagoland.
+        </p>
+
+        <p>
+          We specialize in creating interactive experiences for corporate
+          events, birthday parties, weddings, fundraisers, private
+          celebrations, and more — helping guests play, compete, and connect.
+        </p>
+
+        <div class="author-reference-socials">
+          <a
+            href="https://www.instagram.com/golfngochicago"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >IG</a>
+
+          <a
+            href="https://www.golfngochicago.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="author-site"
+          >Visit Website</a>
+        </div>
+
+      </div>
+
     </div>
-  </div>
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <span>Scroll</span>
-    <div class="hero-scroll-line"></div>
+
   </div>
 </section>
 
+<!-- =======================================================
+     POSTS BY AUTHOR
+======================================================== -->
+<main>
 
-<!-- ══════════════════════════════════════
-     INTRO / ABOUT
-══════════════════════════════════════ -->
-<section id="intro" class="section">
-  <div class="section-wrap">
-    <div class="intro-new-grid">
-      <div class="intro-new-left reveal">
-        <p class="section-label">About Golf 'n Go</p>
-        <h2 class="intro-headline-new">Chicago's Go-To<br>Golf Simulator Rental.</h2>
-        <p class="intro-tagline-new">Premium equipment. Full setup. Unforgettable experience.</p>
-        <div class="stats-badges-row">
-          <div class="stat-badge-new reveal reveal-delay-1">
-            <span class="stat-num-new" data-count-target="50" data-count-suffix="+">0</span>
-            <span class="stat-label-new">Events Hosted</span>
+  <section class="section posts-section author-posts-section">
+
+    <div class="section-wrap">
+
+      <div class="posts-heading">
+
+        <div class="section-label">
+          From The Author
+        </div>
+
+        <h2 class="section-heading">
+          Latest From
+          <span>Golf 'n Go.</span>
+        </h2>
+
+        <p>
+          Explore the latest articles from Golf 'n Go Chicago.
+          Discover ideas for your next event, simulator tips, and Chicago-area
+          golf inspiration.
+        </p>
+
+      </div>
+
+
+      <div class="posts-grid">
+
+
+        <!-- BLOG 1 -->
+
+        <article class="post-card">
+
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-a.jpg"
+              alt="Golf 'n Go mobile golf simulator at a Chicago event"
+            >
+
           </div>
-          <div class="stat-badge-new reveal reveal-delay-2">
-            <span class="stat-num-new">5.0&#9733;</span>
-            <span class="stat-label-new">Google Rating</span>
+
+          <div class="post-body">
+
+            <div class="post-date">
+              August 12, 2026
+            </div>
+
+            <h3 class="post-title">
+              7 Ways to Make Your Next Event Unforgettable With a Golf Simulator
+            </h3>
+
+            <p class="post-excerpt">
+              From corporate outings and backyard parties to weddings
+              and fundraisers, a mobile golf simulator turns your event
+              into an experience guests actually remember.
+            </p>
+
+            <a href="blog-golf-simulator-event-ideas.html" class="post-read">
+              Read More →
+            </a>
+
           </div>
-          <div class="stat-badge-new reveal reveal-delay-3">
-            <span class="stat-num-new" data-count-target="2300" data-count-suffix="+">0</span>
-            <span class="stat-label-new">Courses Available</span>
+
+        </article>
+
+
+        <!-- BLOG 2 -->
+
+        <article class="post-card">
+
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-b.jpg"
+              alt="Mobile golf simulator setup"
+            >
+
           </div>
-        </div>
-        <a href="https://form.jotform.com/253077673115054" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">Book Your Event →</a>
-      </div>
-      <div class="intro-new-right reveal reveal-delay-1">
-        <div class="img-slot-wrap">
-          <span class="img-slot-label">about-main.jpg</span>
-          <img src="/images/about-event.jpg" alt="Golf n Go portable golf simulator setup at a Chicagoland event" loading="lazy" onerror="this.src='images/Galaxy%20motion.PNG';this.onerror=null;">
-        </div>
-        <div class="hud-frame" aria-hidden="true">
-          <span class="hud-c tl"></span>
-          <span class="hud-c tr"></span>
-          <span class="hud-c bl"></span>
-          <span class="hud-c br"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══════════════════════════════════════
-     COURSE MARQUEE STRIP
-══════════════════════════════════════ -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <!-- First copy -->
-    <span class="marquee-item"><span class="marquee-course">Pebble Beach</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Augusta National</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">St Andrews</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">TPC Sawgrass</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Medinah Country Club</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Whistling Straits</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Bethpage Black</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Torrey Pines</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Oakmont</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Pinehurst No. 2</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Kiawah Island</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Riviera Country Club</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Bandon Dunes</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Royal Birkdale</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Cog Hill</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">2,300+ More</span><span class="marquee-sep">·</span></span>
-    <!-- Duplicate for seamless loop -->
-    <span class="marquee-item"><span class="marquee-course">Pebble Beach</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Augusta National</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">St Andrews</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">TPC Sawgrass</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Medinah Country Club</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Whistling Straits</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Bethpage Black</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Torrey Pines</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Oakmont</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Pinehurst No. 2</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Kiawah Island</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Riviera Country Club</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Bandon Dunes</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Royal Birkdale</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">Cog Hill</span><span class="marquee-sep">·</span></span>
-    <span class="marquee-item"><span class="marquee-course">2,300+ More</span><span class="marquee-sep">·</span></span>
-  </div>
-</div>
+          <div class="post-body">
 
-<!-- ══════════════════════════════════════
-     EVENT TYPES
-══════════════════════════════════════ -->
-<section id="events" class="section">
-  <div class="section-wrap">
-    <p class="section-label" style="justify-content:center;">What We Do</p>
-    <h2 class="section-heading" style="text-align:center;">Built for Every Event</h2>
-    <p class="events-sub">From boardrooms to backyards — we bring the simulator to you.</p>
-    <div class="events-photo-grid">
+            <div class="post-date">
+              August 12, 2026
+            </div>
 
-      <a href="golf-simulator-corporate-events-chicago.html" class="event-photo-card reveal">
-        <div class="event-photo-bg">
-          <span class="event-slot-label">event-corporate.jpg</span>
-          <img src="/images/event-corporate.jpg" alt="Corporate golf simulator event Chicago" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="event-photo-gradient"></div>
-        <div class="event-photo-content">
-          <div class="event-photo-title">Corporate Events</div>
-          <p class="event-photo-desc">Elevate your company outing, client entertainment, or team-building day with a premium simulator experience everyone remembers.</p>
-          <span class="event-photo-cta">Learn More →</span>
-        </div>
-      </a>
+            <h3 class="post-title">
+              What Is a Mobile Golf Simulator?
+            </h3>
 
-      <a href="golf-simulator-birthday-party-chicago.html" class="event-photo-card reveal reveal-delay-1">
-        <div class="event-photo-bg">
-          <span class="event-slot-label">event-birthday.jpg</span>
-          <img src="/images/birthday-event-image.jpg" alt="Birthday party golf simulator rental Chicago" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="event-photo-gradient"></div>
-        <div class="event-photo-content">
-          <div class="event-photo-title">Birthdays</div>
-          <p class="event-photo-desc">Make the birthday unforgettable — for golfers and non-golfers alike. All skill levels welcome, guaranteed to be the highlight of the night.</p>
-          <span class="event-photo-cta">Learn More →</span>
-        </div>
-      </a>
+            <p class="post-excerpt">
+              Everything you need to know about portable golf
+              simulator rentals, how they work, and what makes
+              them perfect for events.
+            </p>
 
-      <a href="golf-simulator-graduation-chicago.html" class="event-photo-card reveal">
-        <div class="event-photo-bg">
-          <span class="event-slot-label">graduation-chicago.jpg</span>
-          <img src="/images/graduation-section.jpg" alt="Graduation golf simulator entertainment Chicago" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="event-photo-gradient"></div>
-        <div class="event-photo-content">
-          <div class="event-photo-title">Graduation Parties</div>
-          <p class="event-photo-desc">Celebrate the graduate with an interactive golf simulator experience for every age and skill level — delivered to your backyard, open house, or venue.</p>
-          <span class="event-photo-cta">Learn More →</span>
-        </div>
-      </a>
+            <a href="#" class="post-read">
+              Read More →
+            </a>
 
-      <a href="golf-simulator-charity-fundraiser-chicago.html" class="event-photo-card reveal reveal-delay-1">
-        <div class="event-photo-bg">
-          <span class="event-slot-label">event-charity.jpg</span>
-          <img src="/images/geotagged_event-charity.jpg" alt="Charity fundraiser golf simulator Chicago" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="event-photo-gradient"></div>
-        <div class="event-photo-content">
-          <div class="event-photo-title">Charities</div>
-          <p class="event-photo-desc">Drive donor engagement and boost fundraising at your gala or charity event with a crowd-pleasing simulator attraction everyone wants a turn at.</p>
-          <span class="event-photo-cta">Learn More →</span>
-        </div>
-      </a>
-
-      <a href="golf-simulator-private-party-chicago.html" class="event-photo-card reveal">
-        <div class="event-photo-bg">
-          <span class="event-slot-label">event-private.jpg</span>
-          <img src="/images/event-private.jpeg" alt="Private party golf simulator rental Chicago" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="event-photo-gradient"></div>
-        <div class="event-photo-content">
-          <div class="event-photo-title">Private Parties</div>
-          <p class="event-photo-desc">Bachelor parties, backyard bashes, family reunions — if you're bringing people together, we bring the full simulator experience to you.</p>
-          <span class="event-photo-cta">Learn More →</span>
-        </div>
-      </a>
-
-      <a href="golf-simulator-bachelor-party-chicago.html" class="event-photo-card reveal reveal-delay-1">
-        <div class="event-photo-bg">
-          <span class="event-slot-label">event-bachelor.jpg</span>
-          <img src="/images/bachelor-party-image.jpg" alt="Bachelor party golf simulator Chicago" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="event-photo-gradient"></div>
-        <div class="event-photo-content">
-          <div class="event-photo-title">Bachelor Parties</div>
-          <p class="event-photo-desc">Make the groom's last night legendary with a private golf simulator experience he'll never forget. Bring the competition, we'll bring the course.</p>
-          <span class="event-photo-cta">Learn More →</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     HOW IT WORKS
-══════════════════════════════════════ -->
-<section id="how-it-works" class="section">
-  <div class="section-wrap">
-    <p class="section-label" style="justify-content:center;">Simple Process</p>
-    <h2 class="section-heading">Three Steps to the Best Event<br>You've Ever Hosted.</h2>
-    <div class="hiw-grid">
-
-      <div class="hiw-card reveal">
-        <div class="hiw-step-img">
-          <span>how-it-works-step1.jpg</span>
-          <img src="/images/how-it-works-step1.jpg" alt="Book your golf simulator rental date" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hiw-step-num">01</div>
-        <div class="hiw-step-title">Book Your Date</div>
-        <p class="hiw-step-desc">Fill out our quick booking form and we'll send you a personalized quote within a few hours. No fixed pricing, no surprises.</p>
-      </div>
-
-      <div class="hiw-arrow" aria-hidden="true">→</div>
-
-      <div class="hiw-card reveal reveal-delay-1">
-        <div class="hiw-step-img">
-          <span>how-it-works-step2.jpg</span>
-          <img src="/images/how-it-works-step2.jpeg" alt="Golf simulator setup and arrival" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hiw-step-num">02</div>
-        <div class="hiw-step-title">We Show Up &amp; Set Up</div>
-        <p class="hiw-step-desc">We arrive early, handle full setup in 45–60 minutes, and stay to run the entire simulator experience for your guests all night.</p>
-      </div>
-
-      <div class="hiw-arrow" aria-hidden="true">→</div>
-
-      <div class="hiw-card reveal reveal-delay-2">
-        <div class="hiw-step-img">
-          <span>how-it-works-step3.jpg</span>
-          <img src="/images/how-it-works-step3.jpeg" alt="Guests playing the golf simulator" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hiw-step-num">03</div>
-        <div class="hiw-step-title">Your Guests Play. You Relax.</div>
-        <p class="hiw-step-desc">Your guests enjoy 2,300+ courses, competitions, and mini-games. We handle everything — you just enjoy your event.</p>
-      </div>
-
-    </div>
-    <div class="hiw-cta">
-      <a href="https://form.jotform.com/253077673115054" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">BOOK NOW →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     WHAT WE OFFER
-══════════════════════════════════════ -->
-<section id="what-we-offer" class="section">
-  <div class="section-wrap">
-    <p class="section-label" style="justify-content:center;">What's in the Package</p>
-    <h2 class="section-heading" style="text-align:center;">Everything Included.<br>Nothing Held Back.</h2>
-    <p class="offer-sub">One rental. 2,300+ courses. Unlimited fun.</p>
-
-    <div class="offer-grid">
-
-      <div class="offer-card">
-        <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
-        <p class="offer-title">2,300+ World Courses</p>
-        <p class="offer-desc">Play the most iconic courses on the planet at your event.</p>
-      </div>
-
-      <div class="offer-card">
-        <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-        <p class="offer-title">Long Drive Challenge</p>
-        <p class="offer-desc">See who can crush it the farthest. Perfect for competition.</p>
-      </div>
-
-      <div class="offer-card">
-        <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-        </svg>
-        <p class="offer-title">Closest to the Pin</p>
-        <p class="offer-desc">Test your accuracy and settle the debate once and for all.</p>
-      </div>
-
-      <div class="offer-card">
-        <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
-        <p class="offer-title">Hole in One Challenge</p>
-        <p class="offer-desc">Everyone gets their shot at glory.</p>
-      </div>
-
-      <div class="offer-card">
-        <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="6" width="20" height="12" rx="2"/>
-          <path d="M12 12h.01M7 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10-1h2m-1-1v2"/>
-        </svg>
-        <p class="offer-title">Golf Arcade Mini Games</p>
-        <p class="offer-desc">Cup Pong, Darts and more for non-golfers and beginners.</p>
-      </div>
-
-      <div class="offer-card">
-        <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-        <p class="offer-title">Multiplayer Mode</p>
-        <p class="offer-desc">Up to 8 players simultaneously, perfect for groups and parties.</p>
-      </div>
-
-    </div>
-
-    <!-- Featured Courses -->
-    <div class="courses-strip">
-      <p class="courses-strip-heading">Play the World's Most Iconic Courses</p>
-      <div class="courses-badges">
-        <span class="course-badge">Pebble Beach</span>
-        <span class="course-badge">Augusta National</span>
-        <span class="course-badge">St Andrews</span>
-        <span class="course-badge">Torrey Pines</span>
-        <span class="course-badge">Whistling Straits</span>
-        <span class="course-badge">Bethpage Black</span>
-        <span class="course-badge">TPC Sawgrass</span>
-        <span class="course-badge">Oakmont</span>
-        <span class="course-badge">Pinehurst No. 2</span>
-        <span class="course-badge">Bandon Dunes</span>
-        <span class="course-badge">Kiawah Island</span>
-        <span class="course-badge">Medinah Country Club</span>
-        <span class="course-badge">Cog Hill</span>
-        <span class="course-badge">Riviera Country Club</span>
-        <span class="course-badge">Royal Birkdale</span>
-        <span class="course-badge badge-more">2,300+ More</span>
-      </div>
-    </div>
-
-    <!-- Tech Strip -->
-    <div class="tech-strip">
-      <div class="tech-item">4K Projector</div>
-      <div class="tech-item">Flightscope Mevo+ Launch Monitor</div>
-      <div class="tech-item">GSPro Software</div>
-      <div class="tech-item">Indoor &amp; Outdoor Capable</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     GALLERY
-══════════════════════════════════════ -->
-<section id="gallery" class="section">
-  <div class="section-wrap">
-    <p class="section-label" style="justify-content:center;">See It in Action</p>
-    <h2 class="section-heading">Real Setups. Real Events. Real Fun.</h2>
-    <p class="gallery-intro-new">Every event is different. Every setup is premium.</p>
-  </div>
-
-  <!-- Full-width carousel (intentionally outside section-wrap) -->
-  <div class="carousel-wrap" id="galleryCarousel" role="region" aria-label="Photo gallery">
-
-    <!-- <div class="carousel-slide active">
-      <img src="/images/gallery-1.jpeg" alt="Golf n Go simulator in action at a live event" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div> -->
-    <div class="carousel-slide">
-      <img src="/images/gallery-2.jpeg" alt="Golf n Go mobile simulator at an outdoor backyard event" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
-    <div class="carousel-slide">
-      <img src="/images/gallery-3.jpeg" alt="Golf n Go corporate event in Chicago" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
-    <div class="carousel-slide">
-      <img src="/images/gallery-4.jpeg" alt="Golfer taking a swing at a Golf n Go indoor simulator event" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
-    <!-- <div class="carousel-slide">
-      <img src="/images/gallery-5.jpeg" alt="Golf n Go simulator event photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div> -->
-    <div class="carousel-slide">
-      <img src="/images/gallery-6.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
-    <div class="carousel-slide">
-      <img src="/images/gallery-7.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
-    <!-- <div class="carousel-slide">
-      <img src="/images/gallery-8.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div> -->
-    <div class="carousel-slide">
-      <img src="/images/gallery-9.jpeg" alt="Golf n Go event gallery photo" loading="lazy" onerror="window.gngGallerySkip&&window.gngGallerySkip(this);">
-    </div>
-
-    <!-- Bottom gradient overlay (caption-ready) -->
-    <div class="carousel-bottom-grad" aria-hidden="true"></div>
-
-    <!-- Arrow controls -->
-    <button class="carousel-arrow carousel-arrow-prev" aria-label="Previous photo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="carousel-arrow carousel-arrow-next" aria-label="Next photo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-
-    <!-- Dot indicators (built by JS) -->
-    <div class="carousel-dots" role="tablist" aria-label="Gallery navigation"></div>
-
-  </div><!-- /.carousel-wrap -->
-
-  <div class="section-wrap">
-    <div class="gallery-ig-link">
-      <a href="https://www.instagram.com/golfngochicago" target="_blank" rel="noopener noreferrer">Follow us on Instagram @golfngochicago →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     INSTAGRAM PREVIEW ROW
-══════════════════════════════════════ -->
-<section id="instagram-row" class="section">
-  <div class="section-wrap">
-    <div class="ig-section-inner">
-      <p class="section-label" style="justify-content:center;">Follow Along</p>
-      <div class="ig-photos-row reveal">
-
-        <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-a.jpg</span>
-          <img src="/images/instagram-a.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-        <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-b.jpg</span>
-          <img src="/images/instagram-b.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-        <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-c.jpg</span>
-          <img src="/images/instagram-c.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-        <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-d.jpg</span>
-          <img src="/images/instagram-d.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-        <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-e.jpg</span>
-          <img src="/images/instagram-e.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-        <div class="ig-photo-item">
-          <span class="ig-slot-label">instagram-f.jpg</span>
-          <img src="/images/instagram-f.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
-        </div>
-
-      </div>
-      <div class="ig-handle-row">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-        @golfngochicago
-      </div>
-      <a href="https://www.instagram.com/golfngochicago" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-secondary">FOLLOW US ON INSTAGRAM</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     FAQ
-══════════════════════════════════════ -->
-<section id="faq" class="section">
-  <div class="section-wrap">
-    <p class="section-label" style="justify-content:center;">Got Questions</p>
-    <h2 class="section-heading">Frequently Asked</h2>
-    <p class="faq-sub">Everything you need to know before booking.</p>
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How much space do you need to set up?
-          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a"><p>We offer two enclosure options depending on your event space. Our inflatable enclosure — ideal for outdoor events and larger indoor venues — requires approximately 20×20 feet of space with at least 11 feet of ceiling height. Our compact indoor enclosure is perfect for tighter spaces and requires just 15×10 feet with at least 9 feet of ceiling height. Both setups deliver the exact same simulator experience — same software, same courses, same gameplay. Just let us know your venue details when you book and we'll bring the right setup for your space.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How far in advance do I need to book?
-          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a"><p>We recommend booking three to four weeks out to ensure your date is available. Ideally, eight to twelve weeks in advance is best — it's first come, first served for date and time.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What's included in the rental?
-          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a"><p>Everything. We bring the full simulator setup including the projector, screen, mat, clubs, balls, and software. We handle delivery, setup (45–60 min), operation during your event, and full teardown afterward. You don't need to supply anything.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Do you travel outside Orland Park for events?
-          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a"><p>We serve 100+ communities across Chicagoland — from Waukegan to Kankakee and Elgin to Indiana. If you're within roughly 100 miles of Orland Park, there's a strong chance we can make it work. Search your city in our Service Areas section or give us a call at (708) 264-4980 to confirm.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is your deposit policy?
-          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a"><p>We require a 25% deposit to secure your date, with the remaining balance due the day of the event. We accept Zelle, check, and card payments.</p></div>
-      </div>
-
-      <div class="faq-see-all" style="text-align:center;margin-top:32px;">
-        <a href="/faq.html" style="color:var(--green);text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">See all frequently asked questions &rarr;</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     SERVICE AREAS
-══════════════════════════════════════ -->
-<section id="service-areas" class="section">
-  <div class="section-wrap">
-    <div class="sa-intro">
-      <p class="section-label" style="justify-content:center;">Where We Go</p>
-      <h2 class="section-heading">Serving 100+ Chicagoland Communities</h2>
-      <p class="sa-intro-desc">Based in Orland Park, IL — Golf 'n Go delivers the full simulator experience across the entire Chicagoland area and south suburbs. From Waukegan to Kankakee, Elgin to Indiana, we come to you.</p>
-      <div class="sa-search-bar">
-        <span class="sa-search-icon">&#128269;</span>
-        <input type="text" id="citySearchInput" placeholder="Search your city or suburb&hellip;" autocomplete="off" aria-label="Search service area cities"/>
-      </div>
-    </div>
-
-    <!-- Featured suburb pills -->
-    <div class="sa-featured-pills reveal" style="margin-bottom:28px;">
-      <a class="sa-pill-link" href="golf-simulator-rental-naperville.html">Naperville</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-schaumburg.html">Schaumburg</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-evanston.html">Evanston</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-oak-brook.html">Oak Brook</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-hinsdale.html">Hinsdale</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-orland-park.html">Orland Park</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-northbrook.html">Northbrook</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-glenview.html">Glenview</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-highland-park.html">Highland Park</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-wheaton.html">Wheaton</a>
-      <a class="sa-pill-link" href="golf-simulator-rental-downers-grove.html">Downers Grove</a>
-      <a class="sa-pill-link" href="#contact">Joliet</a>
-    </div>
-
-    <div style="text-align:center;margin-bottom:24px;">
-      <button id="saToggleBtn" class="btn-pill btn-pill-secondary" style="font-size:0.8rem;padding:12px 28px;" aria-expanded="false" aria-controls="saFullContent">View all 100+ communities &#9660;</button>
-    </div>
-
-    <div class="sa-full-content" id="saFullContent">
-
-    <div class="sa-letter-nav" id="letterNav">
-      <button class="sa-letter-btn active" data-letter="all">All</button>
-      <button class="sa-letter-btn" data-letter="A">A</button>
-      <button class="sa-letter-btn" data-letter="B">B</button>
-      <button class="sa-letter-btn" data-letter="C">C</button>
-      <button class="sa-letter-btn" data-letter="D">D</button>
-      <button class="sa-letter-btn" data-letter="E">E</button>
-      <button class="sa-letter-btn" data-letter="F">F</button>
-      <button class="sa-letter-btn" data-letter="G">G</button>
-      <button class="sa-letter-btn" data-letter="H">H</button>
-      <button class="sa-letter-btn" data-letter="J">J</button>
-      <button class="sa-letter-btn" data-letter="K">K</button>
-      <button class="sa-letter-btn" data-letter="L">L</button>
-      <button class="sa-letter-btn" data-letter="M">M</button>
-      <button class="sa-letter-btn" data-letter="N">N</button>
-      <button class="sa-letter-btn" data-letter="O">O</button>
-      <button class="sa-letter-btn" data-letter="P">P</button>
-      <button class="sa-letter-btn" data-letter="R">R</button>
-      <button class="sa-letter-btn" data-letter="S">S</button>
-      <button class="sa-letter-btn" data-letter="T">T</button>
-      <button class="sa-letter-btn" data-letter="V">V</button>
-      <button class="sa-letter-btn" data-letter="W">W</button>
-      <button class="sa-letter-btn" data-letter="Z">Z</button>
-    </div>
-
-    <div class="sa-grid" id="cityGrid">
-      <div class="sa-letter-block" data-block="A"><div class="sa-letter-heading">A</div><ul class="sa-city-list"><li><a href="#contact">Addison, IL</a></li><li><a href="#contact">Algonquin, IL</a></li><li><a href="#contact">Alsip, IL</a></li><li><a href="#contact">Arlington Heights, IL</a></li><li><a href="#contact">Aurora, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="B"><div class="sa-letter-heading">B</div><ul class="sa-city-list"><li><a href="golf-simulator-rental-barrington.html">Barrington, IL</a></li><li><a href="#contact">Batavia, IL</a></li><li><a href="#contact">Berwyn, IL</a></li><li><a href="#contact">Bloomingdale, IL</a></li><li><a href="#contact">Blue Island, IL</a></li><li><a href="#contact">Bolingbrook, IL</a></li><li><a href="#contact">Buffalo Grove, IL</a></li><li><a href="#contact">Burbank, IL</a></li><li><a href="golf-simulator-rental-burr-ridge.html">Burr Ridge, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="C"><div class="sa-letter-heading">C</div><ul class="sa-city-list"><li><a href="#contact">Calumet City, IL</a></li><li><a href="#contact">Carol Stream, IL</a></li><li><a href="#contact">Chicago, IL</a></li><li><a href="#contact">Chicago Heights, IL</a></li><li><a href="#contact">Cicero, IL</a></li><li><a href="golf-simulator-rental-clarendon-hills.html">Clarendon Hills, IL</a></li><li><a href="#contact">Crystal Lake, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="D"><div class="sa-letter-heading">D</div><ul class="sa-city-list"><li><a href="#contact">Darien, IL</a></li><li><a href="#contact">Des Plaines, IL</a></li><li><a href="#contact">Dolton, IL</a></li><li><a href="golf-simulator-rental-downers-grove.html">Downers Grove, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="E"><div class="sa-letter-heading">E</div><ul class="sa-city-list"><li><a href="#contact">Elgin, IL</a></li><li><a href="#contact">Elk Grove Village, IL</a></li><li><a href="#contact">Elmhurst, IL</a></li><li><a href="#contact">Elmwood Park, IL</a></li><li><a href="golf-simulator-rental-evanston.html">Evanston, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="F"><div class="sa-letter-heading">F</div><ul class="sa-city-list"><li><a href="#contact">Forest Park, IL</a></li><li><a href="#contact">Fox Lake, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="G"><div class="sa-letter-heading">G</div><ul class="sa-city-list"><li><a href="#contact">Geneva, IL</a></li><li><a href="golf-simulator-rental-glen-ellyn.html">Glen Ellyn, IL</a></li><li><a href="#contact">Glendale Heights, IL</a></li><li><a href="golf-simulator-rental-glencoe.html">Glencoe, IL</a></li><li><a href="golf-simulator-rental-glenview.html">Glenview, IL</a></li><li><a href="#contact">Gurnee, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="H"><div class="sa-letter-heading">H</div><ul class="sa-city-list"><li><a href="#contact">Harvey, IL</a></li><li><a href="golf-simulator-rental-highland-park.html">Highland Park, IL</a></li><li><a href="golf-simulator-rental-hinsdale.html">Hinsdale, IL</a></li><li><a href="#contact">Hoffman Estates, IL</a></li><li><a href="#contact">Homewood, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="J"><div class="sa-letter-heading">J</div><ul class="sa-city-list"><li><a href="#contact">Joliet, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="K"><div class="sa-letter-heading">K</div><ul class="sa-city-list"><li><a href="#contact">Kankakee, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="L"><div class="sa-letter-heading">L</div><ul class="sa-city-list"><li><a href="golf-simulator-rental-la-grange.html">La Grange, IL</a></li><li><a href="golf-simulator-rental-lake-forest.html">Lake Forest, IL</a></li><li><a href="#contact">Lake in the Hills, IL</a></li><li><a href="#contact">Lansing, IL</a></li><li><a href="#contact">Lisle, IL</a></li><li><a href="#contact">Lockport, IL</a></li><li><a href="#contact">Lombard, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="M"><div class="sa-letter-heading">M</div><ul class="sa-city-list"><li><a href="#contact">Matteson, IL</a></li><li><a href="#contact">Mokena, IL</a></li><li><a href="#contact">Mundelein, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="N"><div class="sa-letter-heading">N</div><ul class="sa-city-list"><li><a href="golf-simulator-rental-naperville.html">Naperville, IL</a></li><li><a href="#contact">New Lenox, IL</a></li><li><a href="#contact">Niles, IL</a></li><li><a href="#contact">Norridge, IL</a></li><li><a href="#contact">North Chicago, IL</a></li><li><a href="golf-simulator-rental-northbrook.html">Northbrook, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="O"><div class="sa-letter-heading">O</div><ul class="sa-city-list"><li><a href="golf-simulator-rental-oak-brook.html">Oak Brook, IL</a></li><li><a href="#contact">Oak Forest, IL</a></li><li><a href="#contact">Oak Lawn, IL</a></li><li><a href="#contact">Oak Park, IL</a></li><li><a href="golf-simulator-rental-orland-park.html">Orland Park, IL</a></li><li><a href="#contact">Oswego, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="P"><div class="sa-letter-heading">P</div><ul class="sa-city-list"><li><a href="#contact">Palatine, IL</a></li><li><a href="#contact">Park Ridge, IL</a></li><li><a href="#contact">Plainfield, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="R"><div class="sa-letter-heading">R</div><ul class="sa-city-list"><li><a href="#contact">Riverside, IL</a></li><li><a href="#contact">Rolling Meadows, IL</a></li><li><a href="#contact">Romeoville, IL</a></li><li><a href="#contact">Roselle, IL</a></li><li><a href="#contact">Round Lake Beach, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="S"><div class="sa-letter-heading">S</div><ul class="sa-city-list"><li><a href="golf-simulator-rental-schaumburg.html">Schaumburg, IL</a></li><li><a href="#contact">Skokie, IL</a></li><li><a href="#contact">South Holland, IL</a></li><li><a href="#contact">St. Charles, IL</a></li><li><a href="#contact">Streamwood, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="T"><div class="sa-letter-heading">T</div><ul class="sa-city-list"><li><a href="#contact">Tinley Park, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="V"><div class="sa-letter-heading">V</div><ul class="sa-city-list"><li><a href="#contact">Vernon Hills, IL</a></li><li><a href="#contact">Villa Park, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="W"><div class="sa-letter-heading">W</div><ul class="sa-city-list"><li><a href="#contact">Waukegan, IL</a></li><li><a href="#contact">West Chicago, IL</a></li><li><a href="golf-simulator-rental-western-springs.html">Western Springs, IL</a></li><li><a href="golf-simulator-rental-wheaton.html">Wheaton, IL</a></li><li><a href="#contact">Wheeling, IL</a></li><li><a href="golf-simulator-rental-wilmette.html">Wilmette, IL</a></li><li><a href="golf-simulator-rental-winnetka.html">Winnetka, IL</a></li><li><a href="#contact">Wood Dale, IL</a></li><li><a href="#contact">Woodridge, IL</a></li></ul></div>
-      <div class="sa-letter-block" data-block="Z"><div class="sa-letter-heading">Z</div><ul class="sa-city-list"><li><a href="#contact">Zion, IL</a></li></ul></div>
-      <p class="sa-no-results" id="saNoResults">No results — try a different city name.</p>
-    </div>
-
-    </div><!-- /.sa-full-content -->
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     REVIEWS
-══════════════════════════════════════ -->
-<section id="reviews" class="section">
-  <div class="section-wrap">
-    <p class="section-label" style="justify-content:center;">What People Are Saying</p>
-    <h2 class="section-heading">Real Reviews. Real Events.</h2>
-    <p class="reviews-sub-new">5.0 ★★★★★ on Google — Chicagoland's favorite mobile golf simulator rental.</p>
-    <div class="reviews-grid-new">
-
-      <div class="review-card-new reveal">
-        <div class="review-header-new">
-          <div class="review-avatar">JM</div>
-          <div class="review-meta-new">
-            <span class="review-name-new">Joey M.</span>
-            <span class="review-source-new">Google Review</span>
           </div>
-        </div>
-        <div class="review-gold-stars">★★★★★</div>
-        <p class="review-text-new">"These guys are great to work with and put on a great set up at our party. Great for corporate events, birthday parties, or BBQs! Looking forward to having them out again."</p>
-      </div>
 
-      <div class="review-card-new reveal reveal-delay-1">
-        <div class="review-header-new">
-          <div class="review-avatar">AT</div>
-          <div class="review-meta-new">
-            <span class="review-name-new">Adam T.</span>
-            <span class="review-source-new">Google Review</span>
-          </div>
-        </div>
-        <div class="review-gold-stars">★★★★★</div>
-        <p class="review-text-new">"We rented a golf simulator for a birthday party and it ended up being the highlight of the whole event. The team showed up on time and got everything set up really fast. We had people who golf all the time and people who never picked up a club — everyone had a great time. Would 100 percent book again."</p>
-      </div>
+        </article>
 
-      <div class="review-card-new reveal">
-        <div class="review-header-new">
-          <div class="review-avatar">AH</div>
-          <div class="review-meta-new">
-            <span class="review-name-new">Adrian H.</span>
-            <span class="review-source-new">Google Review</span>
-          </div>
-        </div>
-        <div class="review-gold-stars">★★★★★</div>
-        <p class="review-text-new">"Tried out this mobile golf simulator service and it was awesome! They came right to my place and set everything up — super easy and professional. The setup looked amazing and felt just like hitting at a real range. Highly recommend!"</p>
-      </div>
 
-      <div class="review-card-new reveal reveal-delay-1">
-        <div class="review-header-new">
-          <div class="review-avatar">MM</div>
-          <div class="review-meta-new">
-            <span class="review-name-new">Moto Man</span>
-            <span class="review-source-new">Google Review</span>
-          </div>
-        </div>
-        <div class="review-gold-stars">★★★★★</div>
-        <p class="review-text-new">"Golf 'n Go was amazing! The setup looked incredible and felt like a real golf experience right in our backyard. The team was on time, friendly, and made everything super easy. Everyone at the party loved it — definitely booking again next summer!"</p>
-      </div>
+        <!-- BLOG 3 -->
 
-      <div class="review-card-new reveal">
-        <div class="review-header-new">
-          <div class="review-avatar">PG</div>
-          <div class="review-meta-new">
-            <span class="review-name-new">Pawel G.</span>
-            <span class="review-source-new">Google Review</span>
-          </div>
-        </div>
-        <div class="review-gold-stars">★★★★★</div>
-        <p class="review-text-new">"Booked out this golf simulator — it was so fun! Great guy, quick setup, great prices, overall a very good experience. Would rate more than 5 stars if I could!"</p>
-      </div>
+        <article class="post-card">
 
-      <div class="review-card-new reveal reveal-delay-1">
-        <div class="review-header-new">
-          <div class="review-avatar">MK</div>
-          <div class="review-meta-new">
-            <span class="review-name-new">Michael K.</span>
-            <span class="review-source-new">Google Review</span>
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-c.jpg"
+              alt="Corporate golf simulator event"
+            >
+
           </div>
-        </div>
-        <div class="review-gold-stars">★★★★★</div>
-        <p class="review-text-new">"Booked Golf N Go for my birthday. Awesome experience and easy to use. Will definitely be booking again."</p>
+
+          <div class="post-body">
+
+            <div class="post-date">
+              August 8, 2026
+            </div>
+
+            <h3 class="post-title">
+              Best Corporate Event Ideas in Chicago
+            </h3>
+
+            <p class="post-excerpt">
+              Looking for something better than another dinner
+              or happy hour? Here are event ideas that get your
+              team competing and connecting.
+            </p>
+
+            <a href="#" class="post-read">
+              Read More →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- BLOG 4 -->
+
+        <article class="post-card">
+
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-d.jpg"
+              alt="Golf simulator birthday party"
+            >
+
+          </div>
+
+          <div class="post-body">
+
+            <div class="post-date">
+              August 3, 2026
+            </div>
+
+            <h3 class="post-title">
+              How to Throw a Golf Simulator Birthday Party
+            </h3>
+
+            <p class="post-excerpt">
+              Build a birthday everyone can enjoy — golfers,
+              beginners, kids, and guests who have never swung
+              a club before.
+            </p>
+
+            <a href="#" class="post-read">
+              Read More →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- BLOG 5 -->
+
+        <article class="post-card">
+
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-e.jpg"
+              alt="Golf simulator course experience"
+            >
+
+          </div>
+
+          <div class="post-body">
+
+            <div class="post-date">
+              July 28, 2026
+            </div>
+
+            <h3 class="post-title">
+              Chicago Golf Courses Worth Playing
+            </h3>
+
+            <p class="post-excerpt">
+              From iconic Chicago-area courses to famous layouts
+              available inside GSPro, here are courses every
+              golfer should experience.
+            </p>
+
+            <a href="#" class="post-read">
+              Read More →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- BLOG 6 -->
+
+        <article class="post-card">
+
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-f.jpg"
+              alt="Golfer using a golf simulator"
+            >
+
+          </div>
+
+          <div class="post-body">
+
+            <div class="post-date">
+              July 21, 2026
+            </div>
+
+            <h3 class="post-title">
+              Can a Golf Simulator Improve Your Swing?
+            </h3>
+
+            <p class="post-excerpt">
+              Learn how launch-monitor data, shot tracking,
+              repetition, and instant feedback can help you
+              practice more effectively.
+            </p>
+
+            <a href="#" class="post-read">
+              Read More →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- BLOG 7 -->
+
+        <article class="post-card">
+
+          <div class="post-image">
+
+            <img
+              src="https://golfngochicago.com/images/instagram-e.jpg"
+              alt="Golf simulator setup at an event"
+            >
+
+          </div>
+
+          <div class="post-body">
+
+            <div class="post-date">
+              July 15, 2026
+            </div>
+
+            <h3 class="post-title">
+              The Complete Golf Simulator Rental Guide
+            </h3>
+
+            <p class="post-excerpt">
+              Space requirements, setup time, equipment,
+              players, games, and everything to consider before
+              booking a mobile simulator.
+            </p>
+
+            <a href="#" class="post-read">
+              Read More →
+            </a>
+
+          </div>
+
+        </article>
+
+
       </div>
 
     </div>
-    <div class="reviews-cta-new">
-      <a href="https://share.google/XoVUwbtsm5Z2OMPCK" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">SEE ALL REVIEWS ON GOOGLE →</a>
+
+  </section>
+
+
+  <!-- =====================================================
+       CTA
+  ====================================================== -->
+
+  <section class="cta">
+
+    <div class="section-wrap">
+
+      <div class="cta-inner">
+
+        <div class="cta-label">
+          Bring The Course To You
+        </div>
+
+        <h2 class="cta-title">
+          Ready To
+          <span>Play?</span>
+        </h2>
+
+        <p class="cta-copy">
+          Planning a corporate event, birthday, wedding,
+          fundraiser, bachelor party, or private celebration?
+          Bring a premium mobile golf simulator to your event
+          anywhere across Chicagoland.
+        </p>
+
+        <a
+          href="contact.html"
+          class="btn btn-primary"
+        >
+          Book Your Event
+          <span>→</span>
+        </a>
+
+      </div>
+
     </div>
-  </div>
-</section>
 
-<!-- ══════════════════════════════════════
-     CTA BANNER
-══════════════════════════════════════ -->
-<section id="cta" class="section">
-  <div class="cta-glow"   aria-hidden="true"></div>
-  <div class="cta-grid-bg" aria-hidden="true"></div>
-  <div class="cta-inner">
-    <p class="cta-label">Get Started</p>
-    <h2 class="cta-heading">
-      Ready to Bring
-      <span>the Course to You?</span>
-    </h2>
-    <p class="cta-body">Every booking is custom — fill out our quick form and we'll send you a personalized quote, usually within a few hours. No fixed prices, no surprises, just a great time.</p>
-    <a href="https://form.jotform.com/253077673115054" target="_blank" rel="noopener noreferrer" class="btn-book">Book Now</a>
-  </div>
-</section>
+  </section>
 
-<!-- ══════════════════════════════════════
-     FOOTER
-══════════════════════════════════════ -->
+</main>
+
+
 <footer id="contact">
   <div class="footer-main">
 
     <div class="footer-brand">
       <a href="/" class="footer-logo">
-        <img src="/images/main_logo_trans.svg" alt="Golf n Go Chicago" loading="lazy" />
+        <img src="https://golfngochicago.com/images/main_logo_trans.svg" alt="Golf n Go Chicago" loading="lazy" />
       </a>
       <p class="footer-tagline">Bring the Course to You</p>
       <p class="footer-desc">Chicago's premier mobile golf simulator rental — delivering a world-class experience to your event anywhere in Chicagoland.</p>
@@ -2324,7 +2892,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#service-areas">Service Areas</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="/blog">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -2705,6 +3272,143 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       padding: 28px 20px 20px;
     }
   }
+
+/* =========================================================
+   REVISED AUTHOR PAGE
+   One author-info section + existing blog cards
+   ========================================================= */
+.author-reference-section {
+  padding: 125px 0 82px;
+  background:
+    radial-gradient(circle at 55% 48%, rgba(57,255,20,.045), transparent 38%),
+    #080908;
+}
+
+.author-reference-inner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.author-reference-card {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 55px;
+  align-items: center;
+}
+
+.author-reference-avatar {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(57,255,20,.22);
+  background: #111;
+  box-shadow: 0 0 70px rgba(57,255,20,.035);
+}
+
+.author-reference-avatar img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+.author-reference-copy {
+  max-width: 920px;
+}
+
+.author-reference-copy h1 {
+  margin: 0 0 25px;
+  color: #39ff14;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+}
+
+.author-reference-copy p {
+  margin: 0 0 18px;
+  color: #f0f0f0;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.author-reference-copy p:last-of-type {
+  margin-bottom: 25px;
+}
+
+.author-reference-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.author-reference-socials a {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.13);
+  background: #151515;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 800;
+  transition: .2s ease;
+}
+
+.author-reference-socials a:hover {
+  color: #39ff14;
+  border-color: rgba(57,255,20,.45);
+  transform: translateY(-2px);
+}
+
+.author-reference-socials .author-site {
+  width: auto;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.author-posts-section {
+  padding-top: 82px;
+}
+
+@media (max-width: 760px) {
+  .author-reference-section {
+    padding: 95px 0 58px;
+  }
+
+  .author-reference-card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .author-reference-avatar {
+    width: 190px;
+    height: 190px;
+  }
+
+  .author-reference-copy p {
+    font-size: 16px;
+  }
+
+  .author-reference-socials {
+    justify-content: center;
+  }
+
+  .author-posts-section {
+    padding-top: 58px;
+  }
+}
+
 </style>
 
 <script>
@@ -2770,18 +3474,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       setTimeout(showPopup, DELAY_MS);
     }
   })();
-
-  // NAV: mobile service areas accordion
-  var areasToggle  = document.getElementById('areasToggle');
-  var areasSubList = document.getElementById('areasSubList');
-  var areasArrow   = document.getElementById('areasArrow');
-  if (areasToggle && areasSubList) {
-    areasToggle.addEventListener('click', function () {
-      var isOpen = areasSubList.classList.toggle('open');
-      if (areasArrow) areasArrow.classList.toggle('open', isOpen);
-      areasToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-  }
 </script>
+</body>
+</html>
+
 </body>
 </html>
