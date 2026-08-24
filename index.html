@@ -1491,7 +1491,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="/how-it-works">How It Works</a></li>
     <li><a href="what-we-offer.html">What We Offer</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#service-areas">Service Areas</a></li>
+    <li class="has-dropdown"><a href="#service-areas">Service Areas</a>
+        <ul class="nav-dropdown">
+          <li><a href="/golf-simulator-rental-naperville">Naperville</a></li>
+        </ul>
+      </li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="/blog">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -1536,7 +1540,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="/how-it-works" class="mobile-nav-close-link">How It Works</a></li>
     <li><a href="what-we-offer.html" class="mobile-nav-close-link">What We Offer</a></li>
     <li><a href="#gallery" class="mobile-nav-close-link">Gallery</a></li>
-    <li><a href="#service-areas" class="mobile-nav-close-link">Service Areas</a></li>
+    <li><button class="mobile-accordion-toggle" id="areasToggle" type="button" aria-expanded="false" aria-controls="areasSubList">Service Areas &#9662;</button>
+        <ul class="mobile-sub-list" id="areasSubList">
+          <li><a href="/golf-simulator-rental-naperville" class="mobile-nav-close-link">Naperville</a></li>
+        </ul>
+      </li>
     <li><a href="#faq" class="mobile-nav-close-link">FAQ</a></li>
     <li><a href="/blog" class="mobile-nav-close-link">Blog</a></li>
     <li><a href="#contact" class="mobile-nav-close-link">Contact</a></li>
@@ -1993,32 +2001,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="ig-photo-item">
           <span class="ig-slot-label">instagram-a.jpg</span>
-          <img src="/images/instagram-a.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/instagram-a.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
           <span class="ig-slot-label">instagram-b.jpg</span>
-          <img src="/images/instagram-b.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/instagram-b.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
           <span class="ig-slot-label">instagram-c.jpg</span>
-          <img src="/images/instagram-c.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/instagram-c.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
           <span class="ig-slot-label">instagram-d.jpg</span>
-          <img src="/images/instagram-d.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/instagram-d.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
           <span class="ig-slot-label">instagram-e.jpg</span>
-          <img src="/images/instagram-e.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/instagram-e.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
         <div class="ig-photo-item">
           <span class="ig-slot-label">instagram-f.jpg</span>
-          <img src="/images/instagram-f.JPG" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
+          <img src="/images/instagram-f.jpg" alt="Golf n Go Chicago Instagram photo" loading="lazy" onerror="this.style.display='none'">
         </div>
 
       </div>
@@ -2762,6 +2770,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       setTimeout(showPopup, DELAY_MS);
     }
   })();
+
+  // NAV: mobile service areas accordion
+  var areasToggle  = document.getElementById('areasToggle');
+  var areasSubList = document.getElementById('areasSubList');
+  var areasArrow   = document.getElementById('areasArrow');
+  if (areasToggle && areasSubList) {
+    areasToggle.addEventListener('click', function () {
+      var isOpen = areasSubList.classList.toggle('open');
+      if (areasArrow) areasArrow.classList.toggle('open', isOpen);
+      areasToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
 </script>
 </body>
 </html>

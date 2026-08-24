@@ -69,7 +69,11 @@
           <li><a href="golf-simulator-private-party-chicago.html">Private Parties</a></li>
         </ul>
       </li>
-      <li><a href="/how-it-works">How It Works</a></li><li><a href="what-we-offer.html">What We Offer</a></li><li><a href="/#gallery">Gallery</a></li><li><a href="/#service-areas">Service Areas</a></li><li><a href="/#faq">FAQ</a></li><li><a href="/#contact">Contact</a></li>
+      <li><a href="/how-it-works">How It Works</a></li><li><a href="what-we-offer.html">What We Offer</a></li><li><a href="/#gallery">Gallery</a></li><li class="has-dropdown"><a href="/#service-areas">Service Areas</a>
+        <ul class="nav-dropdown">
+          <li><a href="/golf-simulator-rental-naperville">Naperville</a></li>
+        </ul>
+      </li><li><a href="/#faq">FAQ</a></li><li><a href="/#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
       <a href="tel:7082644980" class="nav-phone">(708) 264-4980</a>
@@ -89,7 +93,11 @@
           <li><a href="golf-simulator-corporate-events-chicago.html">Corporate Events</a></li><li><a href="golf-simulator-birthday-party-chicago.html">Birthdays</a></li><li><a href="golf-simulator-graduation-chicago.html" class="active" aria-current="page">Graduations</a></li><li><a href="golf-simulator-charity-fundraiser-chicago.html">Charities</a></li><li><a href="golf-simulator-private-party-chicago.html">Private Parties</a></li>
         </ul>
       </li>
-      <li><a href="/how-it-works">How It Works</a></li><li><a href="what-we-offer.html">What We Offer</a></li><li><a href="/#gallery">Gallery</a></li><li><a href="/#service-areas">Service Areas</a></li><li><a href="/#faq">FAQ</a></li><li><a href="/#contact">Contact</a></li>
+      <li><a href="/how-it-works">How It Works</a></li><li><a href="what-we-offer.html">What We Offer</a></li><li><a href="/#gallery">Gallery</a></li><li><button class="mobile-accordion-toggle" id="areasToggle" type="button" aria-expanded="false" aria-controls="areasSubList">Service Areas &#9662;</button>
+        <ul class="mobile-sub-list" id="areasSubList">
+          <li><a href="/golf-simulator-rental-naperville">Naperville</a></li>
+        </ul>
+      </li><li><a href="/#faq">FAQ</a></li><li><a href="/#contact">Contact</a></li>
     </ul>
     <div class="mobile-nav-bottom"><a href="https://form.jotform.com/253077673115054" target="_blank" rel="noopener noreferrer" class="mobile-nav-book">Book Now</a><a href="tel:7082644980" class="mobile-nav-phone">(708) 264-4980</a></div>
   </div>
@@ -213,6 +221,18 @@
     eventsToggle.addEventListener('click',()=>{const open=!eventsSubList.classList.contains('open');eventsSubList.classList.toggle('open',open);eventsToggle.setAttribute('aria-expanded',String(open))});
     document.querySelectorAll('.faq-q').forEach(button=>button.addEventListener('click',()=>{const item=button.closest('.faq-item');const open=!item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(other=>{other.classList.remove('open');other.querySelector('.faq-q').setAttribute('aria-expanded','false')});if(open){item.classList.add('open');button.setAttribute('aria-expanded','true')}}));
     document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMobileNav()});
-  </script>
+  
+  // NAV: mobile service areas accordion
+  var areasToggle  = document.getElementById('areasToggle');
+  var areasSubList = document.getElementById('areasSubList');
+  var areasArrow   = document.getElementById('areasArrow');
+  if (areasToggle && areasSubList) {
+    areasToggle.addEventListener('click', function () {
+      var isOpen = areasSubList.classList.toggle('open');
+      if (areasArrow) areasArrow.classList.toggle('open', isOpen);
+      areasToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+</script>
 </body>
 </html>
