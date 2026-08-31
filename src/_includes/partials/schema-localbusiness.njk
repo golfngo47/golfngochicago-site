@@ -1,0 +1,2 @@
+{#- pass areaName (string, e.g. city.name) from the calling template -#}
+<script type="application/ld+json">{{ site | localBusinessSchema(areaName) | safe }}</script>

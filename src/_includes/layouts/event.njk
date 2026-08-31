@@ -1,0 +1,141 @@
+{% include "partials/schema-localbusiness.njk" %}
+{% include "partials/schema-faqpage.njk" %}
+
+<div class="page-hero">
+  <div class="page-hero-glow" aria-hidden="true"></div>
+  <div class="page-hero-inner">
+    <p class="page-hero-eyebrow">{{ event.name }}</p>
+    <h1 class="page-hero-headline">{{ event.heroH1 }}</h1>
+    <p class="page-hero-sub">{{ event.heroSub }}</p>
+    <div class="hero-btns">
+      <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">Book Your Event &rarr;</a>
+      <a href="/how-it-works.html" class="btn-pill btn-pill-secondary">See How It Works</a>
+    </div>
+  </div>
+</div>
+
+{% if event.whyBody.length %}
+<section class="section">
+  <div class="section-wrap">
+    <div class="why-grid">
+      <div>
+        <p class="section-label">Why {{ site.name }}</p>
+        <h2 class="section-heading">{{ event.whyHeading or "Professional Setup. Zero Work on Your End." }}</h2>
+        <div class="why-body">
+          {%- for p in event.whyBody %}<p>{{ p }}</p>{% endfor %}
+        </div>
+      </div>
+      <div class="info-box">
+        <p class="info-box-heading">{{ event.name }} Details</p>
+        {%- for item in event.infoItems %}
+        <div class="info-item">
+          <svg class="info-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+          <div class="info-text"><strong>{{ item.title }}</strong><span>{{ item.desc }}</span></div>
+        </div>
+        {%- endfor %}
+        <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-book" style="width:100%; justify-content:center; margin-top:8px;">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if event.useCases.length %}
+<section id="use-cases" class="section" style="background:#0d0d0d;">
+  <div class="section-wrap">
+    <p class="section-label" style="justify-content:center;">Perfect For</p>
+    <h2 class="section-heading" style="text-align:center;">Every Kind of {{ event.name }}.</h2>
+    <div class="use-case-grid">
+      {%- for u in event.useCases %}
+      <div class="use-case-card">
+        <span class="use-case-icon">{{ u.icon }}</span>
+        <p class="use-case-title">{{ u.title }}</p>
+        <p class="use-case-desc">{{ u.desc }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if event.perks.length %}
+<section id="perks" class="section">
+  <div class="section-wrap">
+    <p class="section-label">What You Get</p>
+    <h2 class="section-heading">Built for {{ event.name }}.</h2>
+    <div class="perks-grid">
+      {%- for p in event.perks %}
+      <div class="perk-card">
+        <svg class="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="perk-title">{{ p.title }}</p>
+        <p class="perk-desc">{{ p.desc }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if event.packages.length %}
+<section id="packages" class="section">
+  <div class="section-wrap">
+    <p class="section-label">Packages</p>
+    <h2 class="section-heading">Pick Your Duration.</h2>
+    <p class="packages-note">These are our most popular setups — <span>you can book any duration you'd like.</span> Every package includes full setup, on-site operation, and complete breakdown.</p>
+    <div class="packages-grid">
+      {%- for pkg in event.packages %}
+      <div class="pkg-card{% if pkg.featured %} featured{% endif %}">
+        <div class="pkg-header">
+          {% if pkg.featured %}<span class="pkg-badge">Most Popular</span>{% endif %}
+          <p class="pkg-tier">{{ pkg.tier }}</p>
+          <p class="pkg-name">{{ pkg.name }}</p>
+          <p class="pkg-duration">{{ pkg.duration }}</p>
+        </div>
+        <div class="pkg-body">
+          <p class="pkg-desc">{{ pkg.desc }}</p>
+          <ul class="pkg-features">
+            {%- for f in pkg.features %}<li>{{ f }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div class="pkg-footer">
+          <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-book" style="width:100%; justify-content:center;">Get a Quote</a>
+        </div>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if event.faq.length %}
+<section id="faq" class="section">
+  <div class="section-wrap">
+    <p class="section-label" style="justify-content:center;">FAQ</p>
+    <h2 class="section-heading" style="text-align:center;">{{ event.name }} Questions, Answered.</h2>
+    <div class="faq-list" style="margin-top:48px;">
+      {%- for item in event.faq %}
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">{{ item.q }}
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>{{ item.a }}</p></div>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="cta" class="section">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="cta-grid-bg" aria-hidden="true"></div>
+  <div class="cta-inner">
+    <p class="cta-label">Book Your Event</p>
+    <h2 class="cta-heading">Ready to Plan an Event<span>People Remember?</span></h2>
+    <p class="cta-body">Fill out our quick form and we'll send a custom quote — usually within a few hours. Serving all of Chicagoland.</p>
+    <div class="cta-btns">
+      <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-book">Request a Quote</a>
+      <a href="{{ site.phoneHref }}" class="btn-outline">{{ site.phone }}</a>
+    </div>
+  </div>
+</section>

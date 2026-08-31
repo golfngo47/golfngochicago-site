@@ -1,0 +1,19 @@
+{
+  "name": "Golf 'n Go Chicago",
+  "domain": "https://www.golfngochicago.com",
+  "phone": "(708) 264-4980",
+  "phoneHref": "tel:7082644980",
+  "email": "sales@golfngochicago.com",
+  "jotformUrl": "https://form.jotform.com/253077673115054",
+  "gaId": "G-CXKPDZX4SY",
+  "gtmId": "GTM-5WR96DTK",
+  "fbPixelId": "912621701409912",
+  "baseAddress": { "city": "Orland Park", "state": "IL" },
+  "social": {
+    "instagram": "https://www.instagram.com/golfngochicago",
+    "tiktok": "https://www.tiktok.com/@golfngochicago",
+    "facebook": "https://www.facebook.com/people/Golf-n-Go/61580899096746/",
+    "googleReviews": "https://share.google/XoVUwbtsm5Z2OMPCK"
+  },
+  "courseCount": "2,300+"
+}

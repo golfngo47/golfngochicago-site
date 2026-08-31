@@ -11,3 +11,8 @@ Thumbs.db
 
 # Claude Code local config
 .claude/
+
+# Node / Eleventy
+node_modules/
+_site/
+.cache/

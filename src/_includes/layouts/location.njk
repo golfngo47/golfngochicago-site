@@ -1,0 +1,117 @@
+{% include "partials/schema-localbusiness.njk" %}
+{% include "partials/schema-faqpage.njk" %}
+
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <span class="page-hero-bg-label">images/{{ city.heroImage or (city.slug + '-hero.jpg') }}</span>
+    <img src="/images/{{ city.heroImage or (city.slug + '-hero.jpg') }}" loading="lazy" alt="Golf simulator rental in {{ city.name }} IL - Golf n Go Chicago" onerror="this.style.display='none'"/>
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-eyebrow">Serving {{ city.name }} &amp; {{ city.region }}</span>
+    <h1 class="page-hero-h1">Golf Simulator Rental<br>in {{ city.name }}, IL</h1>
+    <p class="page-hero-sub">Bring the world's finest golf courses to your {{ city.name }} event — no driving range required.</p>
+    <div class="page-hero-btns">
+      <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Request a Quote →</a>
+      <a href="{{ site.phoneHref }}" class="btn-outline">{{ site.phone }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt section-border">
+  <div class="section-wrap">
+    <div class="intro-grid">
+      <div class="reveal">
+        <p class="section-label">{{ city.name }}, IL</p>
+        <h2 class="section-heading">{{ city.name }}'s Premier Mobile Golf Simulator</h2>
+        {% for p in city.introParagraphs %}<p class="section-body">{{ p }}</p>{% endfor %}
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Request a Quote →</a>
+          <a href="{{ site.phoneHref }}" class="btn-outline">{{ site.phone }}</a>
+        </div>
+      </div>
+      <div class="intro-img-wrap reveal reveal-d1">
+        <div class="img-ph" style="height:460px">images/{{ city.eventImage or (city.slug + '-event.jpg') }}</div>
+        <img src="/images/{{ city.eventImage or (city.slug + '-event.jpg') }}" loading="lazy" alt="Mobile golf simulator event setup in {{ city.name }} Illinois" onerror="this.style.display='none'"/>
+        <div class="hud-frame"><span class="hud-c tl"></span><span class="hud-c tr"></span><span class="hud-c bl"></span><span class="hud-c br"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="section-wrap">
+    <p class="section-label" style="justify-content:center">The Process</p>
+    <h2 class="section-heading" style="text-align:center;margin-bottom:52px">How It Works</h2>
+    <div class="hiw-grid">
+      <div class="hiw-card reveal"><div class="hiw-num">01</div><div class="hiw-title">Request a Quote</div><p class="hiw-desc">Fill out our quick form or call {{ site.phone }}. Share your {{ city.name }} event date, venue, and guest count. We'll send a custom quote within hours.</p></div>
+      <div class="hiw-arrow reveal reveal-d1">→</div>
+      <div class="hiw-card reveal reveal-d1"><div class="hiw-num">02</div><div class="hiw-title">We Handle Setup</div><p class="hiw-desc">Our team arrives early, handles all setup and calibration at your {{ city.name }} location, and manages the simulator throughout your event.</p></div>
+      <div class="hiw-arrow reveal reveal-d2">→</div>
+      <div class="hiw-card reveal reveal-d2"><div class="hiw-num">03</div><div class="hiw-title">You Play</div><p class="hiw-desc">Guests step up and choose from {{ site.courseCount }} world-famous courses. Our attendant runs everything start to finish, then breaks down without a trace.</p></div>
+    </div>
+    <div class="hiw-cta"><a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Book Your {{ city.name }} Event →</a></div>
+  </div>
+</section>
+
+<section class="section section-alt section-border">
+  <div class="section-wrap">
+    <p class="section-label">Perfect For</p>
+    <h2 class="section-heading">Every {{ city.name }} Event</h2>
+    <div class="events-grid">
+      {%- for card in city.eventCards %}
+      <div class="event-card reveal"><div class="event-card-icon">{{ card.icon }}</div><div class="event-card-title">{{ card.title }}</div><p class="event-card-desc">{{ card.desc }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{% if city.customBlocks %}
+  {% include "partials/blocks/why-us.njk" %}
+  {% include "partials/blocks/features.njk" %}
+  {% include "partials/blocks/courses.njk" %}
+{% endif %}
+
+<section class="section section-alt section-border">
+  <div class="section-wrap">
+    <p class="section-label" style="justify-content:center">Common Questions</p>
+    <h2 class="section-heading" style="text-align:center;margin-bottom:48px">{{ city.name }} FAQ</h2>
+    <div class="faq-list">
+      {%- for item in city.faq %}
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">{{ item.q }}<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a"><p>{{ item.a }}</p></div></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{% if city.customBlocks and city.customBlocks.serviceAreaWidget %}
+  {% include "partials/blocks/service-area-widget.njk" %}
+{% else %}
+<section class="section section-border" style="background:var(--bg3)">
+  <div class="section-wrap">
+    <p class="section-label">Also Serving</p>
+    <h2 class="section-heading">Nearby Communities</h2>
+    <p class="section-body" style="max-width:600px">{{ site.name }} serves {{ city.region }} and surrounding Chicagoland suburbs. Explore our other location pages:</p>
+    <div class="nearby-pills">
+      {%- for slug in city.nearbyTowns %}{% for c in cities %}{% if c.slug == slug %}
+      <a href="/golf-simulator-rental-{{ c.slug }}.html" class="nearby-pill">{{ c.name }}</a>
+      {%- endif %}{% endfor %}{% endfor %}
+      <a href="/locations.html" class="nearby-pill">View All Locations →</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-grid"></div>
+  <div class="cta-inner">
+    <p class="cta-eyebrow">Ready to Book</p>
+    <h2 class="cta-heading">Tee Off in<span>{{ city.name }}.</span></h2>
+    <p class="cta-body">Fill out our quick quote form and we'll send a custom proposal within hours. No commitment required — we bring everything, you bring the guests.</p>
+    <div class="cta-btns">
+      <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Request a Quote →</a>
+      <a href="{{ site.phoneHref }}" class="btn-outline">{{ site.phone }}</a>
+    </div>
+  </div>
+</section>

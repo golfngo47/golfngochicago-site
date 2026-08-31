@@ -1,0 +1,17 @@
+---
+pagination:
+  data: events
+  size: 1
+  alias: event
+permalink: "golf-simulator-{{ event.slug }}-chicago.html"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ event.metaTitle | safe }}"
+  metaDescription: "{{ event.metaDescription | safe }}"
+  ogDescription: "{{ event.ogDescription | safe }}"
+  canonicalPath: "/golf-simulator-{{ event.slug }}-chicago.html"
+  robotsContent: "{% if event.status == 'draft' %}noindex, nofollow{% else %}index, follow{% endif %}"
+  areaName: "Chicago"
+---
+{% if event.status == "draft" %}<!-- Draft page: intentionally excluded from public event navigation. -->{% endif %}
+{% include "layouts/event.njk" %}

@@ -1,0 +1,28 @@
+{%- set w = city.customBlocks.whyUs %}
+{% if w %}
+<section class="section section-border">
+  <div class="section-wrap">
+    <div class="why-grid">
+      <div class="reveal">
+        <p class="section-label">{{ w.label }}</p>
+        <h2 class="section-heading">{{ w.heading }}</h2>
+        <p class="section-body">{{ w.body }}</p>
+        <ul class="why-list">
+          {%- for item in w.checklist %}
+          <li><span class="why-check"><i class="fa-solid fa-circle-check"></i></span>{{ item }}</li>
+          {%- endfor %}
+        </ul>
+        <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Book Your {{ city.name }} Event <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="why-img-wrap reveal reveal-d1">
+        <div class="img-ph" style="height:420px">images/{{ w.image }}</div>
+        <img src="/images/{{ w.image }}" loading="lazy" alt="Guests at a Golf n Go Chicago simulator party near {{ city.name }}" onerror="this.style.display='none'"/>
+        <div class="why-quote">
+          <div class="why-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p>"{{ w.testimonial }}"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

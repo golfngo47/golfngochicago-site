@@ -1,0 +1,15 @@
+---
+pagination:
+  data: cities
+  size: 1
+  alias: city
+permalink: "golf-simulator-rental-{{ city.slug }}.html"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ city.metaTitle | safe }}"
+  metaDescription: "{{ city.metaDescription | safe }}"
+  ogDescription: "{{ city.ogDescription | safe }}"
+  canonicalPath: "/golf-simulator-rental-{{ city.slug }}.html"
+  areaName: "{{ city.name | safe }}"
+---
+{% include "layouts/location.njk" %}

@@ -1,0 +1,21 @@
+---
+permalink: "sitemap.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ site.domain }}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>{{ site.domain }}/locations.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>{{ site.domain }}/how-it-works.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>{{ site.domain }}/what-we-offer.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>{{ site.domain }}/blog.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>{{ site.domain }}/blog/7-ways-to-make-your-next-event-unforgettable-with-a-golf-simulator.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>{{ site.domain }}/blog/how-to-choose-the-right-indoor-golf-experience.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>{{ site.domain }}/blog/a-beginners-guide-to-indoor-golf-technology.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  {%- for c in cities %}
+  <url><loc>{{ site.domain }}/golf-simulator-rental-{{ c.slug }}.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  {%- endfor %}
+  {%- for e in events %}{% if e.status == "live" %}
+  <url><loc>{{ site.domain }}/golf-simulator-{{ e.slug }}-chicago.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  {%- endif %}{% endfor %}
+</urlset>

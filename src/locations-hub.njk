@@ -1,0 +1,62 @@
+---
+permalink: "locations.html"
+layout: layouts/base.njk
+title: "Golf Simulator Rental Locations | Golf 'n Go Chicago"
+metaDescription: "Golf 'n Go Chicago delivers mobile golf simulator rentals across 31 Chicagoland suburbs — North Shore, west, southwest, and northwest suburbs. Find your city."
+canonicalPath: "/locations.html"
+areaName: "Chicago"
+---
+{%- set regionGroups = [
+  { label: "North Shore", sub: "North Shore", slugs: ["winnetka","kenilworth","wilmette","highland-park","lake-forest","evanston","glencoe","glenview"] },
+  { label: "Northwest Suburbs", sub: "Northwest Suburbs", slugs: ["northbrook","buffalo-grove","lake-zurich","barrington","schaumburg"] },
+  { label: "West Suburbs", sub: "West Suburbs", slugs: ["hinsdale","oak-brook","downers-grove","wheaton","glen-ellyn","western-springs","la-grange","elmhurst","oak-park","burr-ridge","clarendon-hills"] },
+  { label: "Southwest Suburbs", sub: "Southwest Suburbs", slugs: ["orland-park","tinley-park","frankfort"] },
+  { label: "Will / Kendall County", sub: "Will / Kendall County", slugs: ["naperville","aurora","plainfield","yorkville"] }
+] -%}
+<div class="page-header">
+  <p class="page-header-eyebrow">Service Area</p>
+  <h1>Golf Simulator Rental Near <span>Chicago, IL</span></h1>
+  <p class="page-header-sub">We deliver, set up, and tear down our GSPro golf simulator anywhere in the Chicago metro — no tee times, no driving, just world-class golf at your door.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Book Your Event</a>
+    <a href="{{ site.phoneHref }}" class="btn-secondary">&#9742; {{ site.phone }}</a>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">{{ cities.length }}</div><div class="stat-label">Suburbs Served</div></div>
+    <div class="stat"><div class="stat-num">{{ site.courseCount }}</div><div class="stat-label">Courses Available</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Mobile &amp; Delivered</div></div>
+    <div class="stat"><div class="stat-num">5&#9733;</div><div class="stat-label">Google Rating</div></div>
+  </div>
+</div>
+
+<section class="locations-section">
+  <div class="container">
+    {%- for group in regionGroups %}
+    <div class="region-block">
+      <p class="region-label">{{ group.label }}</p>
+      <div class="locations-grid">
+        {%- for slug in group.slugs %}{% for c in cities %}{% if c.slug == slug %}
+        <a href="/golf-simulator-rental-{{ c.slug }}.html" class="location-card">
+          <div class="location-card-text"><span class="location-card-name">{{ c.name }}</span><span class="location-card-sub">{{ group.sub }}</span></div>
+          <span class="location-card-arrow">&#8594;</span>
+        </a>
+        {%- endif %}{% endfor %}{% endfor %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+<div class="cta-banner">
+  <div class="container">
+    <h2>Don't See Your Town? <span style="color:var(--green)">Call Us.</span></h2>
+    <p>We serve the entire Chicago metro. If your suburb isn't listed above, call or fill out a quote request — we'll let you know if we can make it work.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Get a Free Quote</a>
+      <a href="{{ site.phoneHref }}" class="btn-secondary">&#9742; {{ site.phone }}</a>
+    </div>
+  </div>
+</div>

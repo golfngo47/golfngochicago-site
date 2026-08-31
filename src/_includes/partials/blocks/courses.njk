@@ -1,0 +1,15 @@
+{% if city.customBlocks.courses %}
+<section id="courses" class="section section-border">
+  <div class="section-wrap">
+    <div class="section-head-center">
+      <p class="section-label">Play Famous Golf Courses in {{ city.name }}</p>
+      <h2 class="section-heading" style="margin-bottom:0">Play the World's Most Iconic Courses</h2>
+    </div>
+    <div class="courses-grid">
+      {%- for c in city.customBlocks.courses %}
+      <button type="button" class="course-card reveal" data-course="{{ c.name }}" data-loc="{{ c.loc }}" data-img="images/{{ c.img }}"><img class="course-thumb" src="/images/{{ c.img }}" loading="lazy" alt="Golf 'n Go mobile golf simulator set up at a Chicagoland event — play {{ c.name }} in {{ city.name }}"><span class="course-body"><span class="course-name">{{ c.name }}</span><span class="course-loc">{{ c.loc }}</span></span></button>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

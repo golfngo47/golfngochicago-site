@@ -1,0 +1,16 @@
+{% if city.customBlocks.features %}
+{% if city.customBlocks.fontAwesome %}<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>{% endif %}
+<section id="features" class="section section-alt section-border">
+  <div class="section-wrap">
+    <div class="section-head-center">
+      <p class="section-label">What's Included</p>
+      <h2 class="section-heading" style="margin-bottom:0">Everything Included. Nothing Held Back.</h2>
+    </div>
+    <div class="incl-grid">
+      {%- for f in city.customBlocks.features %}
+      <div class="incl-card reveal"><div class="incl-icon"><i class="{{ f.icon }}"></i></div><h3>{{ f.title }}</h3><p>{{ f.desc }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

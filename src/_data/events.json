@@ -1,0 +1,909 @@
+[
+  {
+    "slug": "corporate-events",
+    "name": "Corporate Events",
+    "status": "live",
+    "metaTitle": "Corporate Golf Simulator Rental Chicago | Golf N Go",
+    "metaDescription": "Elevate your Chicago corporate events & team building with our mobile golf simulator rental. Interactive, high-tech fun brought straight to your venue. Book today!",
+    "ogDescription": "Elevate your Chicago corporate events & team building with our mobile golf simulator rental. Interactive, high-tech fun brought straight to your venue. Book today!",
+    "heroH1": "Team Building That Gets People Excited.",
+    "heroSub": "A mobile golf simulator delivered to your office, venue, or event space. We handle everything — setup, operation, and breakdown.",
+    "whyHeading": "Professional Setup.Zero Work on Your End.",
+    "whyBody": [
+      "Corporate events work when people actually engage. A mobile golf simulator creates a focal point that draws people in, sparks friendly competition across departments, and keeps energy high. It doesn't matter if your team is full of weekend golfers or people who've never held a club — the simulator is the great equalizer.",
+      "We show up before your event, set up the full rig — Flightscope Mevo+ launch monitor, GSPro software with 2,300+ world courses, projector, screen, clubs, and balls — run the entire experience, and break everything down when you're done. Your team doesn't lift a finger.",
+      "We work with companies of all sizes for team-building days, holiday parties, client appreciation events, sales kickoffs, and company outings. Corporate invoicing available on request."
+    ],
+    "infoItems": [
+      {
+        "title": "We Come to You",
+        "desc": "Office, hotel ballroom, event venue — anywhere in Chicagoland"
+      },
+      {
+        "title": "Any Group Size",
+        "desc": "Works great for 10 to 100+ participants"
+      },
+      {
+        "title": "Invoicing Available",
+        "desc": "Corporate billing documentation provided on request"
+      },
+      {
+        "title": "2,300+ World Courses",
+        "desc": "Pebble Beach, Augusta National, St. Andrews & more"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "🤝",
+        "title": "Team Building",
+        "desc": "Break down silos and spark real connection. A golf simulator puts everyone — from interns to executives — on the same playing field."
+      },
+      {
+        "icon": "🥂",
+        "title": "Client Entertainment",
+        "desc": "Impress clients with a memorable, interactive experience that's a step above the standard dinner-and-drinks outing."
+      },
+      {
+        "icon": "🎄",
+        "title": "Holiday Parties",
+        "desc": "Give your team something to look forward to. The simulator transforms any venue into an event people actually talk about afterward."
+      },
+      {
+        "icon": "🌐",
+        "title": "Networking Events",
+        "desc": "Shared competition is the best icebreaker. A round on Pebble Beach gets conversations going faster than any name-tag exercise."
+      },
+      {
+        "icon": "🏆",
+        "title": "Client Appreciation",
+        "desc": "Show top clients you value the relationship with an experience that's polished, professional, and genuinely fun."
+      },
+      {
+        "icon": "⭐",
+        "title": "Employee Recognition",
+        "desc": "Reward your highest performers with an event that feels like a real celebration — not a slide deck and a lunch."
+      }
+    ],
+    "perks": [
+      {
+        "title": "Genuine Team Connection",
+        "desc": "When the VP is trying to out-drive the intern and losing, walls come down fast. The simulator creates shared moments that generic team-building activities never achieve."
+      },
+      {
+        "title": "Truly Turnkey",
+        "desc": "We arrive early, set up everything, operate the experience, and break down when you're done. No coordination burden on your team whatsoever."
+      },
+      {
+        "title": "Scales to Any Group",
+        "desc": "Small leadership offsite or company-wide holiday party — we calibrate the format to your headcount and duration. Tournament brackets and leaderboards available."
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "Standard",
+        "name": "3 Hours",
+        "duration": "Recommended for groups of 10–25",
+        "desc": "A focused, high-energy block. Everyone gets on, competition runs tight, and the experience stays sharp from start to finish. Great for client entertainment or a team outing alongside dinner.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "Extended",
+        "name": "5 Hours",
+        "duration": "Recommended for groups of 25–60",
+        "desc": "Five hours gives your event real depth — time for multi-round tournaments, team competitions, and genuine social time between shots. This is where colleagues actually bond and clients leave impressed.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "Full Day",
+        "name": "7 Hours",
+        "duration": "Recommended for groups of 60+",
+        "desc": "Seven hours means the simulator is the anchor of your entire event. Wave after wave of participants, full tournament brackets with finals, and a professional setup that elevates the whole production.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can you come to our office or corporate venue?",
+        "a": "Absolutely. We come to you — office lobby, conference center, hotel ballroom, rooftop, or any venue in Chicagoland. We handle full setup and breakdown. We need roughly 20×20 ft with 11 ft ceilings for our inflatable enclosure, or 15×10 ft with 9 ft ceilings for our compact indoor setup."
+      },
+      {
+        "q": "Do participants need to be golfers?",
+        "a": "Not at all. The simulator works for every skill level. Our attendant walks everyone through it and formats like closest-to-pin and long drive are just as fun for beginners as experienced players. It's genuinely inclusive."
+      },
+      {
+        "q": "Do you offer corporate invoicing?",
+        "a": "Yes. We work with corporate clients on invoicing and can provide documentation for business expense purposes. Just let us know your billing requirements when you book and we'll accommodate your company's process."
+      },
+      {
+        "q": "How long should we book for our group size?",
+        "a": "We recommend 3 hours for groups of 10–25, 5 hours for groups of 25–60, and 7 hours for larger events or full-day activations. That said, you can book any duration you'd like — our packages are just a recommended starting point."
+      }
+    ]
+  },
+  {
+    "slug": "birthday-party",
+    "name": "Birthday Parties",
+    "status": "live",
+    "metaTitle": "Chicago Golf Simulator Birthday Party Rental | Golf N Go",
+    "metaDescription": "Make your next celebration unforgettable with a golf simulator birthday party rental in Chicago. Mobile setup, fun games for all ages, brought to you!",
+    "ogDescription": "Make your next celebration unforgettable with a golf simulator birthday party rental in Chicago. Mobile setup, fun games for all ages, brought to you!",
+    "heroH1": "The Birthday Party They'll Still Be Talking About.",
+    "heroSub": "We come to your backyard, party venue, or living room with the full golf simulator experience. Fun for ages 8 to 80, no golf experience required, completely tailored to your group.",
+    "whyHeading": "We Come to You.You Just Host the Party.",
+    "whyBody": [
+      "Birthday parties are more fun when there's something to do together. Golf 'n Go turns any space — backyard, garage, banquet hall, or living room — into a full golf entertainment venue. Our team arrives before your guests, sets up completely, and runs the experience from start to finish so you can actually enjoy the party you planned.",
+      "The simulator works for every age group. Kids love the big screen and instant feedback — seeing their shot fly across a virtual fairway is genuinely thrilling even for a 10-year-old who's never picked up a club. Adults love the competition. Anyone celebrating a milestone birthday gets a genuinely unique experience instead of the same dinner-and-cake routine.",
+      "We bring the Flightscope Mevo+ launch monitor, GSPro software with 2,300+ world-class courses, projector, screen or inflatable enclosure, clubs, and balls. Everything is included — you provide the space, the guests, and the birthday candles."
+    ],
+    "infoItems": [
+      {
+        "title": "All Ages Welcome",
+        "desc": "Kids, teens, adults, milestone birthdays — we do them all"
+      },
+      {
+        "title": "We Come to You",
+        "desc": "Backyard, venue, event hall, garage — anywhere in Chicagoland"
+      },
+      {
+        "title": "Flexible Group Size",
+        "desc": "8–40+ guests; we tailor the duration to your headcount"
+      },
+      {
+        "title": "2,300+ World Courses",
+        "desc": "Pebble Beach, Augusta National, St. Andrews & more"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [],
+    "perks": [
+      {
+        "title": "Fun for Every Skill Level",
+        "desc": "Never picked up a club? Perfect. Our attendant makes the simulator accessible and exciting for total beginners while still delivering a real experience for guests who play regularly. Everyone gets a turn, everyone competes."
+      },
+      {
+        "title": "A Party Centerpiece, Not a Sideshow",
+        "desc": "The simulator becomes the main event. Guests gather around, cheer each other on, and rotate in — it creates a party energy that's hard to replicate with any other entertainment option. Social, competitive, and genuinely fun."
+      },
+      {
+        "title": "Zero Venue Hassle",
+        "desc": "We set up at your location. No need to rent a golf facility, transport your group, or coordinate logistics. We arrive early, handle everything, and leave the space exactly how we found it when the party's over."
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "Standard",
+        "name": "3 Hours",
+        "duration": "Recommended for groups of 8–20",
+        "desc": "Three hours is a perfect birthday window. Every guest gets multiple turns, there's time for a proper competition format, and the energy stays high from start to finish. Great for backyard parties and smaller celebrations.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "Extended",
+        "name": "5 Hours",
+        "duration": "Recommended for groups of 20–40",
+        "desc": "Five hours turns a birthday into a full event. More rotations, longer tournaments, and enough time for every guest to settle in and compete. The right choice for milestone birthdays or larger groups that deserve more.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "Full Day",
+        "name": "7 Hours",
+        "duration": "Recommended for groups of 40+",
+        "desc": "Seven hours means the simulator is the anchor of the entire celebration. Wave after wave of participants, full tournament brackets, and a production-level setup that makes any birthday feel like a real event.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Is a golf simulator birthday party appropriate for kids?",
+        "a": "Absolutely. The simulator is fantastic for kids' birthday parties — the giant screen, instant shot feedback, and competitive formats make it exciting for all ages. Our attendant adjusts difficulty and tees for younger players and keeps energy high throughout. Kids who've never golfed tend to love it just as much as those who have."
+      },
+      {
+        "q": "What age groups do you serve for birthday parties?",
+        "a": "All of them. We've run birthday parties for 10-year-olds and 70-year-olds alike. From a kid's themed party to a milestone 40th, 50th, or 60th birthday, the simulator experience scales for every age group. The formats, difficulty, and vibe are always tailored to who's celebrating."
+      },
+      {
+        "q": "Can Golf 'n Go set up a birthday party outdoors in a backyard?",
+        "a": "Yes — our inflatable enclosure is designed for both indoor and outdoor use. We can set up in any backyard with a flat surface and reasonable wind protection. We'll confirm the specifics with you when you book and make sure the space works perfectly for your party setup."
+      },
+      {
+        "q": "How many guests can participate in a golf simulator birthday party?",
+        "a": "There's no hard cap — one person plays at a time while others watch and rotate in. For a typical 3-hour birthday party, groups of 8–20 work great with everyone getting multiple turns. For larger parties, we recommend a longer package to make sure everyone gets meaningful time on the simulator."
+      }
+    ]
+  },
+  {
+    "slug": "graduation",
+    "name": "Graduations",
+    "status": "live",
+    "metaTitle": "Graduation Party Golf Simulator Rental Chicago | Golf N Go",
+    "metaDescription": "Looking for unique graduation event entertainment in Chicago? Rent a mobile golf simulator for your outdoor or indoor celebration. Reserve your date today!",
+    "ogDescription": "Looking for unique graduation event entertainment in Chicago? Rent a mobile golf simulator for your outdoor or indoor celebration. Reserve your date today!",
+    "heroH1": "The Celebration Everyone Remembers.",
+    "heroSub": "Graduation parties deserve more than just food and music — they deserve an experience. Whether it’s a high school graduation, college send-off, or milestone achievement, Golf 'n Go Chicago brings the ultimate entertainment directly to your celebration.",
+    "whyHeading": "The Graduation Party Upgrade Everyone Loves.",
+    "whyBody": [
+      "Graduation parties often bring together guests of all ages — friends, family, neighbors, and relatives. Finding something everyone enjoys isn’t easy. That’s where Golf 'n Go changes everything.",
+      "We turn your graduation party into an interactive experience where guests don’t just attend — they participate. From friendly competitions to casual fun, the simulator becomes the center of attention.",
+      "We arrive early, set up everything, and manage the entire experience so you can focus on celebrating the graduate.",
+      "The simulator works for everyone:",
+      "We bring the FlightScope Mevo+ launch monitor, GSPro software with 2,300+ courses, a 4K projector, screen or inflatable enclosure, clubs, and balls.",
+      "You bring the guests — we bring the unforgettable experience."
+    ],
+    "infoItems": [
+      {
+        "title": "Perfect for Graduation Celebrations",
+        "desc": "High school, college, and milestone graduations"
+      },
+      {
+        "title": "We Come to You",
+        "desc": "Backyard, garage, event hall, or indoor space anywhere in Chicagoland"
+      },
+      {
+        "title": "All Ages Welcome",
+        "desc": "Students, friends, parents, and extended family"
+      },
+      {
+        "title": "2,300+ World Courses",
+        "desc": "Play Pebble Beach, Augusta National, St. Andrews & more"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [],
+    "perks": [
+      {
+        "title": "Fun for Everyone",
+        "desc": "Not everyone at a graduation party plays golf — and that’s exactly why this works. Our simulator is designed for beginners and pros alike. Guests can jump in, take a swing, and instantly enjoy the experience."
+      },
+      {
+        "title": "Built-In Entertainment",
+        "desc": "From Longest Drive contests to Closest to the Pin challenges and arcade mini-games, your party runs itself. No awkward downtime — just constant engagement."
+      },
+      {
+        "title": "Completely Turnkey",
+        "desc": "We handle everything — setup, operation, and breakdown. Our on-site attendant ensures smooth gameplay, keeps guests engaged, and manages the flow. You host the party. We handle the fun."
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "Standard",
+        "name": "3 Hours",
+        "duration": "Recommended for groups of 10–20",
+        "desc": "Perfect for smaller graduation gatherings with steady gameplay and fun competitions throughout.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "FlightScope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "Extended",
+        "name": "5 Hours",
+        "duration": "Recommended for groups of 20–40",
+        "desc": "Ideal for graduation parties with larger guest lists and extended celebration time.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "FlightScope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "Full Day",
+        "name": "7 Hours",
+        "duration": "Recommended for groups of 40+",
+        "desc": "Turn your graduation party into a full-day event with tournaments, rotations, and nonstop entertainment.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "FlightScope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Do guests need golf experience?",
+        "a": "Not at all — the simulator is beginner-friendly and fun for everyone."
+      },
+      {
+        "q": "Can you set up at a graduation open house?",
+        "a": "Yes — backyards, garages, and indoor spaces all work perfectly."
+      },
+      {
+        "q": "How many guests can participate?",
+        "a": "We can accommodate both small and large groups with rotating gameplay."
+      },
+      {
+        "q": "What’s included in the rental?",
+        "a": "Everything — simulator, equipment, setup, and on-site operation."
+      }
+    ]
+  },
+  {
+    "slug": "charity-fundraiser",
+    "name": "Charity & Fundraisers",
+    "status": "live",
+    "metaTitle": "Charity Golf Simulator Rental Chicago | Golf N Go",
+    "metaDescription": "Boost donor engagement with a mobile golf simulator fundraiser in Chicago. Perfect for charity event entertainment, contests, and drive challenges. Learn more!",
+    "ogDescription": "Boost donor engagement with a mobile golf simulator fundraiser in Chicago. Perfect for charity event entertainment, contests, and drive challenges. Learn more!",
+    "heroH1": "Turn Every Swing Into a Donation.",
+    "heroSub": "Golf 'n Go's mobile simulator brings Hole in One contests, Longest Drive competitions, and live leaderboards to your Chicago charity event — driving engagement and giving all night long.",
+    "whyHeading": "Engagement ThatDrives Giving.",
+    "whyBody": [
+      "The most effective fundraisers give donors something to do — not just something to watch. A golf simulator creates a competitive, energetic centerpiece that draws people in, keeps them engaged all evening, and ties directly to your fundraising goals through paid entries, pledge-per-shot formats, and Hole in One prize contests.",
+      "We bring the Flightscope Mevo+ launch monitor, GSPro software with 2,300+ courses, 4K projector, screen or inflatable enclosure, clubs, and balls. Our on-site attendant runs every rotation and keeps the leaderboard live so the competition stays tight and visible — which keeps donors around longer and giving more.",
+      "Works beautifully at galas, banquets, outdoor fundraisers, golf scrambles, school events, and nonprofit benefit nights. We set up before doors open and break down after the last guest leaves so your team stays focused entirely on the mission."
+    ],
+    "infoItems": [
+      {
+        "title": "Multiple Fundraising Formats",
+        "desc": "Paid entries, pledge-per-shot, Hole in One contests & more"
+      },
+      {
+        "title": "Works Anywhere",
+        "desc": "Galas, banquet halls, outdoor events — indoor & outdoor setup"
+      },
+      {
+        "title": "Any Group Size",
+        "desc": "30 to 200+ attendees — we scale to your event"
+      },
+      {
+        "title": "Live Leaderboard",
+        "desc": "Keeps competition visible and donors engaged all evening"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [],
+    "perks": [
+      {
+        "title": "Multiple Fundraising Formats",
+        "desc": "Charge paid entries for Hole in One contests or Longest Drive competitions. Run pledge-per-shot campaigns. Tie simulator performance to donation tiers. We help you structure the experience to maximize giving for your specific cause."
+      },
+      {
+        "title": "Crowd Energy That Drives Giving",
+        "desc": "One person plays while others gather, cheer, and wait for their turn — creating natural crowd moments that keep energy high all night. A live leaderboard gives everyone a reason to stay engaged and come back for another shot."
+      },
+      {
+        "title": "Professional & Fully Managed",
+        "desc": "We handle everything — setup, operation, and breakdown. Your team stays focused on your donors and your mission. Our attendant runs the experience from first swing to last, keeping it smooth and professional throughout."
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "Standard",
+        "name": "3 Hours",
+        "duration": "Recommended for groups of 30–60",
+        "desc": "Three hours is ideal for focused fundraising activations — a dedicated Hole in One station, a Longest Drive competition, or a paid-entry contest running throughout an evening gala or benefit dinner.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "Live leaderboard & competition tracking"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "Extended",
+        "name": "5 Hours",
+        "duration": "Recommended for groups of 60–120",
+        "desc": "Five hours gives your fundraiser real throughput. Multi-round contests, full leaderboard competition, and enough time for every donor to participate — keeping giving momentum high from cocktail hour through the final auction.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "Live leaderboard & competition tracking"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "Full Day",
+        "name": "7 Hours",
+        "duration": "Recommended for groups of 120+",
+        "desc": "Seven hours makes the simulator the centerpiece of your entire fundraising event. Full-day activations, grand-prize Hole in One contests, multi-wave tournament brackets, and maximum donor participation from open to close.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "Live leaderboard & competition tracking"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How does a golf simulator work as a fundraising tool?",
+        "a": "There are several proven formats. Paid entries for Hole in One contests or Longest Drive competitions drive direct donations. You can charge per swing, sell ticket packages, or tie simulator performance to pledge amounts. Our attendant runs the experience while you focus on donor engagement. We can help you structure the format to maximize participation and giving for your specific event."
+      },
+      {
+        "q": "Can you set up at a gala, banquet, or indoor fundraising venue?",
+        "a": "Yes — our compact indoor setup works beautifully in ballrooms, banquet halls, hotel event spaces, and any venue with roughly 15ft × 10ft of space and 9ft+ ceiling clearance. We coordinate with your venue team and set up ahead of doors opening so everything is ready when your donors arrive."
+      },
+      {
+        "q": "Do guests need to be golfers to participate?",
+        "a": "Not at all. The simulator is designed to be fun for everyone — our attendant guides every participant through it regardless of experience. First-timers often end up being the most enthusiastic participants once they see their shot tracked on the big screen. It's inclusive entertainment that keeps every donor engaged and coming back for another turn."
+      },
+      {
+        "q": "Can you accommodate a large fundraiser with 100+ attendees?",
+        "a": "Yes. With our 5 and 7-hour packages, we rotate through large groups efficiently throughout the evening. One person plays at a time while others gather, cheer, and compete for leaderboard position — naturally creating crowd energy that keeps donors around longer and drives more giving throughout the night."
+      }
+    ]
+  },
+  {
+    "slug": "private-party",
+    "name": "Private Parties",
+    "status": "live",
+    "metaTitle": "Golf Simulator Private Party Rental Chicago | Golf N Go",
+    "metaDescription": "Upgrade your backyard party or private event with a mobile golf simulator rental in Chicago. Seamless setup, premium experience, endless fun. Book now!",
+    "ogDescription": "Upgrade your backyard party or private event with a mobile golf simulator rental in Chicago. Seamless setup, premium experience, endless fun. Book now!",
+    "heroH1": "The Entertainment Everyone Talks About.",
+    "heroSub": "Backyard bashes, family reunions, holiday parties, neighborhood gatherings — Golf 'n Go comes to you with the full simulator experience. Fun for golfers and non-golfers alike, all ages, no experience required.",
+    "whyHeading": "The EntertainmentNobody Forgets.",
+    "whyBody": [
+      "Private parties are better when there's something everyone can do together. Golf 'n Go turns any backyard, living room, garage, or event space into a fully functional golf entertainment venue — no course required, no membership needed, no experience necessary. We show up before your guests, set everything up, and run the entire experience from start to finish so you can actually enjoy the gathering you planned.",
+      "The simulator works for every kind of private party because it works for every kind of person. Kids love seeing their shots launch across a giant screen. Competitive adults turn it into a tournament. Non-golfers find it instantly fun — the Hole in One Challenge, Long Drive Contest, and arcade mini-games are designed for people who've never held a club. Serious golfers get to play Pebble Beach or Augusta National from your backyard.",
+      "We bring the Flightscope Mevo+ launch monitor, GSPro software with 2,300+ world-famous courses, 4K projector, screen or inflatable enclosure, clubs, and balls. Everything is included. You provide the guests — we provide the reason they can't stop talking about the party."
+    ],
+    "infoItems": [
+      {
+        "title": "Any Occasion",
+        "desc": "Backyard parties, reunions, holidays, neighborhood events & more"
+      },
+      {
+        "title": "We Come to You",
+        "desc": "Backyard, garage, event hall, living room — anywhere in Chicagoland"
+      },
+      {
+        "title": "All Ages & Skill Levels",
+        "desc": "Kids, teens, adults, seniors — no golf experience needed"
+      },
+      {
+        "title": "2,300+ World Courses",
+        "desc": "Pebble Beach, Augusta National, St. Andrews & more"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [],
+    "perks": [
+      {
+        "title": "Fun for Golfers & Non-Golfers",
+        "desc": "The simulator is entertaining even if you've never swung a club. Our on-site attendant makes it approachable for total beginners while keeping it challenging for guests who play regularly. Everyone plays, everyone competes, everyone laughs."
+      },
+      {
+        "title": "Built-In Competition",
+        "desc": "Long Drive Challenges, Closest to the Pin, Hole in One contests, and arcade mini-games turn any gathering into a tournament. The simulator creates a natural gathering point where people rotate in, cheer each other on, and compete for bragging rights."
+      },
+      {
+        "title": "Completely Turnkey",
+        "desc": "We handle everything — setup, operation, and breakdown. You don't lift a finger before or after. Our attendant is on-site the entire time to run the experience, adjust difficulty, and keep things moving so you can be a guest at your own party."
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "Standard",
+        "name": "3 Hours",
+        "duration": "Recommended for groups of 10–20",
+        "desc": "Three hours is perfect for a focused private party. Every guest gets multiple turns, there's time for a Long Drive or Hole in One contest, and the energy stays high from first swing to last.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "Extended",
+        "name": "5 Hours",
+        "duration": "Recommended for groups of 20–40",
+        "desc": "Five hours gives your gathering real staying power. More rotations, multiple rounds of competition, and enough time for everyone to fully settle in and enjoy the experience — not just take one quick turn.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "Full Day",
+        "name": "7 Hours",
+        "duration": "Recommended for groups of 40+",
+        "desc": "Seven hours turns a private party into a full-day event. Wave after wave of guests, tournament-style brackets, and a professional setup that makes any gathering feel like a proper production.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Do guests need to know how to play golf?",
+        "a": "Not at all. The simulator is designed for all skill levels — total beginners to scratch golfers. Our attendant makes it fun and accessible for everyone. In our experience, non-golfers are often the most enthusiastic players at the party once they see their ball launch across the big screen."
+      },
+      {
+        "q": "Can you set up at a backyard private party?",
+        "a": "Yes — backyards are one of our most popular setups. Our inflatable enclosure is purpose-built for both indoor and outdoor use. We need a reasonably flat surface and some wind protection. We'll walk through the setup details with you when you book to make sure everything works perfectly for your space."
+      },
+      {
+        "q": "How many people can play at a private party?",
+        "a": "There's no hard limit. One person plays at a time while others watch and cheer from the sides — this naturally creates a crowd and tournament atmosphere. For a typical 3-hour party, groups of 10–20 work great with everyone getting multiple turns. Larger groups work well with a longer booking."
+      },
+      {
+        "q": "What's included in the private party rental?",
+        "a": "Everything. We bring the full setup: inflatable enclosure or indoor screen, 4K projector, Flightscope Mevo+ launch monitor, GSPro software with 2,300+ world courses, clubs (left & right-handed), balls, and a dedicated attendant who runs the experience the entire time. You just provide the space and the guests."
+      }
+    ]
+  },
+  {
+    "slug": "bachelor-party",
+    "name": "Bachelor Parties",
+    "status": "live",
+    "metaTitle": "Golf Simulator Bachelor Party Chicago | Golf 'n Go Chicago",
+    "metaDescription": "Skip the bar crawl — book the ultimate golf simulator bachelor party in Chicago. Golf 'n Go delivers a mobile simulator with closest-to-pin contests, longest drive competitions, and high-energy fun for any group size. Serving all of Chicagoland.",
+    "ogDescription": "The coolest bachelor party in Chicago starts at the tee box. Mobile golf simulator with closest-to-pin contests, longest drive competitions, and full attendant service.",
+    "heroH1": "The Bachelor PartyNobody Forgets.",
+    "heroSub": "Ditch the bar crawl. Golf 'n Go brings a professional golf simulator to wherever the crew is celebrating — with closest-to-pin contests, longest drive battles, and an attendant who runs the whole thing.",
+    "whyHeading": "",
+    "whyBody": [],
+    "infoItems": [
+      {
+        "title": "Group Size",
+        "desc": "Best for 8–30 players; any size welcome"
+      },
+      {
+        "title": "We Come to You",
+        "desc": "Airbnb, bar back room, event venue, backyard — anywhere in Chicagoland"
+      },
+      {
+        "title": "Competition Formats",
+        "desc": "Closest to pin, longest drive, match play, worst-ball scramble"
+      },
+      {
+        "title": "100+ Courses",
+        "desc": "Pebble Beach, Augusta, St. Andrews & more on GSPro"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [],
+    "perks": [
+      {
+        "title": "",
+        "desc": ""
+      },
+      {
+        "title": "",
+        "desc": ""
+      },
+      {
+        "title": "",
+        "desc": ""
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "3-Hour Package",
+        "name": "Standard",
+        "duration": "",
+        "desc": "",
+        "features": [
+          "3 hours of simulator time",
+          "Full setup & breakdown included",
+          "4K simulator experience",
+          "Flightscope launch monitor",
+          "Left & right handed clubs",
+          "Golf balls provided",
+          "100+ world courses on GSPro",
+          "Dedicated on-site operator",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "5-Hour Package",
+        "name": "Extended",
+        "duration": "",
+        "desc": "",
+        "features": [
+          "5 hours of simulator time",
+          "Full setup & breakdown included",
+          "4K simulator experience",
+          "Flightscope launch monitor",
+          "Left & right handed clubs",
+          "Golf balls provided",
+          "100+ world courses on GSPro",
+          "Dedicated on-site operator",
+          "Multiple competition formats",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "7-Hour Package",
+        "name": "Full Day",
+        "duration": "",
+        "desc": "",
+        "features": [
+          "7 hours of simulator time",
+          "Full setup & breakdown included",
+          "4K simulator experience",
+          "Flightscope launch monitor",
+          "Left & right handed clubs",
+          "Golf balls provided",
+          "100+ world courses on GSPro",
+          "Dedicated on-site operator",
+          "Full custom tournament format",
+          "All skill levels welcome"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "How many people can play at a golf simulator bachelor party? ▼",
+        "a": "Our setup comfortably serves groups of 8–20 for a bachelor party, with one player hitting at a time while everyone else cheers and talks trash. Larger groups absolutely work — we just recommend a 5+ hour package to give everyone enough screen time. We'll work with whatever headcount you have."
+      },
+      {
+        "q": "Can you set up the simulator at a bar, venue, or Airbnb? ▼",
+        "a": "Yes — as long as the space has roughly 15ft × 15ft of floor space and at least 9ft of ceiling clearance, we can set up almost anywhere in Chicagoland. Rented Airbnbs, backyard tents, bars with a back room, hotel suites, event venues, garages — we've done them all. We'll confirm the setup details with you when you book."
+      },
+      {
+        "q": "Does the groom or group need to know how to golf? ▼",
+        "a": "Not at all. The simulator is fun for complete beginners and experienced golfers alike. Our attendant walks everyone through it, and hitting a ball on the big screen is instantly satisfying whether you shoot 70 or 170. First-timers often end up the most competitive — and the most entertaining."
+      },
+      {
+        "q": "What competition formats work best for a bachelor party? ▼",
+        "a": "Our go-to bachelor party formats are closest-to-the-pin contests (who lands closest to the flag on an approach shot) and longest drive competitions (pure power). We also run match play head-to-heads, worst-ball scrambles, and custom multi-round tournaments. Our attendant handles all scoring so nobody has to keep track."
+      },
+      {
+        "q": "How far in advance should I book for a bachelor party in Chicago? ▼",
+        "a": "Weekend evenings book up quickly — we strongly recommend reaching out at least 2–3 weeks in advance to lock in your date. Fill out our quick booking form and we'll confirm availability and send a custom quote within a few hours. No commitment required to get a quote."
+      }
+    ]
+  },
+  {
+    "slug": "wedding",
+    "name": "Weddings",
+    "status": "draft",
+    "metaTitle": "Golf Simulator Wedding Entertainment Chicago | Cocktail Hour | Golf 'n Go Chicago",
+    "metaDescription": "Add a stunning golf simulator to your Chicago wedding. Perfect for cocktail hour entertainment — Golf 'n Go's mobile simulator wows guests of all ages, indoors or outdoors. Elegant setup, full attendant service. Get a quote.",
+    "ogDescription": "Trade the photo booth for something guests will actually talk about. Golf 'n Go's mobile golf simulator is the perfect cocktail hour wedding entertainment in Chicago.",
+    "heroH1": "The Cocktail Hour Nobody Expected.",
+    "heroSub": "Trade the photo booth for a real experience. Golf 'n Go's mobile simulator turns your cocktail hour into the moment everyone talks about — engaging every guest, golfer or not.",
+    "whyHeading": "Elegant Setup.Every Guest Involved.",
+    "whyBody": [
+      "The cocktail hour is the hardest part of a wedding to manage — guests are mingling, but there's often a lull where people aren't sure what to do. A golf simulator solves that instantly. It creates a natural gathering point, sparks conversation across family groups and friend circles, and gives guests something genuinely fun and interactive while the wedding party takes photos.",
+      "We coordinate with your venue, arrive early, set up quietly, and operate through the duration of your cocktail hour or reception. When the experience wraps, we break down cleanly and quickly. Your wedding day timeline stays intact — we work around you, not the other way around.",
+      "Golfers and non-golfers both love it. Our attendant guides every guest through the experience — from the grandfather who plays every weekend to the maid of honor who's never held a club. With 2,300+ courses on GSPro, we can even feature the couple's favorite course as a personal touch."
+    ],
+    "infoItems": [
+      {
+        "title": "Perfect For",
+        "desc": "Cocktail hour, reception entertainment, outdoor ceremonies"
+      },
+      {
+        "title": "Venue Coordination",
+        "desc": "We work directly with your venue & wedding coordinator"
+      },
+      {
+        "title": "Indoor & Outdoor",
+        "desc": "Ballroom, garden, tent, rooftop — we adapt to your venue"
+      },
+      {
+        "title": "2,300+ World Courses",
+        "desc": "Feature the couple's favorite course as a personal touch"
+      },
+      {
+        "title": "Call or Text",
+        "desc": "(708) 264-4980"
+      }
+    ],
+    "useCases": [],
+    "perks": [
+      {
+        "title": "Elegant, Unobtrusive Setup",
+        "desc": "Our setup is clean, professional, and designed to complement — not compete with — your wedding aesthetic. We coordinate with your venue team and arrive early so nothing interrupts the day's flow."
+      },
+      {
+        "title": "Bridges Every Generation",
+        "desc": "Grandparents, college friends, coworkers, kids — the simulator engages your entire guest list. It's a rare common ground that gets different groups interacting naturally, which is exactly what a great cocktail hour does."
+      },
+      {
+        "title": "A Memory, Not Just a Moment",
+        "desc": "Photo booths are props. The simulator is an experience — one guests will genuinely talk about. Real competition, real laughs, real memories that set your wedding apart from every other reception they've attended."
+      }
+    ],
+    "packages": [
+      {
+        "featured": false,
+        "tier": "Standard",
+        "name": "3 Hours",
+        "duration": "Recommended for groups of 20–50",
+        "desc": "The ideal window for cocktail hour coverage. Guests arrive, grab a drink, and instantly have something competitive and fun to gather around — all skill levels welcome, no golf experience required.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": true,
+        "tier": "Extended",
+        "name": "5 Hours",
+        "duration": "Recommended for groups of 40–100",
+        "desc": "Five hours covers cocktail hour and flows into the reception. Guests rotate in and out all evening, the leaderboard stays live, and the simulator becomes a centerpiece rather than just an activity.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      },
+      {
+        "featured": false,
+        "tier": "Full Day",
+        "name": "7 Hours",
+        "duration": "Recommended for groups of 80+",
+        "desc": "Seven hours means the simulator anchors the entire wedding day — from pre-ceremony through the reception. Full throughput for large guest lists and golf-themed weddings where it's the main event.",
+        "features": [
+          "Full setup & breakdown included",
+          "4K projector & screen",
+          "Flightscope Mevo+ launch monitor",
+          "2,300+ courses on GSPro",
+          "Clubs & balls provided",
+          "On-site attendant runs the experience",
+          "Long drive, closest to pin & arcade games",
+          "All skill levels welcome"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Is a golf simulator appropriate entertainment for a wedding?",
+        "a": "Absolutely — and it tends to be the highlight guests talk about for months. It turns your cocktail hour into an interactive experience that bridges generations, works for golfers and non-golfers alike, and creates shared moments that no other entertainment option delivers. It's a genuinely unique alternative to the standard photo booth."
+      },
+      {
+        "q": "How does setup work at a wedding venue?",
+        "a": "We coordinate directly with your venue and wedding coordinator. We arrive well before your cocktail hour begins, set up in your designated space, and operate throughout. Breakdown is quiet and quick — we're cleared out before the reception transitions. Your venue just needs a space of roughly 15ft × 15ft with 9ft+ ceiling height."
+      },
+      {
+        "q": "Can non-golfers enjoy the simulator at a wedding?",
+        "a": "Yes — this is one of the things that makes it such a great wedding entertainment option. Our attendant guides every guest through the experience regardless of skill level. The simulator is intuitive and fun for first-timers, which means it engages your full guest list, not just the golfers in attendance."
+      },
+      {
+        "q": "Can we feature the couple's favorite course?",
+        "a": "Yes. With 2,300+ courses on GSPro — including Pebble Beach, Augusta National, St. Andrews, Whistling Straits, and more — we can feature any course that's meaningful to the couple. Whether it's where they got engaged, their home course, or a bucket-list destination, we'll set it as the featured experience for your wedding day."
+      }
+    ]
+  }
+]

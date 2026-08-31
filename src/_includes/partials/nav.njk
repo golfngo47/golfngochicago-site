@@ -1,0 +1,41 @@
+{%- set featuredCitySlugs = ["naperville","schaumburg","evanston","oak-brook","hinsdale","orland-park","northbrook","glenview"] -%}
+<nav id="navbar" aria-label="Main navigation">
+  <div class="nav-logo"><a href="/"><img src="/images/main_logo_trans.svg" alt="Golf n Go Chicago" fetchpriority="high"/></a></div>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li class="has-dropdown"><a href="/#events">Events</a>
+      <ul class="nav-dropdown">
+        {%- for e in events %}{% if e.status == "live" %}
+        <li><a href="/golf-simulator-{{ e.slug }}-chicago.html">{{ e.name }}</a></li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </li>
+    <li><a href="/how-it-works.html">How It Works</a></li>
+    <li><a href="/what-we-offer.html">What We Offer</a></li>
+    <li><a href="/#gallery">Gallery</a></li>
+    <li class="has-dropdown"><a href="/locations.html">Service Areas</a>
+      <ul class="nav-dropdown">
+        {%- for slug in featuredCitySlugs %}{% for c in cities %}{% if c.slug == slug %}
+        <li><a href="/golf-simulator-rental-{{ c.slug }}.html">{{ c.name }}</a></li>
+        {%- endif %}{% endfor %}{% endfor %}
+        <li><a href="/locations.html">View All Locations →</a></li>
+      </ul>
+    </li>
+    <li><a href="/#faq">FAQ</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="{{ site.phoneHref }}" class="nav-phone">{{ site.phone }}</a>
+    <div class="nav-social">
+      <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="{{ site.social.tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg width="17" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+      </a>
+    </div>
+    <a href="{{ site.jotformUrl }}" target="_blank" rel="noopener noreferrer" class="nav-book">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>

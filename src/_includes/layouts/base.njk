@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+{% include "partials/analytics.njk" %}
+
+<title>{{ title }}</title>
+<meta name="description" content="{{ metaDescription }}"/>
+<meta name="robots" content="{{ robotsContent or 'index, follow' }}"/>
+<link rel="canonical" href="{{ site.domain }}{{ canonicalPath }}"/>
+<link rel="icon" href="/images/icon_trans.png" type="image/png"/>
+<link rel="apple-touch-icon" href="/images/icon_trans.png"/>
+
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ site.domain }}{{ canonicalPath }}"/>
+<meta property="og:title" content="{{ title }}"/>
+<meta property="og:description" content="{{ ogDescription or metaDescription }}"/>
+<meta property="og:image" content="{{ ogImage or (site.domain + '/images/og-preview.png') }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{{ title }}"/>
+<meta name="twitter:description" content="{{ ogDescription or metaDescription }}"/>
+<meta name="twitter:image" content="{{ ogImage or (site.domain + '/images/og-preview.png') }}"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body>
+{% include "partials/gtm-noscript.njk" %}
+{% include "partials/nav.njk" %}
+{% include "partials/mobile-nav.njk" %}
+
+{{ content | safe }}
+
+{% include "partials/footer.njk" %}
+</body>
+</html>

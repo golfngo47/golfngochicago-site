@@ -1,0 +1,55 @@
+{%- set w = city.customBlocks.serviceAreaWidget %}
+{% if w %}
+<section class="section section-alt section-border" id="faq">
+  <div class="section-wrap">
+    <div class="faq-grid">
+      <div class="map-wrap reveal">
+        <iframe title="Map of the Golf 'n Go Chicago service area around {{ city.name }}, IL" src="https://maps.google.com/maps?q={{ w.mapEmbedQuery | urlencode }}&z=10&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="hud-frame"><span class="hud-c tl"></span><span class="hud-c tr"></span><span class="hud-c bl"></span><span class="hud-c br"></span></div>
+        <div class="map-cap"><span>Where We Deliver</span><strong>{{ city.name }} &amp; 100+ Chicagoland Communities</strong></div>
+      </div>
+      <div>
+        <p class="section-label">We Come to You</p>
+        <h2 class="section-heading">Serving {{ city.name }} &amp; Surrounding Communities</h2>
+        <p class="section-body" style="margin-bottom:24px">We bring the golf simulator experience to {{ city.name }} and over 100 Chicagoland communities.</p>
+        <div class="city-search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="citySearch" class="city-search" placeholder="Search nearby city or suburb..." aria-label="Search nearby city or suburb"/>
+        </div>
+        <div class="city-pills" id="cityPills">
+          <span class="city-pill is-current">{{ city.name }}</span>
+          {%- for slug in w.linkedTowns %}{% for c in cities %}{% if c.slug == slug %}
+          <a href="/golf-simulator-rental-{{ c.slug }}.html" class="city-pill">{{ c.name }}</a>
+          {%- endif %}{% endfor %}{% endfor %}
+          {%- for name in w.unlinkedTowns %}
+          <span class="city-pill is-plain">{{ name }}</span>
+          {%- endfor %}
+          <a href="/locations.html" class="city-pill">View All Service Areas <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <p class="city-empty" id="cityEmpty" style="display:none">No matching community — call us at {{ site.phone }} and we'll confirm coverage.</p>
+        <div class="radius-card">
+          <div class="radius-card-title"><span><i class="fa-solid fa-map-pin"></i></span>{{ city.name }} Service Radius</div>
+          <p>Available for indoor and outdoor setups across all {{ city.name }} zip codes ({{ w.zipCodes | join(', ') }}).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const citySearch = document.getElementById('citySearch');
+  const cityEmpty = document.getElementById('cityEmpty');
+  if (!citySearch) return;
+  citySearch.addEventListener('input', function () {
+    const q = this.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll('#cityPills .city-pill').forEach(pill => {
+      const match = pill.textContent.toLowerCase().includes(q);
+      pill.style.display = match ? '' : 'none';
+      if (match) shown++;
+    });
+    cityEmpty.style.display = shown ? 'none' : 'block';
+  });
+});
+</script>
+{% endif %}
